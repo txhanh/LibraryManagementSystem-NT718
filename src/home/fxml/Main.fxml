@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -90,54 +91,156 @@
             </Button>
          </children>
       </VBox>
-      <GridPane alignment="CENTER" layoutX="278.0" layoutY="178.0" prefHeight="608.0" prefWidth="950.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="183.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="526.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <StackPane layoutX="270.0" layoutY="183.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="183.0">
          <children>
-            <TableView prefHeight="509.0" prefWidth="953.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="1">
-              <columns>
-                <TableColumn prefWidth="109.0" text="Mã độc giả" />
-                <TableColumn prefWidth="210.0" resizable="false" text="Họ" />
-                  <TableColumn minWidth="0.0" prefWidth="226.0" text="Tên" />
-                  <TableColumn prefWidth="192.0" text="Số điện thoại" />
-                  <TableColumn minWidth="0.0" prefWidth="252.0" text="Email" />
-              </columns>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </TableView>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <GridPane fx:id="paneCuonSach" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="608.0" prefWidth="950.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="526.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </FontAwesomeIconView>
-                  <TextField prefHeight="49.0" prefWidth="526.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
-                     <HBox.margin>
-                        <Insets left="22.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm độc giả" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets left="115.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <TableView prefHeight="509.0" prefWidth="953.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn prefWidth="120.0" text="Mã cuốn sách" />
+                        <TableColumn prefWidth="109.0" resizable="false" text="Mã tựa sách" />
+                        <TableColumn minWidth="0.0" prefWidth="285.0" text="Tên tựa sách" />
+                        <TableColumn prefWidth="133.0" text="Thể loại" />
+                        <TableColumn minWidth="0.0" prefWidth="200.0" text="Tác giả" />
+                        <TableColumn prefWidth="110.0" text="Tình trạng" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <TextField prefHeight="49.0" prefWidth="526.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm cuốn sách" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="115.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </GridPane>
+            <GridPane fx:id="paneTuaSach" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="608.0" prefWidth="950.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="526.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView prefHeight="509.0" prefWidth="953.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn prefWidth="99.0" text="Mã tựa sách" />
+                        <TableColumn prefWidth="256.0" resizable="false" text="Tên tựa sách" />
+                        <TableColumn minWidth="0.0" prefWidth="132.0" text="Thể loại" />
+                        <TableColumn prefWidth="227.0" text="Tác giả" />
+                        <TableColumn minWidth="0.0" prefWidth="164.0" text="Nhà xuất bản" />
+                        <TableColumn prefWidth="79.0" text="Số lượng" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <TextField prefHeight="49.0" prefWidth="526.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button graphicTextGap="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm tựa sách" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="115.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <GridPane fx:id="paneDocGia" alignment="CENTER" prefHeight="608.0" prefWidth="950.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="526.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView fx:id="tableMember" prefHeight="509.0" prefWidth="953.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn fx:id="maDocGiaColumn" prefWidth="109.0" text="Mã độc giả" />
+                      <TableColumn fx:id="hoDocGiaColumn" prefWidth="210.0" resizable="false" text="Họ" />
+                        <TableColumn fx:id="tenDocGiaColumn" minWidth="0.0" prefWidth="226.0" text="Tên" />
+                        <TableColumn fx:id="sdtColumn" prefWidth="192.0" text="Số điện thoại" />
+                        <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="252.0" text="Email" />
+                    </columns>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TableView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <TextField fx:id="tfSearchMemberInfo" prefHeight="49.0" prefWidth="526.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="btnAddMember" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm độc giả" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="115.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
          </children>
-      </GridPane>
+      </StackPane>
       <Pane fx:id="paneStatus" layoutX="256.0" layoutY="37.0" prefHeight="124.0" prefWidth="992.0" style="-fx-background-color: #7156DD;" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="-2.0">
          <children>
             <Label fx:id="labelStatus" layoutX="300.0" layoutY="40.0" text="QUẢN LÍ THÔNG TIN ĐỘC GIẢ" textFill="WHITE">

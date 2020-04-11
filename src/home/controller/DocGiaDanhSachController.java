@@ -1,6 +1,5 @@
 package home.controller;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import home.Main;
 import home.dao.DocGiaDao;
 import home.model.DocGia;
@@ -10,55 +9,32 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class DocGiaDanhSachController implements Initializable {
 
     DocGiaDao memberDao = new DocGiaDao();
     Main window = new Main();
     ObservableList<DocGia> dataTable = FXCollections.observableArrayList(memberDao.getAllMember());
 
-    @FXML
-    private Button btnDocGia;
 
-    @FXML
-    private Button btnTuaSach;
-
-    @FXML
-    private Button btnCuonSach;
-
-    @FXML
-    private Button btnPhieuMuon;
-
-    @FXML
-    private Button btnPhieuTra;
-
-    @FXML
-    private Pane paneStatus;
-
-    @FXML
-    private Label labelStatus;
-
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-    @FXML
-    private GridPane paneDocGia;
-
-    @FXML
-    private GridPane paneTuaSach;
-
-    @FXML
-    private GridPane paneCuonSach;
+    public static int v_maDG;
+    public static String v_ho;
+    public static String v_ten;
+    public static String v_sdt;
+    public static String v_email;
 
     @FXML
     private TableView<DocGia> tableMember;
@@ -83,6 +59,87 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnCancel;
+
+//    @FXML
+//    private Button btnAddMember;
+
+
+    @FXML
+    void updateThisRow(ActionEvent event) {
+        DocGia selectedMemberForUpdate = tableMember.getSelectionModel().getSelectedItem();
+        if (selectedMemberForUpdate == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả!!!");
+            alert.showAndWait();
+            return;
+        }
+
+        v_maDG = selectedMemberForUpdate.getMaDocGia();
+        v_ho = selectedMemberForUpdate.getHoDocGia();
+        v_ten = selectedMemberForUpdate.getTenDocGia();
+        v_sdt = selectedMemberForUpdate.getSdt();
+        v_email = selectedMemberForUpdate.getEmail();
+
+        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaChinhSua.fxml", "Chỉnh sửa thông tin");
+        cancelAction(event);
+
+
+    }
+
+
+
+    @FXML
+    void openAddMemberWindow(ActionEvent event) {
+        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaThem.fxml", "Thêm độc giả mới");
+        cancelAction(event);
+    }
+
+
+    @FXML
+    void deleteThisRow(ActionEvent event) {
+        DocGia selectedMemberForDelete = tableMember.getSelectionModel().getSelectedItem();
+        Alert alert;
+        if (selectedMemberForDelete == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa dòng nào để xóa cả !!!");
+            alert.showAndWait();
+            return;
+        }
+
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn thực sự muốn xóa độc giả \"" + selectedMemberForDelete.getTenDocGia() + "\" chứ?");
+
+        Optional<ButtonType> response = alert.showAndWait();
+        if (response.get() == ButtonType.CANCEL) {
+            return;
+        }
+
+        boolean flag = memberDao.deleteMember(selectedMemberForDelete);
+
+        if (flag) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Xóa độc giả thành công");
+            alert.showAndWait();
+            dataTable.remove(selectedMemberForDelete);
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không xóa được dữ liệu !!!");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void cancelAction(ActionEvent event) {
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,45 +209,5 @@ public class Controller implements Initializable {
         tenDocGiaColumn.setCellValueFactory(new PropertyValueFactory<DocGia, String>("tenDocGia"));
         sdtColumn.setCellValueFactory(new PropertyValueFactory<DocGia, String>("sdt"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<DocGia, String>("email"));
-    }
-
-    @FXML
-    void handleClose(MouseEvent event) {
-        if(event.getSource() == btnClose){
-            System.exit(0);
-        }
-    }
-
-
-    @FXML
-    void handleClickAction(ActionEvent event) {
-        if (event.getSource() == btnDocGia) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN ĐỘC GIẢ");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (113,86,200), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneDocGia.toFront();
-        } else if (event.getSource() == btnTuaSach) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN TỰA SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (43,63,99), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneTuaSach.toFront();
-        } else if (event.getSource() == btnCuonSach) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN CUỐN SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (43,99,63), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneCuonSach.toFront();
-        } else if (event.getSource() == btnPhieuMuon) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU MƯỢN SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (99,42,70), CornerRadii.EMPTY, Insets.EMPTY)));
-            // chua co pane
-        } else if (event.getSource() == btnPhieuTra) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU TRẢ SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (33,130,200), CornerRadii.EMPTY, Insets.EMPTY)));
-            //chưa có pane
-        }
-
-
     }
 }
