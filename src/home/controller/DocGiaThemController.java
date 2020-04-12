@@ -6,10 +6,16 @@ import home.dao.DocGiaDao;
 import home.model.DocGia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class DocGiaThemController {
 
@@ -33,6 +39,11 @@ public class DocGiaThemController {
 
     @FXML
     private Button btnCancel;
+
+    private MainGUIController controller;
+
+    @FXML
+    public BorderPane borderPane;
 
     @FXML
     void addMemberAction(ActionEvent event) {
@@ -69,14 +80,15 @@ public class DocGiaThemController {
     }
 
 
-
     @FXML
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        window.loadAnotherWindow("/home/fxml/DocGiaDanhSach.fxml");
 
 
     }
+
+
 
 }

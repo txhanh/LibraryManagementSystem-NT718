@@ -70,6 +70,13 @@ public class TuaSachDanhSachController implements Initializable {
     private Button btnThemTuaSach;
 
     @FXML
+    void openHomeWindow(ActionEvent event) {
+
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        cancelAction(event);
+    }
+
+    @FXML
     void xoaTuaSachAction(ActionEvent event) {
         TuaSach selectedForDelete = tableTuaSach.getSelectionModel().getSelectedItem();
         Alert alert;

@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainGUIController implements Initializable {
+public class MainGUIController  {
 
     Main window = new Main();
 
@@ -60,9 +60,9 @@ public class MainGUIController implements Initializable {
     public BorderPane borderPane;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadUI(("/home/fxml/Intro.fxml"));
+
+    public void initialize() {
+        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
     }
 
 
@@ -97,12 +97,14 @@ public class MainGUIController implements Initializable {
     }
 
     public void loadUI(String nameUI) {
-        Parent root = null;
+
         try {
+            Parent root;
             root = FXMLLoader.load(getClass().getResource(nameUI));
+            borderPane.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        borderPane.setCenter(root);
+
     }
 }

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -63,6 +64,15 @@ public class DocGiaDanhSachController implements Initializable {
     @FXML
     private Button btnAddMember;
 
+    @FXML
+    private Button btnHome;
+
+    @FXML
+    void openHomeWindow(ActionEvent event) {
+
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        cancelAction(event);
+    }
 
     @FXML
     void openCapNhatDocGiaAction(ActionEvent event) {
@@ -86,7 +96,6 @@ public class DocGiaDanhSachController implements Initializable {
 
 
     }
-
 
 
     @FXML
@@ -137,7 +146,7 @@ public class DocGiaDanhSachController implements Initializable {
     @FXML
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnAddMember.getScene().getWindow();
-        // do what you have to do
+
         stage.close();
     }
 

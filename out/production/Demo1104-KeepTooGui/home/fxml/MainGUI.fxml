@@ -23,9 +23,9 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="53.0" layoutY="87.0" size="40" />
                </children>
             </Pane>
-            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="320.0" stylesheets="@../css/fullpackstyling.css" text="Trang chủ" textFill="WHITE">
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="320.0" stylesheets="@../css/fullpackstyling.css" text="Giới thiệu" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" size="18" />
+                  <FontAwesomeIconView fill="WHITE" size="18" text="" />
                </graphic>
                <font>
                   <Font size="18.0" />

@@ -29,6 +29,51 @@
             <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="480.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3F2B63;">
+               <children>
+                  <Label alignment="CENTER" layoutY="39.0" prefHeight="53.0" prefWidth="1024.0" text="QUẢN LÍ THÔNG TIN TỰA SÁCH" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="1">
+               <children>
+                  <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </FontAwesomeIconView>
+                  <TextField fx:id="tfSearchTuaSach" prefHeight="49.0" prefWidth="420.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
+                     <HBox.margin>
+                        <Insets left="22.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnThemTuaSach" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openThemTuaSach" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm tựa sách" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnHome" graphicTextGap="10.0" layoutX="632.0" layoutY="44.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Trang chủ" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="25" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
             <TableView fx:id="tableTuaSach" prefHeight="500.0" prefWidth="1012.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="2">
                <columns>
                   <TableColumn fx:id="maTuaSachColumn" prefWidth="109.0" text="Mã tựa sách" />
@@ -50,40 +95,6 @@
                   </ContextMenu>
                </contextMenu>
             </TableView>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="1">
-               <children>
-                  <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </FontAwesomeIconView>
-                  <TextField fx:id="tfSearchTuaSach" prefHeight="49.0" prefWidth="565.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
-                     <HBox.margin>
-                        <Insets left="22.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button fx:id="btnThemTuaSach" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openThemTuaSach" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm tựa sách" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
-                     </graphic>
-                     <HBox.margin>
-                        <Insets left="120.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3F2B63;">
-               <children>
-                  <Label alignment="CENTER" layoutY="39.0" prefHeight="53.0" prefWidth="1024.0" text="QUẢN LÍ THÔNG TIN TỰA SÁCH" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
          </children>
       </GridPane>
    </children>
