@@ -52,6 +52,9 @@ public class MainGUIController implements Initializable {
     @FXML
     private Button btnAddMember;
 
+    @FXML
+    private Button btnHome;
+
 
     @FXML
     public BorderPane borderPane;
@@ -59,7 +62,7 @@ public class MainGUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        loadUI(("/home/fxml/Intro.fxml"));
     }
 
 
@@ -86,6 +89,8 @@ public class MainGUIController implements Initializable {
 //
         } else if (event.getSource() == btnPhieuTra) {
 //
+        } else if (event.getSource() == btnHome || event.getSource() == null){
+            loadUI(("/home/fxml/Intro.fxml"));
         }
 
 
