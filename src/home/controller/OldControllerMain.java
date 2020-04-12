@@ -15,7 +15,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class MainController {
+public class OldControllerMain {
 
     Main window = new Main();
 

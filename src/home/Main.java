@@ -1,11 +1,9 @@
 package home;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -20,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/Main2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/MainGUI.fxml"));
 
 //         grab your root here
 //        root.setOnMousePressed(new EventHandler<MouseEvent>() {

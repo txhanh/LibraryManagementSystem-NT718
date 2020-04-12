@@ -4,18 +4,13 @@ import home.Main;
 import home.dao.DocGiaDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import home.model.DocGia;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,7 +40,7 @@ public class DocGiaChinhSuaController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/home/fxml/Main2.fxml");
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
     }
 
     @FXML

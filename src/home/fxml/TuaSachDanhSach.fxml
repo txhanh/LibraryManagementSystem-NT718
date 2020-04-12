@@ -32,11 +32,11 @@
             <TableView fx:id="tableTuaSach" prefHeight="483.0" prefWidth="1226.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="2">
                <columns>
                   <TableColumn fx:id="maTuaSachColumn" prefWidth="109.0" text="Mã tựa sách" />
-                  <TableColumn fx:id="tenTuaSachColumn" prefWidth="275.0" resizable="false" text="Tên sách" />
-                  <TableColumn fx:id="theLoaiColumn" minWidth="0.0" prefWidth="174.0" text="Thể loại" />
-                  <TableColumn fx:id="tacGiaColumn" prefWidth="201.0" text="Tác giả" />
-                  <TableColumn fx:id="nxbColumn" minWidth="0.0" prefWidth="180.0" text="Nhà xuất bản" />
-                  <TableColumn fx:id="soLuongColumn" prefWidth="98.0" text="Số lượng" />
+                  <TableColumn fx:id="tenTuaSachColumn" prefWidth="334.0" resizable="false" text="Tên sách" />
+                  <TableColumn fx:id="theLoaiColumn" minWidth="0.0" prefWidth="136.0" text="Thể loại" />
+                  <TableColumn fx:id="tacGiaColumn" prefWidth="195.0" text="Tác giả" />
+                  <TableColumn fx:id="nxbColumn" minWidth="0.0" prefWidth="173.0" text="Nhà xuất bản" />
+                  <TableColumn fx:id="soLuongColumn" prefWidth="83.0" text="Số lượng" />
                </columns>
                <GridPane.margin>
                   <Insets />

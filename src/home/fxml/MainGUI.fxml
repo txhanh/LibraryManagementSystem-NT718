@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1363.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1363.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.MainGUIController">
    <left>
       <VBox prefHeight="829.0" prefWidth="283.0" style="-fx-background-color: #3F2B63;" BorderPane.alignment="CENTER">
          <children>
@@ -81,4 +81,11 @@
          </children>
       </VBox>
    </left>
+   <right>
+      <FontAwesomeIconView fx:id="btnClose" glyphName="CLOSE" onMouseClicked="#closeWindowAction" size="25" BorderPane.alignment="TOP_RIGHT">
+         <BorderPane.margin>
+            <Insets right="10.0" top="5.0" />
+         </BorderPane.margin>
+      </FontAwesomeIconView>
+   </right>
 </BorderPane>

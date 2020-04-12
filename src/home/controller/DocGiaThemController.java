@@ -6,16 +6,10 @@ import home.dao.DocGiaDao;
 import home.model.DocGia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.IOException;
 
 public class DocGiaThemController {
 
@@ -80,7 +74,7 @@ public class DocGiaThemController {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/home/fxml/Main2.fxml");
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
 
 
     }
