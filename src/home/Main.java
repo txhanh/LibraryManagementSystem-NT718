@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/Main2.fxml"));
 
 //         grab your root here
 //        root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -46,11 +46,11 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void loadAnotherWindow(String location, String title) {
+    public void loadAnotherWindow(String location) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(location));
             Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle(title);
+//            stage.setTitle(title);
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException e) {

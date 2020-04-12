@@ -50,7 +50,7 @@ public class TuaSachChinhSuaController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachDanhSach.fxml", "Danh sách tựa sách");
+        window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachDanhSach.fxml");
     }
 
     @FXML

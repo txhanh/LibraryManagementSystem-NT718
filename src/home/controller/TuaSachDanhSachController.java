@@ -1,5 +1,6 @@
 package home.controller;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import home.Main;
 import home.dao.TuaSachDao;
 import home.model.DocGia;
@@ -126,20 +127,20 @@ public class TuaSachDanhSachController implements Initializable {
         v_nxb = selectedForUpdate.getNXB();
         v_soluong = selectedForUpdate.getSoLuong();
 
-        window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachChinhSua.fxml", "Chỉnh sửa tựa sách");
+        window.loadAnotherWindow("/home/fxml/TuaSachChinhSua.fxml");
         cancelAction(event);
     }
 
     @FXML
     void openThemTuaSach(ActionEvent event) {
-        window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachThem.fxml", "Thêm tựa sách");
+        window.loadAnotherWindow("/home/fxml/TuaSachThem.fxml");
         cancelAction(event);
     }
 
 
     @FXML
     void cancelAction(ActionEvent event) {
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        Stage stage = (Stage) btnThemTuaSach.getScene().getWindow();
         stage.close();
     }
 
@@ -150,6 +151,7 @@ public class TuaSachDanhSachController implements Initializable {
         tableTuaSach.setItems(data);
         tableTuaSach.getSortOrder().add(maTuaSachColumn);
         searchTuaSach();
+
     }
 
     private void searchTuaSach() {

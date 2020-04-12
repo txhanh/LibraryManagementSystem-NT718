@@ -80,6 +80,15 @@ public class DocGiaThemController {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaDanhSach.fxml", "Danh sách Độc giả");
+        window.loadAnotherWindow("/home/fxml/Main2.fxml");
+//        loadUI("/home/fxml/temp.fxml");
+//        Controller controller = new Controller();
+//        if(controller ==null){
+//            return;
+//        }else {
+//            controller.loadUI("/home/fxml/temp.fxml");
+//        }
+
     }
+
 }

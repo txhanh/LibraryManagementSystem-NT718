@@ -60,8 +60,8 @@ public class DocGiaDanhSachController implements Initializable {
     @FXML
     private Button btnCancel;
 
-//    @FXML
-//    private Button btnAddMember;
+    @FXML
+    private Button btnAddMember;
 
 
     @FXML
@@ -81,7 +81,7 @@ public class DocGiaDanhSachController implements Initializable {
         v_sdt = selectedMemberForUpdate.getSdt();
         v_email = selectedMemberForUpdate.getEmail();
 
-        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaChinhSua.fxml", "Chỉnh sửa thông tin");
+        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaChinhSua.fxml");
         cancelAction(event);
 
 
@@ -91,7 +91,7 @@ public class DocGiaDanhSachController implements Initializable {
 
     @FXML
     void openAddMemberWindow(ActionEvent event) {
-        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaThem.fxml", "Thêm độc giả mới");
+        window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml");
         cancelAction(event);
     }
 
@@ -136,7 +136,7 @@ public class DocGiaDanhSachController implements Initializable {
 
     @FXML
     void cancelAction(ActionEvent event) {
-        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        Stage stage = (Stage) btnAddMember.getScene().getWindow();
         // do what you have to do
         stage.close();
     }

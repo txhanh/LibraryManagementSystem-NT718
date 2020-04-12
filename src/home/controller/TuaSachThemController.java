@@ -79,14 +79,14 @@ public class TuaSachThemController implements Initializable {
             alert.setContentText("Thêm tựa sách thành công");
             alert.showAndWait();
             cancelAction(event);
-            window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachDanhSach.fxml", "Danh sách tựa sách");
+            window.loadAnotherWindow("/home/fxml/Main2.fxml");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Không thêm được tựa sách");
             alert.showAndWait();
             cancelAction(event);
-            window.loadAnotherWindow("/com/javafx/lib/fxml/TuaSachDanhSach.fxml", "Danh sách tựa sách");
+            window.loadAnotherWindow("/home/fxml/Main2.fxml");
         }
 
     }

@@ -45,7 +45,7 @@ public class DocGiaChinhSuaController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaDanhSach.fxml", "Danh sách độc giả");
+        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaDanhSach.fxml");
     }
 
     @FXML

@@ -10,14 +10,18 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -84,12 +88,25 @@ public class Controller implements Initializable {
     @FXML
     private Button btnCancel;
 
+    @FXML
+    private Button btnAddMember;
+
+    @FXML
+    private Pane paneShow;
+
+    @FXML
+    public BorderPane borderPane;
+
+    @FXML
+    void openAddMemberWindow(ActionEvent event) {
+        window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml");
+        Stage stage = (Stage) btnAddMember.getScene().getWindow();
+        stage.close();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initColumn();
-        tableMember.setItems(dataTable);
-        tableMember.getSortOrder().add(maDocGiaColumn);
-        searchMemberInfo();
+
     }
 
     private void searchMemberInfo() {
@@ -156,7 +173,7 @@ public class Controller implements Initializable {
 
     @FXML
     void handleClose(MouseEvent event) {
-        if(event.getSource() == btnClose){
+        if (event.getSource() == btnClose) {
             System.exit(0);
         }
     }
@@ -165,32 +182,46 @@ public class Controller implements Initializable {
     @FXML
     void handleClickAction(ActionEvent event) {
         if (event.getSource() == btnDocGia) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN ĐỘC GIẢ");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (113,86,200), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneDocGia.toFront();
+//            labelStatus.setText("QUẢN LÍ THÔNG TIN ĐỘC GIẢ");
+//            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
+//                    (113,86,200), CornerRadii.EMPTY, Insets.EMPTY)));
+//            paneDocGia.toFront();
+
+            loadUI("/home/fxml/temp.fxml");
+
         } else if (event.getSource() == btnTuaSach) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN TỰA SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (43,63,99), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneTuaSach.toFront();
+//            labelStatus.setText("QUẢN LÍ THÔNG TIN TỰA SÁCH");
+//            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
+//                    (43,63,99), CornerRadii.EMPTY, Insets.EMPTY)));
+//            paneTuaSach.toFront();
+            loadUI("/home/fxml/temp2.fxml");
         } else if (event.getSource() == btnCuonSach) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN CUỐN SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (43,99,63), CornerRadii.EMPTY, Insets.EMPTY)));
-            paneCuonSach.toFront();
+//            labelStatus.setText("QUẢN LÍ THÔNG TIN CUỐN SÁCH");
+//            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
+//                    (43,99,63), CornerRadii.EMPTY, Insets.EMPTY)));
+//            paneCuonSach.toFront();
         } else if (event.getSource() == btnPhieuMuon) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU MƯỢN SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (99,42,70), CornerRadii.EMPTY, Insets.EMPTY)));
+//            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU MƯỢN SÁCH");
+//            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
+//                    (99,42,70), CornerRadii.EMPTY, Insets.EMPTY)));
             // chua co pane
         } else if (event.getSource() == btnPhieuTra) {
-            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU TRẢ SÁCH");
-            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
-                    (33,130,200), CornerRadii.EMPTY, Insets.EMPTY)));
+//            labelStatus.setText("QUẢN LÍ THÔNG TIN PHIẾU TRẢ SÁCH");
+//            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
+//                    (33,130,200), CornerRadii.EMPTY, Insets.EMPTY)));
             //chưa có pane
         }
 
 
+    }
+
+    public void loadUI(String nameUI) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(nameUI));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        borderPane.setCenter(root);
     }
 }
