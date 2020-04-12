@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    // define your offset here
+//     define your offset here
 //    private double xOffset = 0;
 //    private double yOffset = 0;
 
@@ -40,8 +40,9 @@ public class Main extends Application {
 //            }
 //        });
 
-        primaryStage.setTitle("XuanHanh9x");
+        primaryStage.setTitle("Phần mềm quản lí thư viện");
         primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -49,7 +50,7 @@ public class Main extends Application {
     public void loadAnotherWindow(String location) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(location));
-            Stage stage = new Stage(StageStyle.DECORATED);
+            Stage stage = new Stage(StageStyle.UNDECORATED);
 //            stage.setTitle(title);
             stage.setScene(new Scene(parent));
             stage.show();

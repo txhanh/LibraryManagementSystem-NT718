@@ -187,14 +187,14 @@ public class Controller implements Initializable {
 //                    (113,86,200), CornerRadii.EMPTY, Insets.EMPTY)));
 //            paneDocGia.toFront();
 
-            loadUI("/home/fxml/temp.fxml");
+            loadUI("/home/fxml/DocGiaDanhSach.fxml");
 
         } else if (event.getSource() == btnTuaSach) {
 //            labelStatus.setText("QUẢN LÍ THÔNG TIN TỰA SÁCH");
 //            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb
 //                    (43,63,99), CornerRadii.EMPTY, Insets.EMPTY)));
 //            paneTuaSach.toFront();
-            loadUI("/home/fxml/temp2.fxml");
+            loadUI("/home/fxml/TuaSachDanhSach.fxml");
         } else if (event.getSource() == btnCuonSach) {
 //            labelStatus.setText("QUẢN LÍ THÔNG TIN CUỐN SÁCH");
 //            paneStatus.setBackground(new Background(new BackgroundFill(Color.rgb

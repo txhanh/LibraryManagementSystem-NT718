@@ -9,75 +9,74 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1235.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="829.0" prefWidth="1363.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.Controller">
    <left>
-      <VBox prefHeight="756.0" prefWidth="234.0" style="-fx-background-color: #3F2B63;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="829.0" prefWidth="283.0" style="-fx-background-color: #3F2B63;" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="146.0" prefWidth="221.0">
                <children>
                   <Label layoutX="105.0" layoutY="51.0" text="XH-KRP" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="System Bold" size="32.0" />
                      </font>
                   </Label>
                   <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="53.0" layoutY="87.0" size="40" />
                </children>
             </Pane>
-            <Button fx:id="btnDocGia" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="55.0" prefWidth="285.0" stylesheets="@../css/fullpackstyling.css" text="Độc Giả" textFill="WHITE">
+            <Button fx:id="btnDocGia" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="285.0" stylesheets="@../css/fullpackstyling.css" text="Độc Giả" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" size="16" />
+                  <FontAwesomeIconView fill="WHITE" size="18" />
                </graphic>
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnTuaSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="55.0" prefWidth="347.0" stylesheets="@../css/fullpackstyling.css" text="Tựa sách" textFill="WHITE">
+            <Button fx:id="btnTuaSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="347.0" stylesheets="@../css/fullpackstyling.css" text="Tựa sách" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" size="16" />
+                  <FontAwesomeIconView fill="WHITE" size="18" />
                </graphic>
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCuonSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="55.0" prefWidth="369.0" stylesheets="@../css/fullpackstyling.css" text="Cuốn sách" textFill="WHITE">
+            <Button fx:id="btnCuonSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="369.0" stylesheets="@../css/fullpackstyling.css" text="Cuốn sách" textFill="WHITE">
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" size="16" />
+                  <FontAwesomeIconView fill="WHITE" size="18" />
                </graphic>
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnPhieuMuon" alignment="BASELINE_LEFT" graphicTextGap="28.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="55.0" prefWidth="387.0" stylesheets="@../css/fullpackstyling.css" text="Phiếu mượn" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USD" size="16" />
-               </graphic>
+            <Button fx:id="btnPhieuMuon" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="387.0" stylesheets="@../css/fullpackstyling.css" text="Phiếu mượn" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="18" />
+               </graphic>
             </Button>
-            <Button fx:id="btnPhieuTra" alignment="BASELINE_LEFT" graphicTextGap="28.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="55.0" prefWidth="350.0" stylesheets="@../css/fullpackstyling.css" text="Phiếu trả" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="USD" size="16" />
-               </graphic>
+            <Button fx:id="btnPhieuTra" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="350.0" stylesheets="@../css/fullpackstyling.css" text="Phiếu trả" textFill="WHITE">
                <padding>
                   <Insets left="50.0" />
                </padding>
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="18" />
+               </graphic>
             </Button>
          </children>
       </VBox>

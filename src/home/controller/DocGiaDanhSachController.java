@@ -65,7 +65,7 @@ public class DocGiaDanhSachController implements Initializable {
 
 
     @FXML
-    void updateThisRow(ActionEvent event) {
+    void openCapNhatDocGiaAction(ActionEvent event) {
         DocGia selectedMemberForUpdate = tableMember.getSelectionModel().getSelectedItem();
         if (selectedMemberForUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -81,7 +81,7 @@ public class DocGiaDanhSachController implements Initializable {
         v_sdt = selectedMemberForUpdate.getSdt();
         v_email = selectedMemberForUpdate.getEmail();
 
-        window.loadAnotherWindow("/com/javafx/lib/fxml/DocGiaChinhSua.fxml");
+        window.loadAnotherWindow("/home/fxml/DocGiaChinhSua.fxml");
         cancelAction(event);
 
 
@@ -97,7 +97,7 @@ public class DocGiaDanhSachController implements Initializable {
 
 
     @FXML
-    void deleteThisRow(ActionEvent event) {
+    void xoaDocGiaAction(ActionEvent event) {
         DocGia selectedMemberForDelete = tableMember.getSelectionModel().getSelectedItem();
         Alert alert;
         if (selectedMemberForDelete == null) {

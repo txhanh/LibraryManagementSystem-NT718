@@ -81,13 +81,7 @@ public class DocGiaThemController {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
         window.loadAnotherWindow("/home/fxml/Main2.fxml");
-//        loadUI("/home/fxml/temp.fxml");
-//        Controller controller = new Controller();
-//        if(controller ==null){
-//            return;
-//        }else {
-//            controller.loadUI("/home/fxml/temp.fxml");
-//        }
+
 
     }
 
