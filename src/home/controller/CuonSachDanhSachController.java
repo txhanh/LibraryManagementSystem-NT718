@@ -1,21 +1,31 @@
 package home.controller;
 
 import home.Main;
+import home.dao.CuonSachDao;
+import home.model.CuonSach;
 import home.model.TuaSach;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class CuonSachDanhSachController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CuonSachDanhSachController implements Initializable {
 
     Main window = new Main();
 
-
+    CuonSachDao cuonSachDao = new CuonSachDao();
+    ObservableList<CuonSach> data = FXCollections.observableArrayList(cuonSachDao.lietKeCuonSach());
 
     @FXML
     private GridPane paneDocGia;
@@ -30,25 +40,25 @@ public class CuonSachDanhSachController {
     private Button btnHome;
 
     @FXML
-    private TableView<TuaSach> tableCuonSach;
+    private TableView<CuonSach> tableCuonSach;
 
     @FXML
-    private TableColumn<TuaSach, Integer> maCuonSachColumn;
+    private TableColumn<CuonSach, Integer> maCuonSachColumn;
 
     @FXML
-    private TableColumn<TuaSach, Integer> maTuaSachColumn;
+    private TableColumn<CuonSach, Integer> maTuaSachColumn;
 
     @FXML
-    private TableColumn<TuaSach, String> tenTuaSachColumn;
+    private TableColumn<CuonSach, String> tenTuaSachColumn;
 
     @FXML
-    private TableColumn<TuaSach, String> tenTheLoaiColumn;
+    private TableColumn<CuonSach, String> tenTheLoaiColumn;
 
     @FXML
-    private TableColumn<TuaSach, String> tacGiaColumn;
+    private TableColumn<CuonSach, String> tacGiaColumn;
 
     @FXML
-    private TableColumn<TuaSach, Integer> trangThaiColumn;
+    private TableColumn<CuonSach, Integer> trangThaiColumn;
 
     @FXML
     void openCapNhatCuonSachAction(ActionEvent event) {
@@ -78,4 +88,20 @@ public class CuonSachDanhSachController {
         stage.close();
     }
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initcolumn();
+        tableCuonSach.setItems(data);
+        tableCuonSach.getSortOrder().add(maCuonSachColumn);
+    }
+
+    private void initcolumn() {
+        maCuonSachColumn.setCellValueFactory(new PropertyValueFactory<>("maCuonSach"));
+        maTuaSachColumn.setCellValueFactory(new PropertyValueFactory<>("maTuaSach"));
+        tenTuaSachColumn.setCellValueFactory(new PropertyValueFactory<>("tenTuaSach"));
+        tenTheLoaiColumn.setCellValueFactory(new PropertyValueFactory<>("tenTheLoai"));
+        tacGiaColumn.setCellValueFactory(new PropertyValueFactory<>("tacGia"));
+        trangThaiColumn.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
+    }
 }

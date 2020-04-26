@@ -78,10 +78,10 @@
                <columns>
                   <TableColumn fx:id="maCuonSachColumn" prefWidth="105.0" text="Mã cuốn sách" />
                   <TableColumn fx:id="maTuaSachColumn" prefWidth="99.0" resizable="false" text="Mã tựa sách" />
-                  <TableColumn fx:id="tenTuaSachColumn" minWidth="0.0" prefWidth="378.0" text="Tên tựa sách" />
-                  <TableColumn fx:id="tenTheLoaiColumn" prefWidth="165.0" text="Tên thể loại" />
-                  <TableColumn fx:id="tacGiaColumn" minWidth="0.0" prefWidth="175.0" text="Tác giả" />
-                  <TableColumn fx:id="trangThaiColumn" prefWidth="108.0" text="Trạng thái" />
+                  <TableColumn fx:id="tenTuaSachColumn" minWidth="0.0" prefWidth="327.0" text="Tên tựa sách" />
+                  <TableColumn fx:id="tenTheLoaiColumn" prefWidth="110.0" text="Tên thể loại" />
+                  <TableColumn fx:id="tacGiaColumn" minWidth="0.0" prefWidth="296.0" text="Tác giả" />
+                  <TableColumn fx:id="trangThaiColumn" prefWidth="93.0" text="Trạng thái" />
                </columns>
                <GridPane.margin>
                   <Insets />
