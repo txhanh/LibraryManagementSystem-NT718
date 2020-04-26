@@ -12,8 +12,8 @@
       <ComboBox fx:id="comboboxTenTuaSach" layoutX="121.0" layoutY="44.0" prefHeight="35.0" prefWidth="419.0" />
       <Button fx:id="btnThemCuonSach" layoutX="89.0" layoutY="210.0" mnemonicParsing="false" onAction="#themCuonSachAction" prefHeight="37.0" text="Thêm cuốn sách" />
       <Button fx:id="btnCancel" layoutX="369.0" layoutY="210.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
-      <Spinner fx:id="tinhTrangSpinner" layoutX="121.0" layoutY="115.0" prefHeight="35.0" prefWidth="117.0" />
-      <Label layoutX="16.0" layoutY="120.0" text="Tình trạng">
+      <Spinner fx:id="trangThaiSpinner" layoutX="121.0" layoutY="115.0" prefHeight="35.0" prefWidth="117.0" />
+      <Label layoutX="16.0" layoutY="120.0" text="Trạng thái">
          <font>
             <Font size="16.0" />
          </font>

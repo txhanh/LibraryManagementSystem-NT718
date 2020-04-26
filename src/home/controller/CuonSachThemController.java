@@ -1,7 +1,9 @@
 package home.controller;
 
 import home.Main;
+import home.dao.CuonSachDao;
 import home.dao.TuaSachDao;
+import home.model.CuonSach;
 import home.model.TuaSach;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -9,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,9 +23,11 @@ public class CuonSachThemController implements Initializable {
 
     TuaSachDao tuaSachDao = new TuaSachDao();
 
+
     ObservableList<String> tenTuaSachList =
             FXCollections.observableArrayList(tuaSachDao.lietKeTenTuaSach());
 
+    CuonSachDao cuonSachDao = new CuonSachDao();
 
     @FXML
     private ComboBox<String> comboboxTenTuaSach;
@@ -38,7 +39,7 @@ public class CuonSachThemController implements Initializable {
     private Button btnCancel;
 
     @FXML
-    private Spinner<Integer> tinhTrangSpinner;
+    private Spinner<Integer> trangThaiSpinner;
 
     @FXML
     void cancelAction(ActionEvent event) {
@@ -49,15 +50,32 @@ public class CuonSachThemController implements Initializable {
 
     @FXML
     void themCuonSachAction(ActionEvent event) {
+        String tenTuaSach = comboboxTenTuaSach.getValue();
+        int trangThai = trangThaiSpinner.getValue();
 
+        CuonSach cuonSach = new CuonSach(tenTuaSach, trangThai);
+        boolean flag = cuonSachDao.themCuonSach(cuonSach);
+        if (flag) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Thêm cuốn sách thành công");
+            alert.showAndWait();
+            cancelAction(event);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không thêm được cuốn sách");
+            alert.showAndWait();
+            cancelAction(event);
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboboxTenTuaSach.setItems(tenTuaSachList);
         comboboxTenTuaSach.getSelectionModel().selectFirst();
-        tinhTrangSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1));
-        tinhTrangSpinner.getValueFactory().setValue(1);
-        tinhTrangSpinner.setEditable(true);
+        trangThaiSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1));
+        trangThaiSpinner.getValueFactory().setValue(1);
     }
 }

@@ -11,8 +11,13 @@ public class CuonSach {
     private SimpleStringProperty tacGia;
     private SimpleIntegerProperty trangThai; // 1 true, 0 false
 
-    public CuonSach(){
+    public CuonSach() {
 
+    }
+
+    public CuonSach(String tenTuaSach, int trangThai) {
+        this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
+        this.trangThai = new SimpleIntegerProperty(trangThai);
     }
 
     public CuonSach(int maTuaSach, String tenTuaSach,
