@@ -84,7 +84,7 @@ public class MainGUIController  {
 
             loadUI("/home/fxml/TuaSachDanhSach.fxml");
         } else if (event.getSource() == btnCuonSach) {
-
+            loadUI("/home/fxml/CuonSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuMuon) {
 //
         } else if (event.getSource() == btnPhieuTra) {

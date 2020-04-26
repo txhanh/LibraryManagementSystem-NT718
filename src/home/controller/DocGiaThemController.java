@@ -86,7 +86,6 @@ public class DocGiaThemController {
         stage.close();
         window.loadAnotherWindow("/home/fxml/DocGiaDanhSach.fxml");
 
-
     }
 
 

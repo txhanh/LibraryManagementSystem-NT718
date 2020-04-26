@@ -39,6 +39,25 @@ public class TuaSachDao {
         return tuaSachList;
     }
 
+    public List<String> lietKeTenTuaSach() {
+        List<String> tenTuaSachList = new ArrayList<>();
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "SELECT TENTUASACH FROM TUASACH";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String tenSach = rs.getString("TENTUASACH");
+                tenTuaSachList.add(tenSach);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tenTuaSachList;
+    }
+
     public boolean themTuaSach(TuaSach tuaSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "INSERT INTO TUASACH(TENSACH,THELOAI,TACGIA,NXB,SOLUONG) VALUES" +

@@ -71,6 +71,8 @@ public class DocGiaDanhSachController implements Initializable {
     void openHomeWindow(ActionEvent event) {
 
         window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+
+
         cancelAction(event);
     }
 
@@ -146,7 +148,6 @@ public class DocGiaDanhSachController implements Initializable {
     @FXML
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnAddMember.getScene().getWindow();
-
         stage.close();
     }
 

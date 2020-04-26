@@ -51,6 +51,7 @@ public class TuaSachThemController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
+        window.loadAnotherWindow("/home/fxml/TuaSachDanhSach.fxml");
     }
 
 
@@ -79,14 +80,13 @@ public class TuaSachThemController implements Initializable {
             alert.setContentText("Thêm tựa sách thành công");
             alert.showAndWait();
             cancelAction(event);
-            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Không thêm được tựa sách");
             alert.showAndWait();
             cancelAction(event);
-            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
         }
 
     }

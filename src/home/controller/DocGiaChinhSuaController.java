@@ -40,7 +40,7 @@ public class DocGiaChinhSuaController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        window.loadAnotherWindow("/home/fxml/DocGiaDanhSach.fxml");
     }
 
     @FXML

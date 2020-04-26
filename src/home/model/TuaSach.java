@@ -15,6 +15,7 @@ public class TuaSach {
 
     }
 
+
     public TuaSach( String tenSach, String theLoai, String tacGia, String NXB, int soLuong) {
         this.tenSach = new SimpleStringProperty(tenSach);
         this.theLoai = new SimpleStringProperty(theLoai);

@@ -50,7 +50,7 @@ public class TuaSachChinhSuaController implements Initializable {
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        window.loadAnotherWindow("/home/fxml/TuaSachDanhSach.fxml");
     }
 
     @FXML
@@ -72,7 +72,7 @@ public class TuaSachChinhSuaController implements Initializable {
 
         TuaSach tuaSach = new TuaSach(TuaSachDanhSachController.v_matuasach,
                 tentuasach,theloai,tacgia,nxb,soluong);
-        ResourceBundle resourceBundle;
+
         boolean flag = tuaSachDao.capNhatTuaSach(tuaSach);
         if(flag){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
