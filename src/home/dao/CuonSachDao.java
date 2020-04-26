@@ -1,5 +1,7 @@
 package home.dao;
 
+import home.controller.CuonSachDanhSachController;
+import home.controller.TuaSachDanhSachController;
 import home.model.CuonSach;
 import home.model.TuaSach;
 import oracle.jdbc.proxy.annotation.Pre;
@@ -81,6 +83,53 @@ public class CuonSachDao {
             e.printStackTrace();
         }
 
+
+        return false;
+    }
+
+    public boolean XoaCuonSach(CuonSach cuonSach){
+
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "DELETE FROM CUONSACH WHERE MACUONSACH = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1,cuonSach.getMaCuonSach());
+
+            int rs = preparedStatement.executeUpdate();
+
+            if(rs > 0){
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean capNhatCuonSach(CuonSach cuonSach){
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql =    "UPDATE CUONSACH\n" +
+                        "SET TRANGTHAI = ?\n" +
+                        "WHERE MACUONSACH = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+
+            preparedStatement.setInt(1,cuonSach.getTrangThai());
+            preparedStatement.setInt(2, CuonSachDanhSachController.v_macuonsach);
+
+            int rs = preparedStatement.executeUpdate();
+            if(rs > 0){
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return false;
     }

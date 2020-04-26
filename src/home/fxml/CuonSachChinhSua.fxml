@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="295.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.CuonSachChinhSuaController">
+   <children>
+      <ComboBox fx:id="comboboxTenTuaSach" layoutX="121.0" layoutY="44.0" prefHeight="35.0" prefWidth="419.0" />
+      <Button fx:id="btnCapNhatCuonSach" layoutX="104.0" layoutY="210.0" mnemonicParsing="false" onAction="#capNhatCuonSachAction" prefHeight="37.0" text="Lưu thay đổi" />
+      <Button fx:id="btnCancel" layoutX="369.0" layoutY="210.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
+      <Spinner fx:id="trangThaiSpinner" layoutX="121.0" layoutY="115.0" prefHeight="35.0" prefWidth="117.0" />
+      <Label layoutX="16.0" layoutY="120.0" text="Trạng thái">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="49.0" prefHeight="25.0" prefWidth="95.0" text="Tên tựa sách">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
