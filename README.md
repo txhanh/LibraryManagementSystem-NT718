@@ -6,3 +6,5 @@ Công cụ và môi trường lập trình được sử dụng
 4. Tools build GUI: Scene Builder, download tại https://gluonhq.com/products/scene-builder/
 5. DBMS: Oracle 12c, port 1521
 6. Tích hợp Docker trong IDE và chạy Oracle DB trong IDE (tùy chọn, k bắt buộc)
+
+Note: phải tạo các bảng DOCGIA, TUASACH, CUONSACH trước
