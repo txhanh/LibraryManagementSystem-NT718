@@ -60,7 +60,7 @@ public class TuaSachDao {
 
     public boolean themTuaSach(TuaSach tuaSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "INSERT INTO TUASACH(TENSACH,THELOAI,TACGIA,NXB,SOLUONG) VALUES" +
+        String sql = "INSERT INTO TUASACH(TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) VALUES" +
                 "(?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class TuaSachDao {
 
     public boolean capNhatTuaSach(TuaSach tuaSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "UPDATE TUASACH SET TENSACH = ?, THELOAI = ?, TACGIA = ? ," +
+        String sql = "UPDATE TUASACH SET TENTUASACH = ?, TENTHELOAI = ?, TACGIA = ? ," +
                 "NXB = ?, SOLUONG = ?" +
                 "WHERE MATUASACH = ?";
         try {

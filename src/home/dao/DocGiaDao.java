@@ -13,7 +13,7 @@ public class DocGiaDao {
     public List<DocGia> getAllMember() {
         List<DocGia> memberList = new ArrayList<DocGia>();
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "SELECT * FROM MEMBER";
+        String sql = "SELECT * FROM DOCGIA";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
@@ -36,7 +36,7 @@ public class DocGiaDao {
 
     public boolean addMember(DocGia member) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "INSERT INTO MEMBER(hodocgia,tendocgia,sdt,email) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO DOCGIA(hodocgia,tendocgia,sdt,email) VALUES (?,?,?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, member.getHoDocGia());
@@ -44,7 +44,7 @@ public class DocGiaDao {
             preparedStatement.setString(3, member.getSdt());
             preparedStatement.setString(4, member.getEmail());
             int rs = preparedStatement.executeUpdate();
-            System.out.println(rs);
+//            System.out.println(rs);
             if (rs > 0) {
                 return true;
             }
@@ -56,7 +56,7 @@ public class DocGiaDao {
 
     public boolean updateMember(DocGia member) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "UPDATE MEMBER SET HODOCGIA = ?, TENDOCGIA = ?, SDT = ?, EMAIL = ? " +
+        String sql = "UPDATE DOCGIA SET HODOCGIA = ?, TENDOCGIA = ?, SDT = ?, EMAIL = ? " +
                 "WHERE MADOCGIA = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -77,12 +77,12 @@ public class DocGiaDao {
 
     public boolean deleteMember(DocGia member) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "DELETE FROM MEMBER WHERE MADOCGIA = ?";
+        String sql = "DELETE FROM DOCGIA WHERE MADOCGIA = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, member.getMaDocGia());
             int rs = preparedStatement.executeUpdate();
-            System.out.println(rs);
+//            System.out.println(rs);
             if (rs > 0) {
                 return true;
             }

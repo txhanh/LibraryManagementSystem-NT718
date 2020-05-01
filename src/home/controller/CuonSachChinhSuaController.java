@@ -73,7 +73,8 @@ public class CuonSachChinhSuaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         comboboxTenTuaSach.setItems(tenTuaSachList);
         comboboxTenTuaSach.setValue(CuonSachDanhSachController.v_tentuasach);
-        comboboxTenTuaSach.setEditable(false);
+
+
         trangThaiSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1));
         trangThaiSpinner.getValueFactory().setValue(CuonSachDanhSachController.v_trangthai);
     }

@@ -99,6 +99,7 @@ public class TuaSachThemController implements Initializable {
         comboboxNXB.getSelectionModel().selectFirst();
         soLuongSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20));
         soLuongSpinner.getValueFactory().setValue(3);
+
     }
 
 }
