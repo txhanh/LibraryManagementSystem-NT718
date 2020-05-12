@@ -3,6 +3,7 @@ package home.model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.DatePicker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,9 +18,8 @@ public class PhieuMuonSach {
     private SimpleIntegerProperty maCuonSach;
     private SimpleStringProperty tenTuaSach;
     private SimpleStringProperty tenTheLoai;
-
-    private Date ngayMuon;
-    private Date ngayDuKienTra;
+    private SimpleObjectProperty<Date> ngayMuon;
+    private SimpleObjectProperty<Date> ngayDuKienTra;
 
 
     public PhieuMuonSach(int maDocGia, String tenDocGia, int maCuonSach, String tenTuaSach,
@@ -29,26 +29,11 @@ public class PhieuMuonSach {
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
+        this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
+        this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
 
-        this.ngayMuon = ngayMuon;
-        this.ngayDuKienTra = ngayDuKienTra;
     }
 
-    public Date getNgayMuon() {
-        return ngayMuon;
-    }
-
-    public void setNgayMuon(Date ngayMuon) {
-        this.ngayMuon = ngayMuon;
-    }
-
-    public Date getNgayDuKienTra() {
-        return ngayDuKienTra;
-    }
-
-    public void setNgayDuKienTra(Date ngayDuKienTra) {
-        this.ngayDuKienTra = ngayDuKienTra;
-    }
 
     public PhieuMuonSach(int maPhieuMuon, int maDocGia, String tenDocGia, int maCuonSach, String tenTuaSach,
                          String tenTheLoai, Date ngayMuon, Date ngayDuKienTra) {
@@ -58,8 +43,9 @@ public class PhieuMuonSach {
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
-        this.ngayMuon = ngayMuon;
-        this.ngayDuKienTra = ngayDuKienTra;
+        this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
+        this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
+
     }
 
     public int getMaDocGia() {
@@ -134,19 +120,27 @@ public class PhieuMuonSach {
         this.tenTheLoai.set(tenTheLoai);
     }
 
-//    public SimpleDateFormat getNgayMuon() {
-//        return ngayMuon;
-//    }
-//
-//    public void setNgayMuon(SimpleDateFormat ngayMuon) {
-//        this.ngayMuon = ngayMuon;
-//    }
-//
-//    public SimpleDateFormat getNgayDuKienTra() {
-//        return ngayDuKienTra;
-//    }
-//
-//    public void setNgayDuKienTra(SimpleDateFormat ngayDuKienTra) {
-//        this.ngayDuKienTra = ngayDuKienTra;
-//    }
+    public Date getNgayMuon() {
+        return ngayMuon.get();
+    }
+
+    public SimpleObjectProperty<Date> ngayMuonProperty() {
+        return ngayMuon;
+    }
+
+    public void setNgayMuon(Date ngayMuon) {
+        this.ngayMuon.set(ngayMuon);
+    }
+
+    public Date getNgayDuKienTra() {
+        return ngayDuKienTra.get();
+    }
+
+    public SimpleObjectProperty<Date> ngayDuKienTraProperty() {
+        return ngayDuKienTra;
+    }
+
+    public void setNgayDuKienTra(Date ngayDuKienTra) {
+        this.ngayDuKienTra.set(ngayDuKienTra);
+    }
 }

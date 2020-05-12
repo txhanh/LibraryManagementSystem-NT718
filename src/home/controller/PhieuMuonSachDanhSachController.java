@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -58,10 +59,10 @@ public class PhieuMuonSachDanhSachController implements Initializable {
     private TableColumn<PhieuMuonSach, String> tenTheLoaiColumn;
 
     @FXML
-    private TableColumn<PhieuMuonSach, DatePicker> ngayMuonColumn;
+    private TableColumn<PhieuMuonSach, Date> ngayMuonColumn;
 
     @FXML
-    private TableColumn<PhieuMuonSach, DatePicker> ngayDuKienTraColumn;
+    private TableColumn<PhieuMuonSach, Date> ngayDuKienTraColumn;
 
     @FXML
     void openCapNhatTuaSachAction(ActionEvent event) {
@@ -98,5 +99,43 @@ public class PhieuMuonSachDanhSachController implements Initializable {
         tenTheLoaiColumn.setCellValueFactory(new PropertyValueFactory<>("tenTheLoai"));
         ngayMuonColumn.setCellValueFactory(new PropertyValueFactory<>("ngayMuon"));
         ngayDuKienTraColumn.setCellValueFactory(new PropertyValueFactory<>("ngayDuKienTra"));
+
+        ngayMuonColumn.setCellFactory(column -> {
+            TableCell<PhieuMuonSach, Date> cell = new TableCell<PhieuMuonSach, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        setText(format.format(item));
+                    }
+                }
+            };
+
+            return cell;
+        });
+
+        ngayDuKienTraColumn.setCellFactory(column -> {
+            TableCell<PhieuMuonSach, Date> cell = new TableCell<PhieuMuonSach, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        setText(format.format(item));
+                    }
+                }
+            };
+
+            return cell;
+        });
     }
 }
