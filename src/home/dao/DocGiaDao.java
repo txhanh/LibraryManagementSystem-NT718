@@ -60,11 +60,13 @@ public class DocGiaDao {
                 "WHERE MADOCGIA = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
             preparedStatement.setString(1,member.getHoDocGia());
             preparedStatement.setString(2,member.getTenDocGia());
             preparedStatement.setString(3,member.getSdt());
             preparedStatement.setString(4,member.getEmail());
             preparedStatement.setInt(5,member.getMaDocGia());
+
             int rs = preparedStatement.executeUpdate();
             if(rs > 0){
                 return true;

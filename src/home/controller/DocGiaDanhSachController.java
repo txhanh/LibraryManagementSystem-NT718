@@ -28,6 +28,7 @@ public class DocGiaDanhSachController implements Initializable {
 
     DocGiaDao memberDao = new DocGiaDao();
     Main window = new Main();
+
     ObservableList<DocGia> dataTable = FXCollections.observableArrayList(memberDao.getAllMember());
 
 
@@ -93,7 +94,7 @@ public class DocGiaDanhSachController implements Initializable {
         v_sdt = selectedMemberForUpdate.getSdt();
         v_email = selectedMemberForUpdate.getEmail();
 
-        window.loadAnotherWindow("/home/fxml/DocGiaChinhSua.fxml");
+        window.loadAnotherWindow("/home/fxml/DocGiaChinhSua.fxml", "Cập nhật thông tin độc giả");
         cancelAction(event);
 
 
@@ -102,7 +103,7 @@ public class DocGiaDanhSachController implements Initializable {
 
     @FXML
     void openAddMemberWindow(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml");
+        window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml", "Thêm độc giả");
         cancelAction(event);
     }
 

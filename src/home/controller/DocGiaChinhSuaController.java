@@ -52,19 +52,29 @@ public class DocGiaChinhSuaController implements Initializable {
         String sdt = tfSDT.getText();
         String email = tfEmail.getText();
         int madg = DocGiaDanhSachController.v_maDG;
-        DocGia member = new DocGia(madg,ho,ten,sdt,email);
+
+        Alert alert;
+        if (ho.isEmpty() || ten.isEmpty() || sdt.isEmpty() || email.isEmpty()) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn phải nhập đầy đủ thông tin");
+            alert.showAndWait();
+            return;
+        }
+
+        DocGia member = new DocGia(madg, ho, ten, sdt, email);
         DocGiaDao memberDao = new DocGiaDao();
 
         boolean flag = memberDao.updateMember(member);
-        if(flag){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if (flag) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Cập nhật dữ liệu thành công");
             alert.showAndWait();
             cancelAction(event);
 
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Cập nhật dữ liệu thất bại!!!");
             alert.showAndWait();
@@ -72,8 +82,6 @@ public class DocGiaChinhSuaController implements Initializable {
 
         }
     }
-
-
 
 
     @Override

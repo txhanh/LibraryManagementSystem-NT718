@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainGUIController  {
+public class MainGUIController implements Initializable {
 
     Main window = new Main();
 
@@ -60,9 +60,9 @@ public class MainGUIController  {
     public BorderPane borderPane;
 
 
-
-    public void initialize() {
-        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadUI(("/home/fxml/PhieuMuonSachDanhSach.fxml"));
     }
 
 
@@ -77,19 +77,16 @@ public class MainGUIController  {
     @FXML
     void handleClickAction(ActionEvent event) {
         if (event.getSource() == btnDocGia) {
-
             loadUI("/home/fxml/DocGiaDanhSach.fxml");
-
         } else if (event.getSource() == btnTuaSach) {
-
             loadUI("/home/fxml/TuaSachDanhSach.fxml");
         } else if (event.getSource() == btnCuonSach) {
             loadUI("/home/fxml/CuonSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuMuon) {
-//
+            loadUI("/home/fxml/PhieuMuonSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuTra) {
 //
-        } else if (event.getSource() == btnHome || event.getSource() == null){
+        } else if (event.getSource() == btnHome || event.getSource() == null) {
             loadUI(("/home/fxml/Intro.fxml"));
         }
 
@@ -107,4 +104,6 @@ public class MainGUIController  {
         }
 
     }
+
+
 }

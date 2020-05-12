@@ -94,7 +94,7 @@ public class CuonSachDanhSachController implements Initializable {
 
     @FXML
     void openThemCuonSach(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/CuonSachThem.fxml");
+        window.loadAnotherWindow("/home/fxml/CuonSachThem.fxml", "Thêm cuốn sách");
         cancelAction(event);
     }
 
