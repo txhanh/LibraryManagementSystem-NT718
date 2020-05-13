@@ -2,6 +2,7 @@ package home.controller;
 
 import home.Main;
 import home.dao.PhieuMuonSachDao;
+import home.model.DocGia;
 import home.model.PhieuMuonSach;
 import home.model.TuaSach;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,19 +20,25 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Observable;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PhieuMuonSachDanhSachController implements Initializable {
+
+    public static final String patternDay = "dd - MM - yyyy";
 
     Main window = new Main();
 
     PhieuMuonSachDao phieuMuonSachDao = new PhieuMuonSachDao();
     ObservableList<PhieuMuonSach> dataPhieuMuonSach =
             FXCollections.observableArrayList(phieuMuonSachDao.lietKePhieuMuonSach());
+
+    public static int v_maDocGia;
+    public static int v_maCuonSach;
+    public static Date v_ngayMuon;
+    public static Date v_ngayDuKienTra;
+    public static int v_maPhieuMuon;
 
     @FXML
     private GridPane paneDocGia;
@@ -72,14 +79,71 @@ public class PhieuMuonSachDanhSachController implements Initializable {
     @FXML
     private TableColumn<PhieuMuonSach, Date> ngayDuKienTraColumn;
 
-    @FXML
-    void openCapNhatTuaSachAction(ActionEvent event) {
 
+    @FXML
+    void openCapNhatPhieuMuonSachAction(ActionEvent event) {
+        PhieuMuonSach selectedForUpdate = tablePhieuMuonSach.getSelectionModel().getSelectedItem();
+        if (selectedForUpdate == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả");
+            alert.showAndWait();
+            return;
+        }
+
+        v_maDocGia = selectedForUpdate.getMaDocGia();
+        v_maCuonSach = selectedForUpdate.getMaCuonSach();
+        v_ngayMuon = selectedForUpdate.getNgayMuon();
+        v_ngayDuKienTra = selectedForUpdate.getNgayDuKienTra();
+        v_maPhieuMuon = selectedForUpdate.getMaPhieuMuon();
+
+        window.loadAnotherWindow("/home/fxml/PhieuMuonSachChinhSua.fxml", "Cập nhật Phiếu mượn sách");
+        cancelAction(event);
+    }
+
+    @FXML
+    void xoaPhieuMuonSachAction(ActionEvent event) {
+        PhieuMuonSach phieuMuonSachForDelete = tablePhieuMuonSach.getSelectionModel().getSelectedItem();
+        Alert alert;
+        if (phieuMuonSachForDelete == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa dòng nào để xóa cả !!!");
+            alert.showAndWait();
+            return;
+        }
+
+
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn thực sự muốn xóa phiếu mượn sách số \""
+                + phieuMuonSachForDelete.getMaPhieuMuon() + "\" chứ?");
+
+        Optional<ButtonType> response = alert.showAndWait();
+        if (response.get() == ButtonType.CANCEL) {
+            return;
+        }
+
+        boolean flag = phieuMuonSachDao.xoaPhieuMuonSach(phieuMuonSachForDelete);
+
+        if (flag) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Xóa phiếu mượn sách thành công");
+            alert.showAndWait();
+            dataPhieuMuonSach.remove(phieuMuonSachForDelete);
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không xóa được phiếu mượn sách !!!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void openHomeWindow(ActionEvent event) {
-
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        cancelAction(event);
     }
 
     @FXML
@@ -94,10 +158,6 @@ public class PhieuMuonSachDanhSachController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    void xoaTuaSachAction(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,6 +182,8 @@ public class PhieuMuonSachDanhSachController implements Initializable {
                     return true;
                 }
 
+                DateFormat dateFormat = new SimpleDateFormat(patternDay);
+
                 // Compare first name and last name of every person with filter text.
                 // ép về kiểu chữ thường rồi so sánh dữ liệu trong DB vs dữ liệu trong bộ lọc
                 String lowerCaseFilter = newValue.toLowerCase();
@@ -138,9 +200,9 @@ public class PhieuMuonSachDanhSachController implements Initializable {
                     return true;
                 } else if (String.valueOf(phieuMuonSach.getMaPhieuMuon()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (String.valueOf(phieuMuonSach.getNgayMuon()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (dateFormat.format(phieuMuonSach.getNgayMuon()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
-                } else if (String.valueOf(phieuMuonSach.getNgayDuKienTra()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                } else if (dateFormat.format(phieuMuonSach.getNgayDuKienTra()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
                 } else
                     return false; // Does not match.
@@ -178,9 +240,11 @@ public class PhieuMuonSachDanhSachController implements Initializable {
         ngayDuKienTraColumn.setCellValueFactory(new PropertyValueFactory<>("ngayDuKienTra"));
 
         // code dùng để định dạng kiểu dữ liệu Date theo ý muốn: dd-MM-yyyy vi VN
+        // dùng dd/MM/yyyy
+//        String pattern = "dd - MM - yyyy";
         ngayMuonColumn.setCellFactory(column -> {
             TableCell<PhieuMuonSach, Date> cell = new TableCell<PhieuMuonSach, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm a", new Locale("vi", "VN"));
+                private SimpleDateFormat format = new SimpleDateFormat(patternDay);
 
                 @Override
                 protected void updateItem(Date item, boolean empty) {
@@ -198,7 +262,7 @@ public class PhieuMuonSachDanhSachController implements Initializable {
 
         ngayDuKienTraColumn.setCellFactory(column -> {
             TableCell<PhieuMuonSach, Date> cell = new TableCell<PhieuMuonSach, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm a", new Locale("vi", "VN"));
+                private SimpleDateFormat format = new SimpleDateFormat(patternDay);
 
                 @Override
                 protected void updateItem(Date item, boolean empty) {

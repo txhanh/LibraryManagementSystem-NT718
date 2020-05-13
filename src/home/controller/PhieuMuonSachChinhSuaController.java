@@ -4,8 +4,10 @@ import home.Main;
 import home.dao.CuonSachDao;
 import home.dao.DocGiaDao;
 import home.dao.PhieuMuonSachDao;
-import home.dao.TuaSachDao;
-import home.model.*;
+import home.model.CuonSach;
+import home.model.DocGia;
+import home.model.PhieuMuonSach;
+import home.model.QuyDinh;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,10 +22,8 @@ import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import javax.print.Doc;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -32,9 +32,7 @@ import java.util.ResourceBundle;
 
 import static home.controller.PhieuMuonSachDanhSachController.patternDay;
 
-public class PhieuMuonSachThemController implements Initializable {
-
-    Main window = new Main();
+public class PhieuMuonSachChinhSuaController implements Initializable {
 
     DocGiaDao docGiaDao = new DocGiaDao();
     CuonSachDao cuonSachDao = new CuonSachDao();
@@ -46,6 +44,13 @@ public class PhieuMuonSachThemController implements Initializable {
     ObservableList<CuonSach> cuonSachList =
             FXCollections.observableArrayList(cuonSachDao.lietKeCuonSach());
 
+    Main window = new Main();
+
+    @FXML
+    private Button btnCapNhatPhieuMuon;
+
+    @FXML
+    private Button btnCancel;
 
     @FXML
     private ComboBox<DocGia> comboboxDocGia;
@@ -54,19 +59,10 @@ public class PhieuMuonSachThemController implements Initializable {
     private ComboBox<CuonSach> comboboxCuonSach;
 
     @FXML
-    private Button btnThemPhieuMuon;
-
-    @FXML
-    private Button btnCancel;
-
-    @FXML
     private DatePicker datepickerNgayMuonSach;
 
     @FXML
     private DatePicker datepickerNgayDuKienTra;
-
-    LocalDate ngayMuonSachInit;
-    LocalDate ngayDuKienTraInit;
 
     @FXML
     void cancelAction(ActionEvent event) {
@@ -76,45 +72,39 @@ public class PhieuMuonSachThemController implements Initializable {
     }
 
     @FXML
-    void themPhieuMuonSachAction(ActionEvent event) {
+    void capNhatPhieuMuonSachAction(ActionEvent event) {
         int maDocGia = comboboxDocGia.getValue().getMaDocGia();
+        String tenDocGia = comboboxDocGia.getValue().getTenDocGia();
         int maCuonSach = comboboxCuonSach.getValue().getMaCuonSach();
+        String tenTuaSach = comboboxCuonSach.getValue().getTenTuaSach();
+        String tenTheLoai = comboboxCuonSach.getValue().getTenTheLoai();
+        //convert datepicker ==> Date
+        //convert datepick ==> localdate ==> *.getValue()
+        java.util.Date ngayMuonSach = java.sql.Date.valueOf(datepickerNgayMuonSach.getValue());
+        java.util.Date ngayDuKienTra = java.sql.Date.valueOf(datepickerNgayDuKienTra.getValue());
 
+        PhieuMuonSach phieuMuonSach = new PhieuMuonSach(PhieuMuonSachDanhSachController.v_maPhieuMuon, maDocGia,
+                tenDocGia, maCuonSach, tenTuaSach, tenTheLoai, ngayMuonSach, ngayDuKienTra);
 
-        if (datepickerNgayMuonSach.getValue() == null || datepickerNgayDuKienTra.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setContentText("Bạn chưa chọn đủ ngày");
-            alert.showAndWait();
-            cancelAction(event);
-            return;
-        }
-
-        java.util.Date ngayMuonSach = java.sql.Date.valueOf(ngayMuonSachInit);
-        java.util.Date ngayDuKienTra = java.sql.Date.valueOf(ngayDuKienTraInit);
-
-        PhieuMuonSach phieuMuonSach = new PhieuMuonSach(maDocGia, maCuonSach, ngayMuonSach, ngayDuKienTra);
-        boolean flag = phieuMuonSachDao.themPhieuMuonSach(phieuMuonSach);
-        if (flag) {
+        boolean flag = phieuMuonSachDao.capNhatPhieuMuonSach(phieuMuonSach);
+        if(flag){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
-            alert.setContentText("Thêm phiếu mượn sách thành công");
+            alert.setContentText("Cập nhật phiếu mượn sách thành công");
             alert.showAndWait();
             cancelAction(event);
-
-        } else {
+        }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không thêm được phiếu mượn sách");
+            alert.setContentText("Không thể cập nhật phiếu mượn sách. Vui lòng kiểm tra lại lỗi !!!");
             alert.showAndWait();
             cancelAction(event);
         }
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        // show mã độc giả + họ tên độc giả
         comboboxDocGia.setItems(tenDocGiaList);
         comboboxDocGia.setConverter(new StringConverter<DocGia>() {
 
@@ -129,8 +119,21 @@ public class PhieuMuonSachThemController implements Initializable {
                         ap.getTenDocGia().equals(string)).findFirst().orElse(null);
             }
         });
-        comboboxDocGia.getSelectionModel().selectFirst();
 
+        // So sánh thông tin độc giả
+        // Selected ở TableView với Độc giả Object lấy từ ObservableList tenDocGiaList phía trên
+        DocGia selectedDocGia = null;
+        for (DocGia docGiaObject : tenDocGiaList) {
+            if (PhieuMuonSachDanhSachController.v_maDocGia == docGiaObject.getMaDocGia()) {
+                int id = docGiaObject.getMaDocGia();
+                String ho = docGiaObject.getHoDocGia();
+                String ten = docGiaObject.getTenDocGia();
+                String sdt = docGiaObject.getSdt();
+                String email = docGiaObject.getEmail();
+                selectedDocGia = new DocGia(id, ho, ten, sdt, email);
+            }
+        }
+        comboboxDocGia.setValue(selectedDocGia);
 
         // show mã cuốn sách + tên tựa sách
         comboboxCuonSach.setItems(cuonSachList);
@@ -147,20 +150,38 @@ public class PhieuMuonSachThemController implements Initializable {
                         ap.getTenTuaSach().equals(string)).findFirst().orElse(null);
             }
         });
-        comboboxCuonSach.getSelectionModel().selectFirst();
 
+        // So sánh thông tin độc giả
+        // Selected ở TableView với Độc giả Object lấy từ ObservableList tenDocGiaList phía trên
+        CuonSach selectedCuonSach = null;
+        for (CuonSach cuonSachObject : cuonSachList) {
+            if (PhieuMuonSachDanhSachController.v_maCuonSach == cuonSachObject.getMaCuonSach()) {
 
+                int macuonsach = cuonSachObject.getMaCuonSach();
+                int matuasach = cuonSachObject.getMaTuaSach();
+                String tenTuaSach = cuonSachObject.getTenTuaSach();
+                String theLoai = cuonSachObject.getTenTheLoai();
+                String tacGia = cuonSachObject.getTacGia();
+                int trangThai = cuonSachObject.getTrangThai();
 
-        //Lấy quy định số ngày mượn tối đa
+                selectedCuonSach = new CuonSach(macuonsach, matuasach, tenTuaSach, theLoai, tacGia, trangThai);
+            }
+        }
+        comboboxCuonSach.setValue(selectedCuonSach);
+
+        // Lấy Date từ Phiếu Mượn Sách danh sách Controller qua
+        // Ép về kiểu LocalDate để thêm vào lại DatePicker
+        LocalDate ngayMuonSach = new java.sql.Date(PhieuMuonSachDanhSachController.v_ngayMuon.getTime()).toLocalDate();
+        LocalDate ngayDuKienTra =
+                new java.sql.Date(PhieuMuonSachDanhSachController.v_ngayDuKienTra.getTime()).toLocalDate();
+
         QuyDinh quyDinh = new QuyDinh();
 
-        //Khởi tạo ngày mượn sách mặc định: now()
-        ngayMuonSachInit = LocalDate.now();
-        ngayDuKienTraInit = ngayMuonSachInit.plusDays(quyDinh.getSoNgayMuonToiDa());
-
+        datepickerNgayMuonSach.setValue(ngayMuonSach);
+        //Format date picker có dạng "dd-MM-yyyy";
 //        String pattern = "dd - MM - yyyy";
-        datepickerNgayMuonSach.setValue(ngayMuonSachInit);
 
+        //format về kiểu dd/MM/yyyy
         datepickerNgayMuonSach.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate date) {
@@ -179,13 +200,7 @@ public class PhieuMuonSachThemController implements Initializable {
             }
         });
 
-
-        datepickerNgayMuonSach.setDisable(true);
-
-
-        //Ngay Du Kien tra
-
-        datepickerNgayDuKienTra.setValue(ngayDuKienTraInit);
+        datepickerNgayDuKienTra.setValue(ngayDuKienTra);
 
         datepickerNgayDuKienTra.setConverter(new StringConverter<LocalDate>() {
             @Override
@@ -206,12 +221,23 @@ public class PhieuMuonSachThemController implements Initializable {
         });
 
 
+        // add Listener kiểm tra lỗi khi vừa chọn xong ngày mượn sách
+        // nếu phù hợp thì tự tăng 5 ngày để tạo thành ngày dự kiến trả sách
+        datepickerNgayMuonSach.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
+                                LocalDate newValue) {
+                if (datepickerNgayMuonSach.getValue().isBefore(LocalDate.now())) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Ngày mượn sách không được TRƯỚC ngày hôm nay");
+                    alert.showAndWait();
+                    return;
+                }
 
+                datepickerNgayDuKienTra.setValue(newValue.plusDays(quyDinh.getSoNgayMuonToiDa()));
+            }
+        });
         datepickerNgayDuKienTra.setDisable(true);
-
-
-
     }
-
-
 }

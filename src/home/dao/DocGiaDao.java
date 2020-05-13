@@ -13,7 +13,7 @@ public class DocGiaDao {
     public List<DocGia> getAllMember() {
         List<DocGia> memberList = new ArrayList<DocGia>();
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "SELECT * FROM DOCGIA";
+        String sql = "SELECT * FROM DOCGIA ORDER BY MADOCGIA";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();

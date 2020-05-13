@@ -24,7 +24,7 @@ public class PhieuMuonSach {
 
     public PhieuMuonSach(int maDocGia, String tenDocGia, int maCuonSach, String tenTuaSach,
                          String tenTheLoai, Date ngayMuon, Date ngayDuKienTra) {
-        this.maPhieuMuon = new SimpleIntegerProperty(maDocGia);
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.tenDocGia = new SimpleStringProperty(tenDocGia);
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
@@ -46,6 +46,13 @@ public class PhieuMuonSach {
         this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
         this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
 
+    }
+
+    public PhieuMuonSach(int maDocGia, int maCuonSach, Date ngayMuon, Date ngayDuKienTra) {
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+        this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
+        this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
     }
 
     public int getMaDocGia() {

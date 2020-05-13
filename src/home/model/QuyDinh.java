@@ -8,6 +8,12 @@ public class QuyDinh {
     private SimpleIntegerProperty soSachMuonToiDa;
     private SimpleIntegerProperty soNgayMuonToiDa;
 
+    public QuyDinh(){
+        soTienPhat = new SimpleIntegerProperty(1000);
+        soSachMuonToiDa = new SimpleIntegerProperty(3);
+        soNgayMuonToiDa = new SimpleIntegerProperty(5);
+    }
+
     public QuyDinh(int soTienPhat, int soSachMuonToiDa, int soNgayMuonToiDa) {
         this.soTienPhat = new SimpleIntegerProperty(soTienPhat);
         this.soSachMuonToiDa = new SimpleIntegerProperty(soSachMuonToiDa);

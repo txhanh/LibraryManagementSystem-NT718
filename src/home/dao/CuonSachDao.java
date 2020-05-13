@@ -15,16 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CuonSachDao {
-    public List<CuonSach> lietKeCuonSach(){
+    public List<CuonSach> lietKeCuonSach() {
         List<CuonSach> danhSachCuonSach = new ArrayList<>();
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "SELECT MACUONSACH, T.MATUASACH, TENTUASACH, TENTHELOAI, TACGIA, TRANGTHAI\n" +
-                "FROM CUONSACH C JOIN TUASACH T on C.MATUASACH = T.MATUASACH";
+                "FROM CUONSACH C\n" +
+                "         JOIN TUASACH T on C.MATUASACH = T.MATUASACH\n" +
+                "ORDER BY T.MATUASACH";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 int macuonsach = rs.getInt(1);
                 int matuasach = rs.getInt(2);
                 String tenTuaSach = rs.getString(3);
@@ -43,7 +45,7 @@ public class CuonSachDao {
         return danhSachCuonSach;
     }
 
-    public boolean themCuonSach(CuonSach cuonSach){
+    public boolean themCuonSach(CuonSach cuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
         String sqlSelect = "DECLARE\n" +
                 "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
@@ -70,12 +72,12 @@ public class CuonSachDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlSelect);
 
 
-            preparedStatement.setString(1,cuonSach.getTenTuaSach());
-            preparedStatement.setInt(2,cuonSach.getTrangThai());
+            preparedStatement.setString(1, cuonSach.getTenTuaSach());
+            preparedStatement.setInt(2, cuonSach.getTrangThai());
 
             int rs = preparedStatement.executeUpdate();
 
-            if(rs > 0){
+            if (rs > 0) {
                 return true;
             }
 
@@ -87,18 +89,18 @@ public class CuonSachDao {
         return false;
     }
 
-    public boolean XoaCuonSach(CuonSach cuonSach){
+    public boolean XoaCuonSach(CuonSach cuonSach) {
 
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "DELETE FROM CUONSACH WHERE MACUONSACH = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1,cuonSach.getMaCuonSach());
+            preparedStatement.setInt(1, cuonSach.getMaCuonSach());
 
             int rs = preparedStatement.executeUpdate();
 
-            if(rs > 0){
+            if (rs > 0) {
                 return true;
             }
 
@@ -109,21 +111,21 @@ public class CuonSachDao {
         return false;
     }
 
-    public boolean capNhatCuonSach(CuonSach cuonSach){
+    public boolean capNhatCuonSach(CuonSach cuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql =    "UPDATE CUONSACH\n" +
-                        "SET TRANGTHAI = ?\n" +
-                        "WHERE MACUONSACH = ?";
+        String sql = "UPDATE CUONSACH\n" +
+                "SET TRANGTHAI = ?\n" +
+                "WHERE MACUONSACH = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 
-            preparedStatement.setInt(1,cuonSach.getTrangThai());
+            preparedStatement.setInt(1, cuonSach.getTrangThai());
             preparedStatement.setInt(2, CuonSachDanhSachController.v_macuonsach);
 
             int rs = preparedStatement.executeUpdate();
-            if(rs > 0){
+            if (rs > 0) {
                 return true;
             }
 
