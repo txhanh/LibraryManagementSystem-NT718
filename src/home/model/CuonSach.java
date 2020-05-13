@@ -9,34 +9,34 @@ public class CuonSach {
     private SimpleStringProperty tenTuaSach;
     private SimpleStringProperty tenTheLoai;
     private SimpleStringProperty tacGia;
-    private SimpleIntegerProperty trangThai; // 1 true, 0 false
+    private SimpleStringProperty trangThai; // 1 true, 0 false
 
     public CuonSach() {
 
     }
 
-    public CuonSach(String tenTuaSach, int trangThai) {
+    public CuonSach(String tenTuaSach, String trangThai) {
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
-        this.trangThai = new SimpleIntegerProperty(trangThai);
+        this.trangThai = new SimpleStringProperty(trangThai);
     }
 
     public CuonSach(int maTuaSach, String tenTuaSach,
-                    String tenTheLoai, String tacGia, int trangThai) {
+                    String tenTheLoai, String tacGia, String trangThai) {
         this.maTuaSach = new SimpleIntegerProperty(maTuaSach);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
         this.tacGia = new SimpleStringProperty(tacGia);
-        this.trangThai = new SimpleIntegerProperty(trangThai);
+        this.trangThai = new SimpleStringProperty(trangThai);
     }
 
     public CuonSach(int maCuonSach, int maTuaSach, String tenTuaSach,
-                    String tenTheLoai, String tacGia, int trangThai) {
+                    String tenTheLoai, String tacGia, String trangThai) {
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
         this.maTuaSach = new SimpleIntegerProperty(maTuaSach);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
         this.tacGia = new SimpleStringProperty(tacGia);
-        this.trangThai = new SimpleIntegerProperty(trangThai);
+        this.trangThai = new SimpleStringProperty(trangThai);
     }
 
     public int getMaCuonSach() {
@@ -99,15 +99,15 @@ public class CuonSach {
         this.tacGia.set(tacGia);
     }
 
-    public int getTrangThai() {
+    public String getTrangThai() {
         return trangThai.get();
     }
 
-    public SimpleIntegerProperty trangThaiProperty() {
+    public SimpleStringProperty trangThaiProperty() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(String trangThai) {
         this.trangThai.set(trangThai);
     }
 }

@@ -23,6 +23,8 @@ public class CuonSachThemController implements Initializable {
 
     TuaSachDao tuaSachDao = new TuaSachDao();
 
+    ObservableList<String> trangThaiList = FXCollections.observableArrayList("Chưa mượn", "Đã mượn");
+
 
     ObservableList<String> tenTuaSachList =
             FXCollections.observableArrayList(tuaSachDao.lietKeTenTuaSach());
@@ -39,7 +41,7 @@ public class CuonSachThemController implements Initializable {
     private Button btnCancel;
 
     @FXML
-    private Spinner<Integer> trangThaiSpinner;
+    private ComboBox<String> comboboxTrangThai;
 
     @FXML
     void cancelAction(ActionEvent event) {
@@ -51,7 +53,7 @@ public class CuonSachThemController implements Initializable {
     @FXML
     void themCuonSachAction(ActionEvent event) {
         String tenTuaSach = comboboxTenTuaSach.getValue();
-        int trangThai = trangThaiSpinner.getValue();
+        String trangThai = comboboxTrangThai.getValue();
 
         CuonSach cuonSach = new CuonSach(tenTuaSach, trangThai);
         boolean flag = cuonSachDao.themCuonSach(cuonSach);
@@ -75,7 +77,10 @@ public class CuonSachThemController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         comboboxTenTuaSach.setItems(tenTuaSachList);
         comboboxTenTuaSach.getSelectionModel().selectFirst();
-        trangThaiSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1));
-        trangThaiSpinner.getValueFactory().setValue(1);
+
+
+        comboboxTrangThai.setItems(trangThaiList);
+        comboboxTrangThai.getSelectionModel().selectFirst();
+        comboboxTrangThai.setDisable(true);
     }
 }

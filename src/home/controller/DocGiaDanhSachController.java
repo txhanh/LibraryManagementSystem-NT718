@@ -141,7 +141,7 @@ public class DocGiaDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được dữ liệu !!!");
+            alert.setContentText("Không xóa được độc giả. Kiểm tra lại ràng buộc toàn vẹn !");
             alert.showAndWait();
         }
     }

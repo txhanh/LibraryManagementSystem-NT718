@@ -110,7 +110,7 @@ public class TuaSachDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được tựa sách");
+            alert.setContentText("Không xóa được tựa sách. Kiểm tra lại ràng buộc toàn vẹn !");
             alert.showAndWait();
         }
     }
@@ -134,13 +134,13 @@ public class TuaSachDanhSachController implements Initializable {
         v_nxb = selectedForUpdate.getNXB();
         v_soluong = selectedForUpdate.getSoLuong();
 
-        window.loadAnotherWindow("/home/fxml/TuaSachChinhSua.fxml");
+        window.loadAnotherWindow("/home/fxml/TuaSachChinhSua.fxml", "Cập nhật tựa sách");
         cancelAction(event);
     }
 
     @FXML
     void openThemTuaSach(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/TuaSachThem.fxml");
+        window.loadAnotherWindow("/home/fxml/TuaSachThem.fxml", "Thêm tựa sách");
         cancelAction(event);
     }
 

@@ -97,8 +97,9 @@ public class TuaSachThemController implements Initializable {
         comboboxTheLoai.getSelectionModel().selectFirst();
         comboboxNXB.setItems(NXBList);
         comboboxNXB.getSelectionModel().selectFirst();
-        soLuongSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20));
-        soLuongSpinner.getValueFactory().setValue(3);
+        soLuongSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20));
+        soLuongSpinner.getValueFactory().setValue(0);
+        soLuongSpinner.setDisable(true);
 
     }
 

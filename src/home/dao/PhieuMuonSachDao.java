@@ -55,15 +55,30 @@ public class PhieuMuonSachDao {
 
     public boolean themPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "INSERT INTO PHIEUMUONSACH(MADOCGIA,MACUONSACH,NGAYMUONSACH,NGAYDUKIENTRA)\n" +
-                "VALUES (?,?,?,?)";
+        String sql =
+                "BEGIN\n" +
+                "    INSERT INTO PHIEUMUONSACH(MADOCGIA, MACUONSACH, NGAYMUONSACH, NGAYDUKIENTRA) VALUES (?, ?, ?, ?)" +
+                ";\n" +
+                "\n" +
+                "    UPDATE CUONSACH\n" +
+                "    SET TRANGTHAI = 'Đã mượn'\n" +
+                "    WHERE MACUONSACH = ?;\n" +
+                "    \n" +
+                "    COMMIT ;\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "end;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuMuonSach.getMaDocGia());
             preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
             preparedStatement.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
             preparedStatement.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-
+            preparedStatement.setInt(5, phieuMuonSach.getMaCuonSach());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;
@@ -78,10 +93,25 @@ public class PhieuMuonSachDao {
 
     public boolean xoaPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "DELETE FROM PHIEUMUONSACH WHERE MAPHIEUMUON = ?";
+        String sql = "BEGIN\n" +
+                "    DELETE FROM PHIEUMUONSACH WHERE MAPHIEUMUON = ?;\n" +
+                "\n" +
+                "    UPDATE CUONSACH\n" +
+                "    SET TRANGTHAI = 'Chưa mượn'\n" +
+                "    WHERE MACUONSACH = ?;\n" +
+                "\n" +
+                "    COMMIT ;\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "end;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuMuonSach.getMaPhieuMuon());
+            preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;
@@ -105,7 +135,7 @@ public class PhieuMuonSachDao {
             preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
             preparedStatement.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
             preparedStatement.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-            preparedStatement.setInt(5,phieuMuonSach.getMaPhieuMuon());
+            preparedStatement.setInt(5, phieuMuonSach.getMaPhieuMuon());
 
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {

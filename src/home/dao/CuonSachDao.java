@@ -32,7 +32,7 @@ public class CuonSachDao {
                 String tenTuaSach = rs.getString(3);
                 String theLoai = rs.getString(4);
                 String tacGia = rs.getString(5);
-                int trangThai = rs.getInt(6);
+                String trangThai = rs.getString(6);
 
                 CuonSach cuonSach = new CuonSach(macuonsach, matuasach, tenTuaSach, theLoai, tacGia, trangThai);
                 danhSachCuonSach.add(cuonSach);
@@ -49,31 +49,39 @@ public class CuonSachDao {
         Connection connection = JDBCConnection.getJDBCConnection();
         String sqlSelect = "DECLARE\n" +
                 "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
+                "    v_count number;\n" +
                 "BEGIN\n" +
                 "    SELECT MATUASACH into v_matuasach\n" +
                 "    FROM TUASACH\n" +
                 "    WHERE TENTUASACH = ?;\n" +
                 "\n" +
-                "    INSERT INTO CUONSACH(MATUASACH,TRANGTHAI)\n" +
-                "        VALUES (v_matuasach,?);\n" +
+                "    INSERT INTO CUONSACH(MATUASACH, TRANGTHAI)\n" +
+                "    VALUES (v_matuasach, ?);\n" +
+                "    \n" +
+                "    SELECT SOLUONG INTO v_count\n" +
+                "    FROM TUASACH\n" +
+                "    WHERE MATUASACH = v_matuasach;\n" +
+                "    \n" +
+                "    UPDATE TUASACH\n" +
+                "    SET SOLUONG = v_count + 1\n" +
+                "    WHERE MATUASACH = v_matuasach;\n" +
                 "\n" +
                 "    COMMIT;\n" +
                 "\n" +
-                "    EXCEPTION\n" +
+                "EXCEPTION\n" +
                 "    WHEN OTHERS THEN\n" +
-                "    DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-                "    DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-                "    ROLLBACK ;\n" +
-                "    RAISE ;\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
                 "\n" +
                 "END;";
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlSelect);
 
 
             preparedStatement.setString(1, cuonSach.getTenTuaSach());
-            preparedStatement.setInt(2, cuonSach.getTrangThai());
+            preparedStatement.setString(2, cuonSach.getTrangThai());
 
             int rs = preparedStatement.executeUpdate();
 
@@ -92,11 +100,41 @@ public class CuonSachDao {
     public boolean XoaCuonSach(CuonSach cuonSach) {
 
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "DELETE FROM CUONSACH WHERE MACUONSACH = ?";
+        String sql = "DECLARE\n" +
+                "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
+                "    v_count number;\n" +
+                "BEGIN\n" +
+                "\n" +
+                "    SELECT MATUASACH INTO v_matuasach\n" +
+                "    FROM CUONSACH\n" +
+                "    WHERE MACUONSACH = ?;\n" +
+                "\n" +
+                "    DELETE FROM CUONSACH WHERE MACUONSACH = ?;\n" +
+                "\n" +
+                "\n" +
+                "    SELECT SOLUONG INTO v_count\n" +
+                "    FROM TUASACH\n" +
+                "    WHERE MATUASACH = v_matuasach;\n" +
+                "\n" +
+                "    UPDATE TUASACH\n" +
+                "    SET SOLUONG = v_count - 1\n" +
+                "    WHERE MATUASACH = v_matuasach;\n" +
+                "\n" +
+                "    COMMIT;\n" +
+                "\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "\n" +
+                "END;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, cuonSach.getMaCuonSach());
+            preparedStatement.setInt(2, cuonSach.getMaCuonSach());
 
             int rs = preparedStatement.executeUpdate();
 
@@ -121,7 +159,7 @@ public class CuonSachDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 
-            preparedStatement.setInt(1, cuonSach.getTrangThai());
+            preparedStatement.setString(1, cuonSach.getTrangThai());
             preparedStatement.setInt(2, CuonSachDanhSachController.v_macuonsach);
 
             int rs = preparedStatement.executeUpdate();

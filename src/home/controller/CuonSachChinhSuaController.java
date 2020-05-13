@@ -22,6 +22,7 @@ public class CuonSachChinhSuaController implements Initializable {
     TuaSachDao tuaSachDao = new TuaSachDao();
     CuonSachDao cuonSachDao = new CuonSachDao();
 
+    ObservableList<String> trangThaiList = FXCollections.observableArrayList("Chưa mượn", "Đã mượn");
 
     ObservableList<String> tenTuaSachList =
             FXCollections.observableArrayList(tuaSachDao.lietKeTenTuaSach());
@@ -30,13 +31,16 @@ public class CuonSachChinhSuaController implements Initializable {
     private ComboBox<String> comboboxTenTuaSach;
 
     @FXML
+    private ComboBox<String> comboboxTrangThai;
+
+    @FXML
     private Button btnCapNhatCuonSach;
 
     @FXML
     private Button btnCancel;
 
-    @FXML
-    private Spinner<Integer> trangThaiSpinner;
+
+
 
     @FXML
     void cancelAction(ActionEvent event) {
@@ -48,7 +52,7 @@ public class CuonSachChinhSuaController implements Initializable {
     @FXML
     void capNhatCuonSachAction(ActionEvent event) {
         String tentuasach = comboboxTenTuaSach.getValue();
-        int trangthai = trangThaiSpinner.getValue();
+        String trangthai = comboboxTrangThai.getValue();
 
 
         CuonSach cuonSach = new CuonSach(tentuasach,trangthai);
@@ -73,9 +77,9 @@ public class CuonSachChinhSuaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         comboboxTenTuaSach.setItems(tenTuaSachList);
         comboboxTenTuaSach.setValue(CuonSachDanhSachController.v_tentuasach);
+        comboboxTenTuaSach.setDisable(true);
 
-
-        trangThaiSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1));
-        trangThaiSpinner.getValueFactory().setValue(CuonSachDanhSachController.v_trangthai);
+        comboboxTrangThai.setItems(trangThaiList);
+        comboboxTrangThai.setValue(CuonSachDanhSachController.v_trangthai);
     }
 }

@@ -162,7 +162,7 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
                 String tenTuaSach = cuonSachObject.getTenTuaSach();
                 String theLoai = cuonSachObject.getTenTheLoai();
                 String tacGia = cuonSachObject.getTacGia();
-                int trangThai = cuonSachObject.getTrangThai();
+                String trangThai = cuonSachObject.getTrangThai();
 
                 selectedCuonSach = new CuonSach(macuonsach, matuasach, tenTuaSach, theLoai, tacGia, trangThai);
             }

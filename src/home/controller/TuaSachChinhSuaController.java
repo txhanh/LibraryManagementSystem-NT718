@@ -96,7 +96,7 @@ public class TuaSachChinhSuaController implements Initializable {
 
         comboboxNXB.setItems(NXBList);
 
-        soLuongSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20));
+        soLuongSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20));
 
         tfTenTuaSach.setText(TuaSachDanhSachController.v_tentuasach);
         comboboxTheLoai.setValue(TuaSachDanhSachController.v_theloai);
