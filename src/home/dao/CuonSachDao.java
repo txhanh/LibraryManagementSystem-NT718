@@ -21,7 +21,7 @@ public class CuonSachDao {
         String sql = "SELECT MACUONSACH, T.MATUASACH, TENTUASACH, TENTHELOAI, TACGIA, TRANGTHAI\n" +
                 "FROM CUONSACH C\n" +
                 "         JOIN TUASACH T on C.MATUASACH = T.MATUASACH\n" +
-                "ORDER BY T.MATUASACH";
+                "ORDER BY T.MATUASACH, C.MACUONSACH";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();

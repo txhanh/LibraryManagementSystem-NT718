@@ -4,6 +4,7 @@ import home.Main;
 import home.dao.CuonSachDao;
 import home.dao.TuaSachDao;
 import home.model.CuonSach;
+import home.model.DocGia;
 import home.model.TuaSach;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,16 +25,20 @@ public class CuonSachThemController implements Initializable {
 
     TuaSachDao tuaSachDao = new TuaSachDao();
 
-    ObservableList<String> trangThaiList = FXCollections.observableArrayList("Chưa mượn", "Đã mượn");
+    public static String trangThai0 = "Chưa mượn";
+    public static String trangThai1 = "Đã mượn";
 
 
-    ObservableList<String> tenTuaSachList =
-            FXCollections.observableArrayList(tuaSachDao.lietKeTenTuaSach());
+    ObservableList<String> trangThaiList = FXCollections.observableArrayList(trangThai0,trangThai1);
+
+
+    ObservableList<TuaSach> tenTuaSachList =
+            FXCollections.observableArrayList(tuaSachDao.lietKeTuaSach());
 
     CuonSachDao cuonSachDao = new CuonSachDao();
 
     @FXML
-    private ComboBox<String> comboboxTenTuaSach;
+    private ComboBox<TuaSach> comboboxTenTuaSach;
 
     @FXML
     private Button btnThemCuonSach;
@@ -52,7 +58,7 @@ public class CuonSachThemController implements Initializable {
 
     @FXML
     void themCuonSachAction(ActionEvent event) {
-        String tenTuaSach = comboboxTenTuaSach.getValue();
+        String tenTuaSach = comboboxTenTuaSach.getValue().getTenSach();
         String trangThai = comboboxTrangThai.getValue();
 
         CuonSach cuonSach = new CuonSach(tenTuaSach, trangThai);
@@ -76,6 +82,19 @@ public class CuonSachThemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboboxTenTuaSach.setItems(tenTuaSachList);
+        comboboxTenTuaSach.setConverter(new StringConverter<TuaSach>() {
+
+            @Override
+            public String toString(TuaSach object) {
+                return "MS: " + object.getMaTuaSach() + " - " + object.getTenSach();
+            }
+
+            @Override
+            public TuaSach fromString(String string) {
+                return comboboxTenTuaSach.getItems().stream().filter(ap ->
+                        ap.getTenSach().equals(string)).findFirst().orElse(null);
+            }
+        });
         comboboxTenTuaSach.getSelectionModel().selectFirst();
 
 

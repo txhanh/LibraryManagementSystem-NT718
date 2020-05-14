@@ -1,5 +1,6 @@
 package home.dao;
 
+import home.controller.PhieuMuonSachDanhSachController;
 import home.model.PhieuMuonSach;
 
 
@@ -11,6 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static home.controller.CuonSachThemController.trangThai0;
+import static home.controller.CuonSachThemController.trangThai1;
 
 public class PhieuMuonSachDao {
     public List<PhieuMuonSach> lietKePhieuMuonSach() {
@@ -55,15 +59,14 @@ public class PhieuMuonSachDao {
 
     public boolean themPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql =
-                "BEGIN\n" +
+        String sql = "BEGIN\n" +
                 "    INSERT INTO PHIEUMUONSACH(MADOCGIA, MACUONSACH, NGAYMUONSACH, NGAYDUKIENTRA) VALUES (?, ?, ?, ?)" +
                 ";\n" +
                 "\n" +
                 "    UPDATE CUONSACH\n" +
                 "    SET TRANGTHAI = 'Đã mượn'\n" +
                 "    WHERE MACUONSACH = ?;\n" +
-                "    \n" +
+                "\n" +
                 "    COMMIT ;\n" +
                 "EXCEPTION\n" +
                 "    WHEN OTHERS THEN\n" +
@@ -71,7 +74,8 @@ public class PhieuMuonSachDao {
                 "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
                 "        ROLLBACK;\n" +
                 "        RAISE;\n" +
-                "end;";
+                "end;\n";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuMuonSach.getMaDocGia());
@@ -125,17 +129,48 @@ public class PhieuMuonSachDao {
 
     public boolean capNhatPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "UPDATE PHIEUMUONSACH\n" +
-                "SET MADOCGIA = ?,MACUONSACH = ?, NGAYMUONSACH = ?, NGAYDUKIENTRA = ?\n" +
-                "WHERE MAPHIEUMUON = ?";
+        String sql = "DECLARE\n" +
+                "    v_macuonsachOld int;\n" +
+                "    v_macuonsachNew int;\n" +
+                "BEGIN\n" +
+                "\n" +
+                "    v_macuonsachOld :=?;\n" +
+                "    v_macuonsachNew :=?;\n" +
+                "\n" +
+                "    UPDATE PHIEUMUONSACH\n" +
+                "    SET MADOCGIA      = ?,\n" +
+                "        MACUONSACH    = ?,\n" +
+                "        NGAYMUONSACH  = ?,\n" +
+                "        NGAYDUKIENTRA = ?\n" +
+                "    WHERE MAPHIEUMUON = ?;\n" +
+                "\n" +
+                "    UPDATE CUONSACH\n" +
+                "    SET TRANGTHAI = 'Chưa mượn'\n" +
+                "    WHERE MACUONSACH = v_macuonsachOld;\n" +
+                "\n" +
+                "    UPDATE CUONSACH\n" +
+                "    SET TRANGTHAI = 'Đã mượn'\n" +
+                "    WHERE MACUONSACH = v_macuonsachNew;\n" +
+                "\n" +
+                "    COMMIT;\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "END;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, phieuMuonSach.getMaDocGia());
-            preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
-            preparedStatement.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
-            preparedStatement.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-            preparedStatement.setInt(5, phieuMuonSach.getMaPhieuMuon());
+
+            preparedStatement.setInt(1, PhieuMuonSachDanhSachController.v_maCuonSach);
+            preparedStatement.setInt(2,phieuMuonSach.getMaCuonSach());
+            preparedStatement.setInt(3, phieuMuonSach.getMaDocGia());
+            preparedStatement.setInt(4, phieuMuonSach.getMaCuonSach());
+            preparedStatement.setDate(5, (java.sql.Date) phieuMuonSach.getNgayMuon());
+            preparedStatement.setDate(6, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
+            preparedStatement.setInt(7, phieuMuonSach.getMaPhieuMuon());
 
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {

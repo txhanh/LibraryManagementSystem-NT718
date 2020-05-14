@@ -28,8 +28,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
+import static home.controller.CuonSachThemController.trangThai1;
 import static home.controller.PhieuMuonSachDanhSachController.patternDay;
 
 public class PhieuMuonSachChinhSuaController implements Initializable {
@@ -135,6 +137,9 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
         }
         comboboxDocGia.setValue(selectedDocGia);
 
+
+
+
         // show mã cuốn sách + tên tựa sách
         comboboxCuonSach.setItems(cuonSachList);
         comboboxCuonSach.setConverter(new StringConverter<CuonSach>() {
@@ -168,6 +173,31 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
             }
         }
         comboboxCuonSach.setValue(selectedCuonSach);
+
+                /*
+        Code để loại bỏ những cuốn sách đã được mượn khỏi combobox Phiếu mượn sách
+         */
+
+//      Khởi tạo biến đếm trong cuonSachList (tính tổng số phần tử trong mảng)
+        Iterator<CuonSach> i = cuonSachList.iterator();
+        while (i.hasNext()) {
+            CuonSach sach = i.next(); // must be called before you can call i.remove()
+            if (sach.getTrangThai().equals(trangThai1)) {
+                i.remove();
+            }
+        }
+        if(cuonSachList.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Hiện tại thư viện không còn cuốn sách nào cả!");
+            alert.showAndWait();
+//            comboboxCuonSach.setValue(null);
+            comboboxDocGia.setDisable(true);
+            btnCapNhatPhieuMuon.setDisable(true);
+            datepickerNgayMuonSach.setDisable(true);
+            datepickerNgayDuKienTra.setDisable(true);
+            return;
+        }
 
         // Lấy Date từ Phiếu Mượn Sách danh sách Controller qua
         // Ép về kiểu LocalDate để thêm vào lại DatePicker

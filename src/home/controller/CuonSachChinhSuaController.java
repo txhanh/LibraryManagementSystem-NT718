@@ -16,13 +16,16 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static home.controller.CuonSachThemController.trangThai0;
+import static home.controller.CuonSachThemController.trangThai1;
+
 public class CuonSachChinhSuaController implements Initializable {
 
     Main window = new Main();
     TuaSachDao tuaSachDao = new TuaSachDao();
     CuonSachDao cuonSachDao = new CuonSachDao();
 
-    ObservableList<String> trangThaiList = FXCollections.observableArrayList("Chưa mượn", "Đã mượn");
+    ObservableList<String> trangThaiList = FXCollections.observableArrayList(trangThai0,trangThai1);
 
     ObservableList<String> tenTuaSachList =
             FXCollections.observableArrayList(tuaSachDao.lietKeTenTuaSach());

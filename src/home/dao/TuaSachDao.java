@@ -12,9 +12,9 @@ import java.util.List;
 public class TuaSachDao {
 
     public List<TuaSach> lietKeTuaSach() {
-        List<TuaSach> tuaSachList = new ArrayList<TuaSach>();
+        List<TuaSach> tuaSachList = new ArrayList<>();
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "SELECT * FROM TUASACH";
+        String sql = "SELECT * FROM TUASACH ORDER BY MATUASACH";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
