@@ -62,7 +62,7 @@ public class MainGUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadUI(("/home/fxml/PhieuMuonSachDanhSach.fxml"));
+        loadUI(("/home/fxml/PhieuTraSachDanhSach.fxml"));
     }
 
 
@@ -85,7 +85,7 @@ public class MainGUIController implements Initializable {
         } else if (event.getSource() == btnPhieuMuon) {
             loadUI("/home/fxml/PhieuMuonSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuTra) {
-//
+            loadUI("/home/fxml/PhieuTraSachDanhSach.fxml");
         } else if (event.getSource() == btnHome || event.getSource() == null) {
             loadUI(("/home/fxml/Intro.fxml"));
         }
