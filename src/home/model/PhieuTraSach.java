@@ -10,6 +10,8 @@ import java.util.Date;
 public class PhieuTraSach {
     private SimpleIntegerProperty maPhieuTra;
     private SimpleIntegerProperty maPhieuMuon;
+    private SimpleIntegerProperty maDocGia;
+    private SimpleIntegerProperty maCuonSach;
     private SimpleStringProperty tenSachMuon;
     private SimpleStringProperty tenDocGia;
     private SimpleObjectProperty<Date> ngayMuonSach;
@@ -17,6 +19,17 @@ public class PhieuTraSach {
     private SimpleIntegerProperty soNgayMuon;
     private SimpleIntegerProperty soNgayTraTre;
     private SimpleLongProperty tienPhat;
+
+    public PhieuTraSach( int maPhieuMuon, int maDocGia, int maCuonSach,
+                        Date ngayTraSach, int soNgayMuon, int soNgayTraTre, long tienPhat) {
+        this.maPhieuMuon = new SimpleIntegerProperty(maPhieuMuon);
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+        this.ngayTraSach = new SimpleObjectProperty<>(ngayTraSach);
+        this.soNgayMuon = new SimpleIntegerProperty(soNgayMuon);
+        this.soNgayTraTre = new SimpleIntegerProperty(soNgayTraTre);
+        this.tienPhat = new SimpleLongProperty(tienPhat);
+    }
 
     public PhieuTraSach(int maPhieuMuon,
                         String tenSachMuon, String tenDocGia,
@@ -47,6 +60,30 @@ public class PhieuTraSach {
         this.soNgayMuon = new SimpleIntegerProperty(soNgayMuon);
         this.soNgayTraTre = new SimpleIntegerProperty(soNgayTraTre);
         this.tienPhat = new SimpleLongProperty(tienPhat);
+    }
+
+    public int getMaDocGia() {
+        return maDocGia.get();
+    }
+
+    public SimpleIntegerProperty maDocGiaProperty() {
+        return maDocGia;
+    }
+
+    public void setMaDocGia(int maDocGia) {
+        this.maDocGia.set(maDocGia);
+    }
+
+    public int getMaCuonSach() {
+        return maCuonSach.get();
+    }
+
+    public SimpleIntegerProperty maCuonSachProperty() {
+        return maCuonSach;
+    }
+
+    public void setMaCuonSach(int maCuonSach) {
+        this.maCuonSach.set(maCuonSach);
     }
 
     public int getMaPhieuTra() {

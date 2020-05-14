@@ -1,6 +1,7 @@
 package home.dao;
 
 import home.model.PhieuTraSach;
+import jdk.nashorn.internal.scripts.JD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,4 +45,30 @@ public class PhieuTraSachDao {
 
         return danhSachPhieuTra;
     }
+
+    public boolean themPhieuTraSach(PhieuTraSach phieuTraSach) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "INSERT INTO PHIEUTRASACH(MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE," +
+                "TIENPHAT)\n" +
+                "VALUES (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, phieuTraSach.getMaPhieuMuon());
+            preparedStatement.setInt(2, phieuTraSach.getMaDocGia());
+            preparedStatement.setInt(3, phieuTraSach.getMaCuonSach());
+            preparedStatement.setDate(4, (java.sql.Date) phieuTraSach.getNgayTraSach());
+            preparedStatement.setInt(5, phieuTraSach.getSoNgayMuon());
+            preparedStatement.setInt(6, phieuTraSach.getSoNgayTraTre());
+            preparedStatement.setLong(7, phieuTraSach.getTienPhat());
+
+            int rs = preparedStatement.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
 }

@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -84,12 +85,20 @@ public class PhieuTraSachDanhSachController implements Initializable {
 
     @FXML
     void openHomeWindow(ActionEvent event) {
+        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        cancelAction(event);
+    }
 
+    @FXML
+    void cancelAction(ActionEvent event) {
+        Stage stage = (Stage) btnThemPhieuTraSach.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void openThemPhieuTraSach(ActionEvent event) {
-
+        window.loadAnotherWindow("/home/fxml/PhieuTraSachThem.fxml", "Thêm phiếu trả sách");
+        cancelAction(event);
     }
 
     @FXML
