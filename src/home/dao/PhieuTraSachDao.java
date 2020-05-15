@@ -71,4 +71,21 @@ public class PhieuTraSachDao {
         return false;
     }
 
+    public boolean xoaPhieuTraSach(PhieuTraSach phieuTraSach){
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "DELETE FROM PHIEUTRASACH WHERE MAPHIEUTRA = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,phieuTraSach.getMaPhieuTra());
+            int rs = preparedStatement.executeUpdate();
+            if(rs > 0){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
 }

@@ -24,6 +24,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static home.controller.PhieuMuonSachDanhSachController.patternDay;
@@ -103,7 +104,41 @@ public class PhieuTraSachDanhSachController implements Initializable {
 
     @FXML
     void xoaPhieuTraSachAction(ActionEvent event) {
+        PhieuTraSach selectedForDelete = tablePhieuTraSach.getSelectionModel().getSelectedItem();
+        Alert alert;
+        if (selectedForDelete == null) {
+            alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa chọn dòng nào để xóa cả!!!");
+            alert.showAndWait();
+            return;
+        }
 
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn thực sự muốn xóa phiếu trả sách số \"" + selectedForDelete.getMaPhieuTra()
+                + "\" chứ?");
+
+        Optional<ButtonType> response = alert.showAndWait();
+        if (response.get() == ButtonType.CANCEL) {
+            return;
+        }
+
+        boolean flag = phieuTraSachDao.xoaPhieuTraSach(selectedForDelete);
+
+        if (flag) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Xóa phiếu trả sách thành công");
+            alert.showAndWait();
+            datePhieuTraSach.remove(selectedForDelete);
+
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không xóa được phiếu trả sách. Kiểm tra lại ràng buộc toàn vẹn !");
+            alert.showAndWait();
+        }
     }
 
     @Override
