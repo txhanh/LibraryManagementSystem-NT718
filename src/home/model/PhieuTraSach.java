@@ -25,6 +25,18 @@ public class PhieuTraSach {
 
     }
 
+    public PhieuTraSach( int maPhieuTra, int maPhieuMuon, int maDocGia, int maCuonSach,
+                         Date ngayTraSach, int soNgayMuon, int soNgayTraTre, long tienPhat) {
+        this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
+        this.maPhieuMuon = new SimpleIntegerProperty(maPhieuMuon);
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+        this.ngayTraSach = new SimpleObjectProperty<>(ngayTraSach);
+        this.soNgayMuon = new SimpleIntegerProperty(soNgayMuon);
+        this.soNgayTraTre = new SimpleIntegerProperty(soNgayTraTre);
+        this.tienPhat = new SimpleLongProperty(tienPhat);
+    }
+
     public PhieuTraSach( int maPhieuMuon, int maDocGia, int maCuonSach,
                         Date ngayTraSach, int soNgayMuon, int soNgayTraTre, long tienPhat) {
         this.maPhieuMuon = new SimpleIntegerProperty(maPhieuMuon);

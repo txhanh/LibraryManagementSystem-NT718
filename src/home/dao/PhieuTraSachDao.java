@@ -40,7 +40,7 @@ public class PhieuTraSachDao {
                 int maTuaSach = rs.getInt(12);
 
                 danhSachPhieuTra.add(new PhieuTraSach(maPhieuTra, maPhieuMuon, tenSach, tenDocGia, ngayMuonSach,
-                        ngayTraSach, soNgayMuon, soNgayTraTre, tienPhat, maDocGia, maCuonSach,maTuaSach));
+                        ngayTraSach, soNgayMuon, soNgayTraTre, tienPhat, maDocGia, maCuonSach, maTuaSach));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -91,6 +91,33 @@ public class PhieuTraSachDao {
         return false;
     }
 
+    public boolean capNhatPhieuTraSach(PhieuTraSach phieuTraSach) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "UPDATE PHIEUTRASACH\n" +
+                "SET MAPHIEUMUON = ?, MADOCGIA = ?, MACUONSACH = ?, NGAYTRASACH = ?, SONGAYMUON = ?,\n" +
+                "    SONGAYTRATRE = ?, TIENPHAT = ?\n" +
+                "WHERE MAPHIEUTRA = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+            preparedStatement.setInt(1, phieuTraSach.getMaPhieuMuon());
+            preparedStatement.setInt(2, phieuTraSach.getMaDocGia());
+            preparedStatement.setInt(3, phieuTraSach.getMaCuonSach());
+            preparedStatement.setDate(4, (java.sql.Date) phieuTraSach.getNgayTraSach());
+            preparedStatement.setInt(5, phieuTraSach.getSoNgayMuon());
+            preparedStatement.setInt(6, phieuTraSach.getSoNgayTraTre());
+            preparedStatement.setLong(7, phieuTraSach.getTienPhat());
+            preparedStatement.setLong(8, phieuTraSach.getMaPhieuTra());
+
+            int rs = preparedStatement.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
 
 }

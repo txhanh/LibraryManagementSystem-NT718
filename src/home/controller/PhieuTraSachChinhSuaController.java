@@ -3,6 +3,7 @@ package home.controller;
 import home.Main;
 import home.dao.CuonSachDao;
 import home.dao.DocGiaDao;
+import home.dao.PhieuMuonSachDao;
 import home.dao.PhieuTraSachDao;
 import home.model.*;
 import javafx.collections.FXCollections;
@@ -10,10 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -42,8 +41,8 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
     Main window = new Main();
 
-    CuonSachDao cuonSacDao = new CuonSachDao();
-    ObservableList<CuonSach> danhSachCuonSach;
+    PhieuMuonSachDao phieuMuonSachDao = new PhieuMuonSachDao();
+    ObservableList<PhieuMuonSach> danhSachPhieuMuonSach;
 
     PhieuTraSachDao phieuTraSachDao = new PhieuTraSachDao();
     ObservableList<PhieuTraSach> danhSachPhieuTraSach;
@@ -67,7 +66,10 @@ public class PhieuTraSachChinhSuaController implements Initializable {
     private DatePicker datepickerNgayTraSach;
 
     @FXML
-    private ComboBox<PhieuTraSach> comboboxMaPhieuMuon;
+    private ComboBox<PhieuMuonSach> comboboxMaPhieuMuon;
+
+    @FXML
+    private ComboBox<PhieuTraSach> comboboxMaPhieuTra;
 
     @FXML
     private TextField tfSoNgayMuon;
@@ -78,10 +80,9 @@ public class PhieuTraSachChinhSuaController implements Initializable {
     @FXML
     private TextField tfTienPhat;
 
-    @FXML
-    void autoShowContent(ActionEvent event) {
-
-    }
+    int soNgayMuon;
+    int soNgayTraTre;
+    long soTienPhat;
 
 
     @FXML
@@ -93,24 +94,86 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
     @FXML
     void capNhatPhieuTraSachAction(ActionEvent event) {
+        int maPhieuTra = comboboxMaPhieuTra.getValue().getMaPhieuTra();
+        int maPhieuMuon = comboboxMaPhieuMuon.getValue().getMaPhieuMuon();
+        int maDocGia = comboboxDocGia.getValue().getMaDocGia();
+        int maCuonSach = comboboxCuonSach.getValue().getMaCuonSach();
+        java.util.Date ngayTraSach = java.sql.Date.valueOf(datepickerNgayTraSach.getValue());
+        soNgayMuon = Integer.parseInt(tfSoNgayMuon.getText());
+        soNgayTraTre = Integer.parseInt(tfSoNgayTraTre.getText());
+        soTienPhat = Long.parseLong(tfTienPhat.getText());
+
+        PhieuTraSach phieuTraSach = new PhieuTraSach(maPhieuTra, maPhieuMuon, maDocGia, maCuonSach, ngayTraSach, soNgayMuon,
+                soNgayTraTre, soTienPhat);
+
+        boolean flag = phieuTraSachDao.capNhatPhieuTraSach(phieuTraSach);
+
+        if (flag) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Cập nhật phiếu trả sách thành công");
+            alert.showAndWait();
+            cancelAction(event);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Không cập nhật được phiếu trả sách");
+            alert.showAndWait();
+            cancelAction(event);
+        }
+
+
+    }
+
+    @FXML
+    void traSachListener(ActionEvent event) {
+        // Báo lỗi nếu chọn ngày trả trước ngày hôm nay
+        if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
+            alert.showAndWait();
+            return;
+        }
+
+        // tính số ngày mượn sách, và set giá trị cho text field
+        LocalDate localDateNgayMuonSach = datepickerNgayMuonSach.getValue();
+        LocalDate localDateNgayTraSach = datepickerNgayTraSach.getValue();
+
+        Period period = Period.between(localDateNgayMuonSach, localDateNgayTraSach);
+        soNgayMuon = period.getDays();
+        tfSoNgayMuon.setText(String.valueOf(soNgayMuon));
+
+        // tính số ngày trả trễ;
+        if (soNgayMuon > quyDinh.getSoNgayMuonToiDa()) {
+            soNgayTraTre = soNgayMuon - quyDinh.getSoNgayMuonToiDa();
+            tfSoNgayTraTre.setText(String.valueOf(soNgayTraTre));
+
+            soTienPhat = soNgayTraTre * quyDinh.getSoTienPhat();
+            tfTienPhat.setText(String.valueOf(soTienPhat));
+        } else {
+            tfSoNgayTraTre.setText("0");
+            tfTienPhat.setText("0");
+        }
+
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         danhSachPhieuTraSach = FXCollections.observableArrayList(phieuTraSachDao.lietKePhieuTraSach());
-//        danhSachCuonSach = FXCollections.observableArrayList(cuonSacDao.lietKeCuonSach());
-        comboboxMaPhieuMuon.setItems(danhSachPhieuTraSach);
-        comboboxMaPhieuMuon.setConverter(new StringConverter<PhieuTraSach>() {
+        comboboxMaPhieuTra.setItems(danhSachPhieuTraSach);
+        comboboxMaPhieuTra.setConverter(new StringConverter<PhieuTraSach>() {
 
             @Override
             public String toString(PhieuTraSach object) {
-                return "Phiếu mượn số: " + object.getMaPhieuMuon();
+                return "Phiếu trả sách số: " + object.getMaPhieuTra();
             }
 
             @Override
             public PhieuTraSach fromString(String string) {
-                return comboboxMaPhieuMuon.getItems().stream().filter(ap ->
+                return comboboxMaPhieuTra.getItems().stream().filter(ap ->
                         ap.getTenDocGia().equals(string)).findFirst().orElse(null);
             }
         });
@@ -119,8 +182,9 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
         for (PhieuTraSach elementPhieuTraSach : danhSachPhieuTraSach) {
             if (PhieuTraSachDanhSachController.getSelectedForUpdate().getMaPhieuTra() == elementPhieuTraSach.getMaPhieuTra()) {
-                comboboxMaPhieuMuon.getSelectionModel().select(elementPhieuTraSach);
-                comboboxMaPhieuMuon.setDisable(true);
+                comboboxMaPhieuTra.getSelectionModel().select(elementPhieuTraSach);
+                comboboxMaPhieuTra.setDisable(true);
+                setComboboxPhieuMuonSachInfo(PhieuTraSachDanhSachController.getSelectedForUpdate().getMaPhieuMuon());
                 setComboboxCuonSachInfo(PhieuTraSachDanhSachController.getSelectedForUpdate().getMaCuonSach());
                 setComboboxDocGiaInfo(PhieuTraSachDanhSachController.getSelectedForUpdate().getMaDocGia());
                 setNgayMuon(PhieuTraSachDanhSachController.getSelectedForUpdate().getNgayMuonSach());
@@ -136,6 +200,33 @@ public class PhieuTraSachChinhSuaController implements Initializable {
         }
 
 
+    }
+
+    private void setComboboxPhieuMuonSachInfo(int maPhieuMuon) {
+        danhSachPhieuMuonSach = FXCollections.observableArrayList(phieuMuonSachDao.lietKePhieuMuonSach());
+        Iterator<PhieuMuonSach> i = danhSachPhieuMuonSach.iterator();
+        while (i.hasNext()) {
+            PhieuMuonSach sach = i.next(); // must be called before you can call i.remove()
+            if (maPhieuMuon != sach.getMaPhieuMuon()) {
+                i.remove();
+            }
+        }
+
+        comboboxMaPhieuMuon.setConverter(new StringConverter<PhieuMuonSach>() {
+
+            @Override
+            public String toString(PhieuMuonSach object) {
+                return "Phiếu mượn sách số: " + object.getMaPhieuMuon();
+            }
+
+            @Override
+            public PhieuMuonSach fromString(String string) {
+                return comboboxMaPhieuMuon.getItems().stream().filter(ap ->
+                        ap.getTenTuaSach().equals(string)).findFirst().orElse(null);
+            }
+        });
+        comboboxMaPhieuMuon.setItems(danhSachPhieuMuonSach);
+        comboboxMaPhieuMuon.getSelectionModel().selectFirst();
     }
 
     private void setComboboxCuonSachInfo(int masoCuonSach) {
