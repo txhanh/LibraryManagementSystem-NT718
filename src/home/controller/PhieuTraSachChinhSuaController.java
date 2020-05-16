@@ -83,30 +83,6 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
     }
 
-//    private void tinhTienPhat(int soNgayTraTre) {
-//        long tienPhat = soNgayTraTre * quyDinh.getSoTienPhat();
-//        tfTienPhat.setText(String.valueOf(tienPhat));
-//        tfTienPhat.setDisable(true);
-//    }
-//
-//    private int tinhSoNgayTraTre(int soNgayMuon) {
-//        int soNgayTraTre = soNgayMuon - quyDinh.getSoNgayMuonToiDa();
-//        tfSoNgayTraTre.setText(String.valueOf(soNgayTraTre));
-//        tfSoNgayTraTre.setDisable(true);
-//        return soNgayTraTre;
-//    }
-//
-//    private int setSoNgayMuon(Date ngayMuon) {
-//        LocalDate localDateNgayMuon = new java.sql.Date(ngayMuon.getTime()).toLocalDate();
-//        LocalDate ngayTra = LocalDate.now();
-//        Period period = Period.between(localDateNgayMuon, ngayTra);
-//        Integer soNgayMuon = period.getDays();
-//        tfSoNgayMuon.setText(String.valueOf(soNgayMuon));
-//        tfSoNgayMuon.setDisable(true);
-//        return soNgayMuon;
-//    }
-//
-
 
     @FXML
     void cancelAction(ActionEvent event) {

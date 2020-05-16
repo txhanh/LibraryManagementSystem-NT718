@@ -91,38 +91,6 @@ public class PhieuTraSachDao {
         return false;
     }
 
-    public PhieuTraSach selectedPhieuTraSachForUpdate(int maPhieuTraSachSelected) {
-        PhieuTraSach phieuTraSachObject = null;
-        Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "SELECT PMS.MAPHIEUMUON, TS.TENTUASACH, DG.TENDOCGIA, PMS.NGAYMUONSACH, " +
-                "PTS.NGAYTRASACH, SONGAYMUON,SONGAYTRATRE,TIENPHAT\n" +
-                "FROM (((PHIEUTRASACH PTS JOIN PHIEUMUONSACH PMS ON PTS.MAPHIEUMUON = PMS.MAPHIEUMUON)\n" +
-                "    JOIN DOCGIA DG ON PMS.MADOCGIA = DG.MADOCGIA) JOIN CUONSACH CS ON CS.MACUONSACH = PMS" +
-                ".MACUONSACH)\n" +
-                "JOIN TUASACH TS ON CS.MATUASACH = TS.MATUASACH\n" +
-                "WHERE PTS.MAPHIEUTRA = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, maPhieuTraSachSelected);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int maPhieuMuon = rs.getInt(1);
-                String tenSach = rs.getString(2);
-                String tenDocGia = rs.getString(3);
-                Date ngayMuonSach = rs.getTimestamp(4);
-                Date ngayTraSach = rs.getTimestamp(5);
-                int soNgayMuon = rs.getInt(6);
-                int soNgayTraTre = rs.getInt(7);
-                long tienPhat = rs.getLong(8);
 
-                phieuTraSachObject = new PhieuTraSach(maPhieuMuon, tenSach, tenDocGia, ngayMuonSach, ngayTraSach,
-                        soNgayMuon, soNgayTraTre, tienPhat);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return phieuTraSachObject;
-    }
 
 }
