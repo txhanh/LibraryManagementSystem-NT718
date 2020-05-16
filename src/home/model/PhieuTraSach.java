@@ -12,6 +12,7 @@ public class PhieuTraSach {
     private SimpleIntegerProperty maPhieuMuon;
     private SimpleIntegerProperty maDocGia;
     private SimpleIntegerProperty maCuonSach;
+    private SimpleIntegerProperty maTuaSach;
     private SimpleStringProperty tenSachMuon;
     private SimpleStringProperty tenDocGia;
     private SimpleObjectProperty<Date> ngayMuonSach;
@@ -19,6 +20,10 @@ public class PhieuTraSach {
     private SimpleIntegerProperty soNgayMuon;
     private SimpleIntegerProperty soNgayTraTre;
     private SimpleLongProperty tienPhat;
+
+    public PhieuTraSach(){
+
+    }
 
     public PhieuTraSach( int maPhieuMuon, int maDocGia, int maCuonSach,
                         Date ngayTraSach, int soNgayMuon, int soNgayTraTre, long tienPhat) {
@@ -50,7 +55,7 @@ public class PhieuTraSach {
                         String tenSachMuon, String tenDocGia,
                         Date ngayMuonSach, Date ngayTraSach,
                         int soNgayMuon, int soNgayTraTre,
-                        long tienPhat) {
+                        long tienPhat,int maDocGia, int maCuonSach, int maTuaSach) {
         this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
         this.maPhieuMuon = new SimpleIntegerProperty(maPhieuMuon);
         this.tenSachMuon = new SimpleStringProperty(tenSachMuon);
@@ -60,6 +65,21 @@ public class PhieuTraSach {
         this.soNgayMuon = new SimpleIntegerProperty(soNgayMuon);
         this.soNgayTraTre = new SimpleIntegerProperty(soNgayTraTre);
         this.tienPhat = new SimpleLongProperty(tienPhat);
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+        this.maTuaSach = new SimpleIntegerProperty(maTuaSach);
+    }
+
+    public int getMaTuaSach() {
+        return maTuaSach.get();
+    }
+
+    public SimpleIntegerProperty maTuaSachProperty() {
+        return maTuaSach;
+    }
+
+    public void setMaTuaSach(int maTuaSach) {
+        this.maTuaSach.set(maTuaSach);
     }
 
     public int getMaDocGia() {

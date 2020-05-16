@@ -16,7 +16,7 @@ public class PhieuTraSachDao {
         List<PhieuTraSach> danhSachPhieuTra = new ArrayList<>();
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "SELECT PTS.MAPHIEUTRA, PMS.MAPHIEUMUON, TS.TENTUASACH, DG.TENDOCGIA, PMS.NGAYMUONSACH, " +
-                "PTS.NGAYTRASACH, SONGAYMUON,SONGAYTRATRE,TIENPHAT\n" +
+                "PTS.NGAYTRASACH, SONGAYMUON,SONGAYTRATRE,TIENPHAT,DG.MADOCGIA, CS.MACUONSACH, TS.MATUASACH\n" +
                 "FROM (((PHIEUTRASACH PTS JOIN PHIEUMUONSACH PMS ON PTS.MAPHIEUMUON = PMS.MAPHIEUMUON)\n" +
                 "    JOIN DOCGIA DG ON PMS.MADOCGIA = DG.MADOCGIA) JOIN CUONSACH CS ON CS.MACUONSACH = PMS" +
                 ".MACUONSACH)\n" +
@@ -35,9 +35,12 @@ public class PhieuTraSachDao {
                 int soNgayMuon = rs.getInt(7);
                 int soNgayTraTre = rs.getInt(8);
                 long tienPhat = rs.getLong(9);
+                int maDocGia = rs.getInt(10);
+                int maCuonSach = rs.getInt(11);
+                int maTuaSach = rs.getInt(12);
 
                 danhSachPhieuTra.add(new PhieuTraSach(maPhieuTra, maPhieuMuon, tenSach, tenDocGia, ngayMuonSach,
-                        ngayTraSach, soNgayMuon, soNgayTraTre, tienPhat));
+                        ngayTraSach, soNgayMuon, soNgayTraTre, tienPhat, maDocGia, maCuonSach,maTuaSach));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -71,14 +74,14 @@ public class PhieuTraSachDao {
         return false;
     }
 
-    public boolean xoaPhieuTraSach(PhieuTraSach phieuTraSach){
+    public boolean xoaPhieuTraSach(PhieuTraSach phieuTraSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "DELETE FROM PHIEUTRASACH WHERE MAPHIEUTRA = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,phieuTraSach.getMaPhieuTra());
+            preparedStatement.setInt(1, phieuTraSach.getMaPhieuTra());
             int rs = preparedStatement.executeUpdate();
-            if(rs > 0){
+            if (rs > 0) {
                 return true;
             }
         } catch (SQLException throwables) {
@@ -86,6 +89,40 @@ public class PhieuTraSachDao {
         }
 
         return false;
+    }
+
+    public PhieuTraSach selectedPhieuTraSachForUpdate(int maPhieuTraSachSelected) {
+        PhieuTraSach phieuTraSachObject = null;
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "SELECT PMS.MAPHIEUMUON, TS.TENTUASACH, DG.TENDOCGIA, PMS.NGAYMUONSACH, " +
+                "PTS.NGAYTRASACH, SONGAYMUON,SONGAYTRATRE,TIENPHAT\n" +
+                "FROM (((PHIEUTRASACH PTS JOIN PHIEUMUONSACH PMS ON PTS.MAPHIEUMUON = PMS.MAPHIEUMUON)\n" +
+                "    JOIN DOCGIA DG ON PMS.MADOCGIA = DG.MADOCGIA) JOIN CUONSACH CS ON CS.MACUONSACH = PMS" +
+                ".MACUONSACH)\n" +
+                "JOIN TUASACH TS ON CS.MATUASACH = TS.MATUASACH\n" +
+                "WHERE PTS.MAPHIEUTRA = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, maPhieuTraSachSelected);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int maPhieuMuon = rs.getInt(1);
+                String tenSach = rs.getString(2);
+                String tenDocGia = rs.getString(3);
+                Date ngayMuonSach = rs.getTimestamp(4);
+                Date ngayTraSach = rs.getTimestamp(5);
+                int soNgayMuon = rs.getInt(6);
+                int soNgayTraTre = rs.getInt(7);
+                long tienPhat = rs.getLong(8);
+
+                phieuTraSachObject = new PhieuTraSach(maPhieuMuon, tenSach, tenDocGia, ngayMuonSach, ngayTraSach,
+                        soNgayMuon, soNgayTraTre, tienPhat);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return phieuTraSachObject;
     }
 
 }

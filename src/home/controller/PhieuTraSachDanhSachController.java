@@ -37,6 +37,22 @@ public class PhieuTraSachDanhSachController implements Initializable {
     ObservableList<PhieuTraSach> datePhieuTraSach =
             FXCollections.observableArrayList(phieuTraSachDao.lietKePhieuTraSach());
 
+
+    /*
+    Tạo object PhieuTraSach để truyền dữ liệu từ TableView -> window Cập nhật PhieuTraSach
+     */
+    private static PhieuTraSach selectedForUpdate;
+
+    public static PhieuTraSach getSelectedForUpdate() {
+        return selectedForUpdate;
+    }
+
+    public static void setSelectedForUpdate(PhieuTraSach selectedForUpdate) {
+        PhieuTraSachDanhSachController.selectedForUpdate = selectedForUpdate;
+    }
+
+
+
     @FXML
     private GridPane panePhieuTraSach;
 
@@ -80,8 +96,29 @@ public class PhieuTraSachDanhSachController implements Initializable {
     private TableColumn<PhieuTraSach, Long> tienPhatColumn;
 
     @FXML
-    void openCapNhatPhieuTraSachAction(ActionEvent event) {
+    private TableColumn<PhieuTraSach, Integer> maDocGiaColumn;
 
+    @FXML
+    private TableColumn<PhieuTraSach, Integer> maCuonSachColumn;
+
+    @FXML
+    private TableColumn<PhieuTraSach, Integer> maTuaSachColumn;
+
+
+    @FXML
+    void openCapNhatPhieuTraSachAction(ActionEvent event) {
+        selectedForUpdate = tablePhieuTraSach.getSelectionModel().getSelectedItem();
+        if (selectedForUpdate == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa chọn dòng nào để xóa cả !");
+            alert.showAndWait();
+            return;
+        }
+
+
+        window.loadAnotherWindow("/home/fxml/PhieuTraSachChinhSua.fxml", "Cập nhật phiếu trả sách");
+        cancelAction(event);
     }
 
     @FXML
@@ -177,7 +214,7 @@ public class PhieuTraSachDanhSachController implements Initializable {
                 } else if (String.valueOf(phieuTraSach.getTienPhat()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
                 } else if (String.valueOf(phieuTraSach.getSoNgayTraTre()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                        return true; // Filter matches last name.
+                    return true; // Filter matches last name.
                 } else if (String.valueOf(phieuTraSach.getSoNgayMuon()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
                 } else if (String.valueOf(phieuTraSach.getMaPhieuTra()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
@@ -224,6 +261,9 @@ public class PhieuTraSachDanhSachController implements Initializable {
         soNgayMuonColumn.setCellValueFactory(new PropertyValueFactory<>("soNgayMuon"));
         soNgayTraTreColumn.setCellValueFactory(new PropertyValueFactory<>("soNgayTraTre"));
         tienPhatColumn.setCellValueFactory(new PropertyValueFactory<>("tienPhat"));
+        maDocGiaColumn.setCellValueFactory(new PropertyValueFactory<>("maDocGia"));
+        maCuonSachColumn.setCellValueFactory(new PropertyValueFactory<>("maCuonSach"));
+        maTuaSachColumn.setCellValueFactory(new PropertyValueFactory<>("maTuaSach"));
 
 
         // code dùng để định dạng kiểu dữ liệu Date theo ý muốn: dd-MM-yyyy vi VN

@@ -32,11 +32,22 @@ public class DocGiaDanhSachController implements Initializable {
     ObservableList<DocGia> dataTable = FXCollections.observableArrayList(memberDao.getAllMember());
 
 
-    public static int v_maDG;
-    public static String v_ho;
-    public static String v_ten;
-    public static String v_sdt;
-    public static String v_email;
+    /*
+    Tạo 1 object DocGia và sử dụng get/set để truyền dữ liệu
+    khi được chọn từ bảng TableView để thực hiện việc
+    cập nhật thông tin Độc giả.
+    Truyền tất cả các thông tin từ bảng TableView sang
+    cửa sổ Cập nhật thông tin Độc giả
+     */
+    private static DocGia selectedMemberForUpdate;
+
+    public static DocGia getSelectedMemberForUpdate() {
+        return selectedMemberForUpdate;
+    }
+
+    public static void setSelectedMemberForUpdate(DocGia selectedMemberForUpdate) {
+        DocGiaDanhSachController.selectedMemberForUpdate = selectedMemberForUpdate;
+    }
 
     @FXML
     private TableView<DocGia> tableMember;
@@ -79,24 +90,21 @@ public class DocGiaDanhSachController implements Initializable {
 
     @FXML
     void openCapNhatDocGiaAction(ActionEvent event) {
-        DocGia selectedMemberForUpdate = tableMember.getSelectionModel().getSelectedItem();
+
+        selectedMemberForUpdate = tableMember.getSelectionModel().getSelectedItem();
+
+
         if (selectedMemberForUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả!!!");
             alert.showAndWait();
-            return;
+            return ;
         }
 
-        v_maDG = selectedMemberForUpdate.getMaDocGia();
-        v_ho = selectedMemberForUpdate.getHoDocGia();
-        v_ten = selectedMemberForUpdate.getTenDocGia();
-        v_sdt = selectedMemberForUpdate.getSdt();
-        v_email = selectedMemberForUpdate.getEmail();
 
         window.loadAnotherWindow("/home/fxml/DocGiaChinhSua.fxml", "Cập nhật thông tin độc giả");
         cancelAction(event);
-
 
     }
 

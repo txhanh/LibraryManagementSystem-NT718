@@ -85,6 +85,9 @@
                   <TableColumn fx:id="soNgayMuonColumn" minWidth="0.0" prefWidth="96.0" text="Số ngày mượn" />
                   <TableColumn fx:id="soNgayTraTreColumn" minWidth="0.0" prefWidth="91.0" text="Số ngày trả trễ" />
                   <TableColumn fx:id="tienPhatColumn" prefWidth="96.0" text="Tiền phạt" />
+                  <TableColumn fx:id="maDocGiaColumn" prefWidth="96.0" text="Mã độc giả" />
+                  <TableColumn fx:id="maCuonSachColumn" prefWidth="96.0" text="Mã cuốn sách" />
+                  <TableColumn fx:id="maTuaSachColumn" prefWidth="96.0" text="Mã tựa sách" />
                </columns>
                <GridPane.margin>
                   <Insets />

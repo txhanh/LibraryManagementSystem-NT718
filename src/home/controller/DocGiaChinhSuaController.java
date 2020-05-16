@@ -51,7 +51,7 @@ public class DocGiaChinhSuaController implements Initializable {
         String ten = tfTenDocGia.getText();
         String sdt = tfSDT.getText();
         String email = tfEmail.getText();
-        int madg = DocGiaDanhSachController.v_maDG;
+        int madg = DocGiaDanhSachController.getSelectedMemberForUpdate().getMaDocGia();
 
         Alert alert;
         if (ho.isEmpty() || ten.isEmpty() || sdt.isEmpty() || email.isEmpty()) {
@@ -86,9 +86,13 @@ public class DocGiaChinhSuaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tfHoDocGia.setText(DocGiaDanhSachController.v_ho);
-        tfTenDocGia.setText(DocGiaDanhSachController.v_ten);
-        tfSDT.setText(DocGiaDanhSachController.v_sdt);
-        tfEmail.setText(DocGiaDanhSachController.v_email);
+
+        DocGia selectedDocGia = DocGiaDanhSachController.getSelectedMemberForUpdate();
+
+        tfHoDocGia.setText(selectedDocGia.getHoDocGia());
+        tfTenDocGia.setText(selectedDocGia.getTenDocGia());
+        tfSDT.setText(selectedDocGia.getSdt());
+        tfEmail.setText(selectedDocGia.getEmail());
+
     }
 }
