@@ -6,6 +6,8 @@ import home.dao.DocGiaDao;
 import home.dao.PhieuMuonSachDao;
 import home.dao.PhieuTraSachDao;
 import home.model.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,7 +105,8 @@ public class PhieuTraSachChinhSuaController implements Initializable {
         soNgayTraTre = Integer.parseInt(tfSoNgayTraTre.getText());
         soTienPhat = Long.parseLong(tfTienPhat.getText());
 
-        PhieuTraSach phieuTraSach = new PhieuTraSach(maPhieuTra, maPhieuMuon, maDocGia, maCuonSach, ngayTraSach, soNgayMuon,
+        PhieuTraSach phieuTraSach = new PhieuTraSach(maPhieuTra, maPhieuMuon, maDocGia, maCuonSach, ngayTraSach,
+                soNgayMuon,
                 soNgayTraTre, soTienPhat);
 
         boolean flag = phieuTraSachDao.capNhatPhieuTraSach(phieuTraSach);
@@ -126,39 +129,6 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
     }
 
-    @FXML
-    void traSachListener(ActionEvent event) {
-        // Báo lỗi nếu chọn ngày trả trước ngày hôm nay
-        if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
-            alert.showAndWait();
-            return;
-        }
-
-        // tính số ngày mượn sách, và set giá trị cho text field
-        LocalDate localDateNgayMuonSach = datepickerNgayMuonSach.getValue();
-        LocalDate localDateNgayTraSach = datepickerNgayTraSach.getValue();
-
-        Period period = Period.between(localDateNgayMuonSach, localDateNgayTraSach);
-        soNgayMuon = period.getDays();
-        tfSoNgayMuon.setText(String.valueOf(soNgayMuon));
-
-        // tính số ngày trả trễ;
-        if (soNgayMuon > quyDinh.getSoNgayMuonToiDa()) {
-            soNgayTraTre = soNgayMuon - quyDinh.getSoNgayMuonToiDa();
-            tfSoNgayTraTre.setText(String.valueOf(soNgayTraTre));
-
-            soTienPhat = soNgayTraTre * quyDinh.getSoTienPhat();
-            tfTienPhat.setText(String.valueOf(soTienPhat));
-        } else {
-            tfSoNgayTraTre.setText("0");
-            tfTienPhat.setText("0");
-        }
-
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -168,7 +138,7 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
             @Override
             public String toString(PhieuTraSach object) {
-                return "Phiếu trả sách số: " + object.getMaPhieuTra();
+                return "Phiếu trả sách số: " + object.getMaPhieuTra() + " - Độc giả: " + object.getTenDocGia();
             }
 
             @Override
@@ -199,6 +169,55 @@ public class PhieuTraSachChinhSuaController implements Initializable {
             }
         }
 
+        /*
+         listener cho ngày trả sách
+         kiểm tra nếu ngày trả sách trước ngày hôm nay thì báo lỗi
+         */
+        datepickerNgayTraSach.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
+                                LocalDate newValue) {
+                if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
+                    alert.showAndWait();
+                    return;
+                }
+
+
+                // Báo lỗi nếu chọn ngày trả trước ngày hôm nay
+
+                if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
+                    alert.showAndWait();
+                    return;
+                }
+
+                // tính số ngày mượn sách, và set giá trị cho text field
+                LocalDate localDateNgayMuonSach = datepickerNgayMuonSach.getValue();
+                LocalDate localDateNgayTraSach = datepickerNgayTraSach.getValue();
+
+                Period period = Period.between(localDateNgayMuonSach, localDateNgayTraSach);
+                soNgayMuon = period.getDays();
+                tfSoNgayMuon.setText(String.valueOf(soNgayMuon));
+
+                // tính số ngày trả trễ;
+                if (soNgayMuon > quyDinh.getSoNgayMuonToiDa()) {
+                    soNgayTraTre = soNgayMuon - quyDinh.getSoNgayMuonToiDa();
+                    tfSoNgayTraTre.setText(String.valueOf(soNgayTraTre));
+
+                    soTienPhat = soNgayTraTre * quyDinh.getSoTienPhat();
+                    tfTienPhat.setText(String.valueOf(soTienPhat));
+                } else {
+                    tfSoNgayTraTre.setText("0");
+                    tfTienPhat.setText("0");
+                }
+
+            }
+        });
 
     }
 
@@ -340,4 +359,5 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
 
 }
+
 

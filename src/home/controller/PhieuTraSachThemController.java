@@ -277,7 +277,7 @@ public class PhieuTraSachThemController implements Initializable {
 
             @Override
             public String toString(PhieuMuonSach object) {
-                return "Phiếu mượn số: " + object.getMaPhieuMuon();
+                return "Phiếu mượn số: " + object.getMaPhieuMuon() + " - Độc giả: " + object.getTenDocGia();
             }
 
             @Override
