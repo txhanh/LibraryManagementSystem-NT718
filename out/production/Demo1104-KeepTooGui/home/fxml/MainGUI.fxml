@@ -89,6 +89,17 @@
                   <FontAwesomeIconView fill="WHITE" size="18" />
                </graphic>
             </Button>
+            <Button fx:id="btnPhieuPhat" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="62.0" prefWidth="350.0" stylesheets="@../css/fullpackstyling.css" text="Phiếu phạt" textFill="WHITE">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" size="18" />
+               </graphic>
+            </Button>
          </children>
          <BorderPane.margin>
             <Insets />

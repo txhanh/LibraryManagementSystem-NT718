@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.PhieuPhatDanhSachController">
+   <children>
+      <GridPane fx:id="panePhieuPhat" alignment="CENTER" layoutX="24.0" layoutY="18.0" prefHeight="756.0" prefWidth="1024.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="480.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TableView fx:id="tablePhieuPhat" prefHeight="483.0" prefWidth="1226.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="2">
+               <columns>
+                  <TableColumn fx:id="maPhieuPhatColumn" prefWidth="125.0" text="Mã phiếu phạt" />
+                  <TableColumn fx:id="maDocGiaColumn" prefWidth="106.0" resizable="false" text="Mã độc giả" />
+                  <TableColumn fx:id="tenDocGiaColumn" minWidth="0.0" prefWidth="148.0" text="Tên độc giả" />
+                  <TableColumn fx:id="maPhieuTraColumn" prefWidth="131.0" text="Mã phiếu trả" />
+                  <TableColumn fx:id="tenTuaSachColumn" minWidth="0.0" prefWidth="390.0" text="Tên tựa sách" />
+                  <TableColumn fx:id="tienPhatColumn" minWidth="0.0" prefWidth="409.0" text="Tiền phạt" />
+               </columns>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#xoaPhieuPhatAction" text="Xóa" />
+                        <MenuItem mnemonicParsing="false" onAction="#openCapNhatPhieuPhatAction" text="Chỉnh sửa" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="1">
+               <children>
+                  <FontAwesomeIconView fill="#3f2b63" glyphName="SEARCH" size="32" wrappingWidth="14.857142448425293">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </FontAwesomeIconView>
+                  <TextField fx:id="tfSearchPhieuPhatInfo" prefHeight="49.0" prefWidth="420.0" promptText="Nhập thông tin cần tìm vào đây" style="-fx-border-color: #3F2B63;">
+                     <HBox.margin>
+                        <Insets left="22.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="btnThemPhieuPhat" graphicTextGap="10.0" mnemonicParsing="false" onAction="#openThemPhieuPhatAction" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Thêm phiếu phạt" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="25" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnHome" graphicTextGap="10.0" layoutX="632.0" layoutY="44.0" mnemonicParsing="false" onAction="#openHomeWindow" prefHeight="57.0" prefWidth="186.0" stylesheets="@../css/fullpackstyling.css" text="Trang chủ" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="25" />
+                     </graphic>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #3F2B63;">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="39.0" prefHeight="53.0" prefWidth="1024.0" text="QUẢN LÍ THÔNG TIN PHIẾU PHẠT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

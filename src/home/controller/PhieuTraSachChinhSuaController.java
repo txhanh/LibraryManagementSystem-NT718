@@ -211,6 +211,8 @@ public class PhieuTraSachChinhSuaController implements Initializable {
 
                     soTienPhat = soNgayTraTre * quyDinh.getSoTienPhat();
                     tfTienPhat.setText(String.valueOf(soTienPhat));
+
+                    // enter your code here
                 } else {
                     tfSoNgayTraTre.setText("0");
                     tfTienPhat.setText("0");
