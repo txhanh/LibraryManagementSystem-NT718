@@ -14,7 +14,7 @@ public class PhieuPhatDao {
         List<PhieuPhat> danhSachPhieuPhat = new ArrayList<>();
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "SELECT PP.MAPHIEUPHAT,  DG.MADOCGIA, DG.TENDOCGIA, PTS.MAPHIEUTRA, TS.TENTUASACH, PTS" +
-                ".TIENPHAT\n" +
+                ".TIENPHAT, CS.MACUONSACH\n" +
                 "FROM ((((PHIEUPHAT PP JOIN DOCGIA DG ON PP.MADOCGIA = DG.MADOCGIA) JOIN PHIEUTRASACH PTS ON PP" +
                 ".MAPHIEUTRA = PTS.MAPHIEUTRA)\n" +
                 "    JOIN PHIEUMUONSACH PMS ON PMS.MAPHIEUMUON = PTS.MAPHIEUMUON) JOIN CUONSACH CS ON CS.MACUONSACH =" +
@@ -31,8 +31,10 @@ public class PhieuPhatDao {
                 int maPhieuTra = rs.getInt(4);
                 String tenTuaSach = rs.getString(5);
                 long tienPhat = rs.getLong(6);
+                int maCuonSach = rs.getInt(7);
 
-                PhieuPhat phieuPhat = new PhieuPhat(maPhieuPhat, maDocGia, tenDocGia, maPhieuTra, tenTuaSach, tienPhat);
+                PhieuPhat phieuPhat = new PhieuPhat(maPhieuPhat, maDocGia, tenDocGia, maPhieuTra, tenTuaSach,
+                        tienPhat, maCuonSach);
                 danhSachPhieuPhat.add(phieuPhat);
             }
         } catch (SQLException throwables) {
@@ -69,6 +71,29 @@ public class PhieuPhatDao {
             preparedStatement.setInt(1, phieuPhat.getMaDocGia());
             preparedStatement.setInt(2, phieuPhat.getMaPhieuTra());
             preparedStatement.setLong(3, phieuPhat.getTienPhat());
+
+            int rs = preparedStatement.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean capNhatPhieuPhat(PhieuPhat phieuPhat) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "UPDATE PHIEUPHAT\n" +
+                "SET MADOCGIA = ?, MAPHIEUTRA = ?, TIENPHAT = ?\n" +
+                "WHERE MAPHIEUPHAT = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, phieuPhat.getMaDocGia());
+            preparedStatement.setInt(2, phieuPhat.getMaPhieuTra());
+            preparedStatement.setLong(3, phieuPhat.getTienPhat());
+            preparedStatement.setInt(4, phieuPhat.getMaPhieuPhat());
 
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {

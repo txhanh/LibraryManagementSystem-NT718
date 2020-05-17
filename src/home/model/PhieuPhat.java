@@ -11,33 +11,57 @@ public class PhieuPhat {
     private SimpleIntegerProperty maPhieuTra;
     private SimpleStringProperty tenTuaSach;
     private SimpleLongProperty tienPhat;
+    private SimpleIntegerProperty maCuonSach;
 
-    public PhieuPhat(int maDocGia, int maPhieuTra, long tienPhat) {
+    public PhieuPhat(int maPhieuPhat, int maDocGia, int maPhieuTra, long tienPhat, int maCuonSach) {
+        this.maPhieuPhat = new SimpleIntegerProperty(maPhieuPhat);
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
         this.tienPhat = new SimpleLongProperty(tienPhat);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+    }
+
+    public PhieuPhat(int maDocGia, int maPhieuTra, long tienPhat, int maCuonSach) {
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
+        this.tienPhat = new SimpleLongProperty(tienPhat);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
     }
 
 
     public PhieuPhat(int maDocGia,
                      String tenDocGia, int maPhieuTra,
-                     String tenTuaSach, long tienPhat) {
+                     String tenTuaSach, long tienPhat, int maCuonSach) {
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.tenDocGia = new SimpleStringProperty(tenDocGia);
         this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tienPhat = new SimpleLongProperty(tienPhat);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
     }
 
     public PhieuPhat(int maPhieuPhat, int maDocGia,
                      String tenDocGia, int maPhieuTra,
-                     String tenTuaSach, long tienPhat) {
+                     String tenTuaSach, long tienPhat, int maCuonSach) {
         this.maPhieuPhat = new SimpleIntegerProperty(maPhieuPhat);
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.tenDocGia = new SimpleStringProperty(tenDocGia);
         this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
         this.tenTuaSach = new SimpleStringProperty(tenTuaSach);
         this.tienPhat = new SimpleLongProperty(tienPhat);
+        this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
+    }
+
+    public void setMaCuonSach(int maCuonSach) {
+        this.maCuonSach.set(maCuonSach);
+    }
+
+    public int getMaCuonSach() {
+        return maCuonSach.get();
+    }
+
+    public SimpleIntegerProperty maCuonSachProperty() {
+        return maCuonSach;
     }
 
     public int getMaPhieuPhat() {

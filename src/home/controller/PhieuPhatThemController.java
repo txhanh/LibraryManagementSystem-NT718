@@ -136,8 +136,9 @@ public class PhieuPhatThemController implements Initializable {
         int maDG = comboboxDocGia.getValue().getMaDocGia();
         int maPhieuTra = comboboxMaPhieuTraTre.getValue().getMaPhieuTra();
         long tienPhat = Long.parseLong(tfTienPhat.getText());
+        int maCuonSach = comboboxCuonSach.getValue().getMaCuonSach();
 
-        PhieuPhat phieuPhat = new PhieuPhat(maDG,maPhieuTra,tienPhat);
+        PhieuPhat phieuPhat = new PhieuPhat(maDG,maPhieuTra,tienPhat,maCuonSach);
         PhieuPhatDao phieuPhatDao = new PhieuPhatDao();
         boolean flag = phieuPhatDao.themPhieuPhat(phieuPhat);
         if(flag){
