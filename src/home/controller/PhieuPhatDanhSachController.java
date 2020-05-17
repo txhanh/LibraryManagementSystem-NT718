@@ -80,7 +80,8 @@ public class PhieuPhatDanhSachController implements Initializable {
 
     @FXML
     void openThemPhieuPhatAction(ActionEvent event) {
-
+        window.loadAnotherWindow("/home/fxml/PhieuPhatThem.fxml", "Thêm phiếu phạt");
+        cancelAction(event);
     }
 
     @FXML

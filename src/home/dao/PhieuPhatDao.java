@@ -59,4 +59,25 @@ public class PhieuPhatDao {
 
         return false;
     }
+
+    public boolean themPhieuPhat(PhieuPhat phieuPhat) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "INSERT INTO PHIEUPHAT(MADOCGIA, MAPHIEUTRA, TIENPHAT) " +
+                "VALUES(?,?,?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, phieuPhat.getMaDocGia());
+            preparedStatement.setInt(2, phieuPhat.getMaPhieuTra());
+            preparedStatement.setLong(3, phieuPhat.getTienPhat());
+
+            int rs = preparedStatement.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return false;
+    }
 }

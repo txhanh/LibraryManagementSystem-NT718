@@ -32,9 +32,9 @@
             <TableView fx:id="tablePhieuPhat" prefHeight="483.0" prefWidth="1226.0" stylesheets="@../css/fullpackstyling.css" GridPane.rowIndex="2">
                <columns>
                   <TableColumn fx:id="maPhieuPhatColumn" prefWidth="125.0" text="Mã phiếu phạt" />
+                  <TableColumn fx:id="maPhieuTraColumn" prefWidth="131.0" text="Mã phiếu trả" />
                   <TableColumn fx:id="maDocGiaColumn" prefWidth="106.0" resizable="false" text="Mã độc giả" />
                   <TableColumn fx:id="tenDocGiaColumn" minWidth="0.0" prefWidth="148.0" text="Tên độc giả" />
-                  <TableColumn fx:id="maPhieuTraColumn" prefWidth="131.0" text="Mã phiếu trả" />
                   <TableColumn fx:id="tenTuaSachColumn" minWidth="0.0" prefWidth="390.0" text="Tên tựa sách" />
                   <TableColumn fx:id="tienPhatColumn" minWidth="0.0" prefWidth="409.0" text="Tiền phạt" />
                </columns>
