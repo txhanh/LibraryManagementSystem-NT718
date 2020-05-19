@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
 
 import static home.controller.CuonSachThemController.trangThai1;
 import static home.controller.PhieuMuonSachDanhSachController.patternDay;
+import static home.controller.PhieuMuonSachThemController.trangThaiPMS0;
+import static home.controller.PhieuMuonSachThemController.trangThaiPMS1;
 
 public class PhieuMuonSachChinhSuaController implements Initializable {
 
@@ -45,6 +47,10 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
 
     ObservableList<CuonSach> cuonSachList =
             FXCollections.observableArrayList(cuonSachDao.lietKeCuonSach());
+
+
+
+    ObservableList<String> trangThaiPMSArray = FXCollections.observableArrayList(trangThaiPMS0, trangThaiPMS1);
 
     Main window = new Main();
 
@@ -67,6 +73,9 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
     private DatePicker datepickerNgayDuKienTra;
 
     @FXML
+    private ComboBox<String> comboboxTrangThaiPMS;
+
+    @FXML
     void cancelAction(ActionEvent event) {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
@@ -84,9 +93,10 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
         //convert datepick ==> localdate ==> *.getValue()
         java.util.Date ngayMuonSach = java.sql.Date.valueOf(datepickerNgayMuonSach.getValue());
         java.util.Date ngayDuKienTra = java.sql.Date.valueOf(datepickerNgayDuKienTra.getValue());
+        String trangThaiPMS = comboboxTrangThaiPMS.getValue();
 
         PhieuMuonSach phieuMuonSach = new PhieuMuonSach(PhieuMuonSachDanhSachController.v_maPhieuMuon, maDocGia,
-                tenDocGia, maCuonSach, tenTuaSach, tenTheLoai, ngayMuonSach, ngayDuKienTra);
+                tenDocGia, maCuonSach, tenTuaSach, tenTheLoai, ngayMuonSach, ngayDuKienTra, trangThaiPMS);
 
         boolean flag = phieuMuonSachDao.capNhatPhieuMuonSach(phieuMuonSach);
         if(flag){
@@ -269,5 +279,10 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
             }
         });
         datepickerNgayDuKienTra.setDisable(true);
+
+
+        //set giá trị cho combobox trạng thái phiếu mượn sách
+        comboboxTrangThaiPMS.setItems(trangThaiPMSArray);
+        comboboxTrangThaiPMS.getSelectionModel().selectFirst();
     }
 }

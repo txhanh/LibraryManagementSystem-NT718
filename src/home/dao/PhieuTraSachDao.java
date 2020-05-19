@@ -51,9 +51,22 @@ public class PhieuTraSachDao {
 
     public boolean themPhieuTraSach(PhieuTraSach phieuTraSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "INSERT INTO PHIEUTRASACH(MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE," +
-                "TIENPHAT)\n" +
-                "VALUES (?,?,?,?,?,?,?)";
+        String sql = "BEGIN\n" +
+                "    INSERT INTO PHIEUTRASACH(MAPHIEUMUON, MADOCGIA, MACUONSACH, NGAYTRASACH, SONGAYMUON, " +
+                "SONGAYTRATRE, TIENPHAT)\n" +
+                "    VALUES (?, ?, ?, ?, ?, ?, ?);\n" +
+                "    \n" +
+                "    UPDATE PHIEUMUONSACH\n" +
+                "    SET TRANGTHAIPMS = 'Đã trả'\n" +
+                "    WHERE MAPHIEUMUON = ?;\n" +
+                "    COMMIT;\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "end;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuTraSach.getMaPhieuMuon());
@@ -63,7 +76,7 @@ public class PhieuTraSachDao {
             preparedStatement.setInt(5, phieuTraSach.getSoNgayMuon());
             preparedStatement.setInt(6, phieuTraSach.getSoNgayTraTre());
             preparedStatement.setLong(7, phieuTraSach.getTienPhat());
-
+            preparedStatement.setInt(8, phieuTraSach.getMaPhieuMuon());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;

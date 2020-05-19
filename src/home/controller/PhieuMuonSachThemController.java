@@ -48,6 +48,10 @@ public class PhieuMuonSachThemController implements Initializable {
     ObservableList<CuonSach> cuonSachList =
             FXCollections.observableArrayList(cuonSachDao.lietKeCuonSach());
 
+    public static String trangThaiPMS0 = "Chưa trả";
+    public static String trangThaiPMS1 = "Đã trả";
+
+    ObservableList<String> trangThaiPMSArray = FXCollections.observableArrayList(trangThaiPMS0,trangThaiPMS1);
 
     @FXML
     private ComboBox<DocGia> comboboxDocGia;
@@ -66,6 +70,9 @@ public class PhieuMuonSachThemController implements Initializable {
 
     @FXML
     private DatePicker datepickerNgayDuKienTra;
+
+    @FXML
+    private ComboBox<String> comboboxTrangThaiPMS;
 
     LocalDate ngayMuonSachInit;
     LocalDate ngayDuKienTraInit;
@@ -94,8 +101,9 @@ public class PhieuMuonSachThemController implements Initializable {
 
         java.util.Date ngayMuonSach = java.sql.Date.valueOf(ngayMuonSachInit);
         java.util.Date ngayDuKienTra = java.sql.Date.valueOf(ngayDuKienTraInit);
+        String trangThaiPMS = comboboxTrangThaiPMS.getValue();
 
-        PhieuMuonSach phieuMuonSach = new PhieuMuonSach(maDocGia, maCuonSach, ngayMuonSach, ngayDuKienTra);
+        PhieuMuonSach phieuMuonSach = new PhieuMuonSach(maDocGia, maCuonSach, ngayMuonSach, ngayDuKienTra,trangThaiPMS);
         boolean flag = phieuMuonSachDao.themPhieuMuonSach(phieuMuonSach);
         if (flag) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -234,5 +242,10 @@ public class PhieuMuonSachThemController implements Initializable {
 
         datepickerNgayDuKienTra.setDisable(true);
 
+
+        //set giá trị cho combobox trạng thái phiếu mượn sách;
+        comboboxTrangThaiPMS.setItems(trangThaiPMSArray);
+        comboboxTrangThaiPMS.getSelectionModel().selectFirst();
+        comboboxTrangThaiPMS.setDisable(true);
     }
 }

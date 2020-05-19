@@ -79,6 +79,9 @@ public class PhieuMuonSachDanhSachController implements Initializable {
     @FXML
     private TableColumn<PhieuMuonSach, Date> ngayDuKienTraColumn;
 
+    @FXML
+    private TableColumn<PhieuMuonSach, String> trangThaiPMSColumn;
+
 
     @FXML
     void openCapNhatPhieuMuonSachAction(ActionEvent event) {
@@ -194,6 +197,8 @@ public class PhieuMuonSachDanhSachController implements Initializable {
                     return true; // Filter matches last name.
                 } else if (phieuMuonSach.getTenTheLoai().toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true; // Filter matches last name.
+                } else if (phieuMuonSach.getTrangThaiPMS().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true; // Filter matches last name.
                 } else if (String.valueOf(phieuMuonSach.getMaCuonSach()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
                     return true;
                 } else if (String.valueOf(phieuMuonSach.getMaDocGia()).toLowerCase().indexOf(lowerCaseFilter) != -1) {
@@ -238,6 +243,7 @@ public class PhieuMuonSachDanhSachController implements Initializable {
         tenTheLoaiColumn.setCellValueFactory(new PropertyValueFactory<>("tenTheLoai"));
         ngayMuonColumn.setCellValueFactory(new PropertyValueFactory<>("ngayMuon"));
         ngayDuKienTraColumn.setCellValueFactory(new PropertyValueFactory<>("ngayDuKienTra"));
+        trangThaiPMSColumn.setCellValueFactory(new PropertyValueFactory<>("trangThaiPMS"));
 
         // code dùng để định dạng kiểu dữ liệu Date theo ý muốn: dd-MM-yyyy vi VN
         // dùng dd/MM/yyyy

@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="436.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.PhieuMuonSachChinhSuaController">
+<AnchorPane prefHeight="509.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.PhieuMuonSachChinhSuaController">
    <children>
-      <Button fx:id="btnCapNhatPhieuMuon" layoutX="65.0" layoutY="346.0" mnemonicParsing="false" onAction="#capNhatPhieuMuonSachAction" prefHeight="37.0" text="Cập nhật phiếu mượn sách" />
-      <Button fx:id="btnCancel" layoutX="391.0" layoutY="346.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
+      <Button fx:id="btnCapNhatPhieuMuon" layoutX="71.0" layoutY="422.0" mnemonicParsing="false" onAction="#capNhatPhieuMuonSachAction" prefHeight="37.0" text="Cập nhật phiếu mượn sách" />
+      <Button fx:id="btnCancel" layoutX="381.0" layoutY="422.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
       <Label layoutX="16.0" layoutY="49.0" prefHeight="25.0" prefWidth="134.0" text="Thông tin độc giả">
          <font>
             <Font size="16.0" />
@@ -35,5 +35,11 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="14.0" layoutY="352.0" text="Trạng thái phiếu mượn sách">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxTrangThaiPMS" layoutX="262.0" layoutY="346.0" prefHeight="37.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

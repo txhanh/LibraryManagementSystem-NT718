@@ -20,10 +20,11 @@ public class PhieuMuonSach {
     private SimpleStringProperty tenTheLoai;
     private SimpleObjectProperty<Date> ngayMuon;
     private SimpleObjectProperty<Date> ngayDuKienTra;
+    private SimpleStringProperty trangThaiPMS;
 
 
     public PhieuMuonSach(int maDocGia, String tenDocGia, int maCuonSach, String tenTuaSach,
-                         String tenTheLoai, Date ngayMuon, Date ngayDuKienTra) {
+                         String tenTheLoai, Date ngayMuon, Date ngayDuKienTra, String trangThaiPMS) {
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.tenDocGia = new SimpleStringProperty(tenDocGia);
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
@@ -31,12 +32,13 @@ public class PhieuMuonSach {
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
         this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
         this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
+        this.trangThaiPMS = new SimpleStringProperty(trangThaiPMS);
 
     }
 
 
     public PhieuMuonSach(int maPhieuMuon, int maDocGia, String tenDocGia, int maCuonSach, String tenTuaSach,
-                         String tenTheLoai, Date ngayMuon, Date ngayDuKienTra) {
+                         String tenTheLoai, Date ngayMuon, Date ngayDuKienTra, String trangThaiPMS) {
         this.maPhieuMuon = new SimpleIntegerProperty(maPhieuMuon);
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.tenDocGia = new SimpleStringProperty(tenDocGia);
@@ -45,14 +47,15 @@ public class PhieuMuonSach {
         this.tenTheLoai = new SimpleStringProperty(tenTheLoai);
         this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
         this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
-
+        this.trangThaiPMS = new SimpleStringProperty(trangThaiPMS);
     }
 
-    public PhieuMuonSach(int maDocGia, int maCuonSach, Date ngayMuon, Date ngayDuKienTra) {
+    public PhieuMuonSach(int maDocGia, int maCuonSach, Date ngayMuon, Date ngayDuKienTra, String trangThaiPMS) {
         this.maDocGia = new SimpleIntegerProperty(maDocGia);
         this.maCuonSach = new SimpleIntegerProperty(maCuonSach);
         this.ngayMuon = new SimpleObjectProperty<>(ngayMuon);
         this.ngayDuKienTra = new SimpleObjectProperty<>(ngayDuKienTra);
+        this.trangThaiPMS = new SimpleStringProperty(trangThaiPMS);
     }
 
     public int getMaDocGia() {
@@ -149,5 +152,17 @@ public class PhieuMuonSach {
 
     public void setNgayDuKienTra(Date ngayDuKienTra) {
         this.ngayDuKienTra.set(ngayDuKienTra);
+    }
+
+    public String getTrangThaiPMS() {
+        return trangThaiPMS.get();
+    }
+
+    public SimpleStringProperty trangThaiPMSProperty() {
+        return trangThaiPMS;
+    }
+
+    public void setTrangThaiPMS(String trangThaiPMS) {
+        this.trangThaiPMS.set(trangThaiPMS);
     }
 }

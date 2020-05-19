@@ -28,11 +28,15 @@ import java.util.ResourceBundle;
 
 import static home.controller.CuonSachThemController.trangThai1;
 import static home.controller.PhieuMuonSachDanhSachController.patternDay;
+import static home.controller.PhieuMuonSachThemController.trangThaiPMS1;
 
 public class PhieuTraSachThemController implements Initializable {
 
+
+
     DocGiaDao docGiaDao = new DocGiaDao();
     ObservableList<DocGia> docGiaList;
+
 
     CuonSachDao cuonSachDao = new CuonSachDao();
     ObservableList<CuonSach> cuonSachList;
@@ -272,6 +276,18 @@ public class PhieuTraSachThemController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /*
+        Code để loại bỏ những mã phiếu mượn đã được trả khỏi combobox mã phiếu mượn trong phần THÊM PHIẾU TRẢ SÁCH
+        */
+
+//      Khởi tạo biến đếm trong cuonSachList (tính tổng số phần tử trong mảng)
+        Iterator<PhieuMuonSach> i = phieuMuonSachList.iterator();
+        while (i.hasNext()) {
+            PhieuMuonSach phieuMuonSach = i.next(); // must be called before you can call i.remove()
+            if (phieuMuonSach.getTrangThaiPMS().equals(trangThaiPMS1)) {
+                i.remove();
+            }
+        }
         comboboxMaPhieuMuon.setItems(phieuMuonSachList);
         comboboxMaPhieuMuon.setConverter(new StringConverter<PhieuMuonSach>() {
 

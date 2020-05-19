@@ -29,7 +29,8 @@ public class PhieuMuonSachDao {
                 "       TS.TENTUASACH,\n" +
                 "       TS.TENTHELOAI,\n" +
                 "       NGAYMUONSACH,\n" +
-                "       NGAYDUKIENTRA\n" +
+                "       NGAYDUKIENTRA,\n" +
+                "       TRANGTHAIPMS\n" +
                 "FROM ((PHIEUMUONSACH PMS JOIN DOCGIA DG ON PMS.MADOCGIA = DG.MADOCGIA)\n" +
                 "    JOIN CUONSACH CS ON PMS.MACUONSACH = CS.MACUONSACH)\n" +
                 "         JOIN TUASACH TS ON CS.MATUASACH = TS.MATUASACH\n" +
@@ -46,9 +47,10 @@ public class PhieuMuonSachDao {
                 String tenTheLoai = rs.getString(6);
                 Date ngayMuon = rs.getTimestamp(7);
                 Date ngayDuKienTra = rs.getTimestamp(8);
+                String trangThaiPMS = rs.getString(9);
 
                 danhSachPhieuMuon.add(new PhieuMuonSach(maPhieuMuon, maDocGia, tenDocGia, maCuonSach, tenTuaSach,
-                        tenTheLoai, ngayMuon, ngayDuKienTra));
+                        tenTheLoai, ngayMuon, ngayDuKienTra, trangThaiPMS));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -60,7 +62,7 @@ public class PhieuMuonSachDao {
     public boolean themPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "BEGIN\n" +
-                "    INSERT INTO PHIEUMUONSACH(MADOCGIA, MACUONSACH, NGAYMUONSACH, NGAYDUKIENTRA) VALUES (?, ?, ?, ?)" +
+                "    INSERT INTO PHIEUMUONSACH(MADOCGIA, MACUONSACH, NGAYMUONSACH, NGAYDUKIENTRA, TRANGTHAIPMS) VALUES (?, ?, ?, ?, ?)" +
                 ";\n" +
                 "\n" +
                 "    UPDATE CUONSACH\n" +
@@ -82,7 +84,8 @@ public class PhieuMuonSachDao {
             preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
             preparedStatement.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
             preparedStatement.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-            preparedStatement.setInt(5, phieuMuonSach.getMaCuonSach());
+            preparedStatement.setString(5, phieuMuonSach.getTrangThaiPMS());
+            preparedStatement.setInt(6, phieuMuonSach.getMaCuonSach());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;
@@ -141,7 +144,8 @@ public class PhieuMuonSachDao {
                 "    SET MADOCGIA      = ?,\n" +
                 "        MACUONSACH    = ?,\n" +
                 "        NGAYMUONSACH  = ?,\n" +
-                "        NGAYDUKIENTRA = ?\n" +
+                "        NGAYDUKIENTRA = ?,\n" +
+                "        TRANGTHAIPMS = ?\n" +
                 "    WHERE MAPHIEUMUON = ?;\n" +
                 "\n" +
                 "    UPDATE CUONSACH\n" +
@@ -170,7 +174,8 @@ public class PhieuMuonSachDao {
             preparedStatement.setInt(4, phieuMuonSach.getMaCuonSach());
             preparedStatement.setDate(5, (java.sql.Date) phieuMuonSach.getNgayMuon());
             preparedStatement.setDate(6, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-            preparedStatement.setInt(7, phieuMuonSach.getMaPhieuMuon());
+            preparedStatement.setString(7, phieuMuonSach.getTrangThaiPMS());
+            preparedStatement.setInt(8, phieuMuonSach.getMaPhieuMuon());
 
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {

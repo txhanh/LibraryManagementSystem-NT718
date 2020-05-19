@@ -84,6 +84,7 @@
                   <TableColumn fx:id="tenTheLoaiColumn" minWidth="0.0" prefWidth="113.0" text="Thể loại" />
                   <TableColumn fx:id="ngayMuonColumn" prefWidth="156.0" text="Ngày mượn" />
                   <TableColumn fx:id="ngayDuKienTraColumn" prefWidth="96.0" text="Ngày dự kiến trả" />
+                  <TableColumn fx:id="trangThaiPMSColumn" prefWidth="96.0" text="Trạng thái phiếu mượn sách" />
                </columns>
                <GridPane.margin>
                   <Insets />
