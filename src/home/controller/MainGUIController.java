@@ -63,6 +63,8 @@ public class MainGUIController implements Initializable {
     @FXML
     private Button btnPhieuPhat;
 
+    @FXML
+    private Button btnBaoCaoTK;
 
 
     @Override
@@ -93,6 +95,8 @@ public class MainGUIController implements Initializable {
             loadUI("/home/fxml/PhieuTraSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuPhat) {
             loadUI("/home/fxml/PhieuPhatDanhSach.fxml");
+        } else if (event.getSource() == btnBaoCaoTK) {
+            loadUI("/home/fxml/BaoCaoThongKe.fxml");
         } else if (event.getSource() == btnHome || event.getSource() == null) {
             loadUI(("/home/fxml/Intro.fxml"));
         }

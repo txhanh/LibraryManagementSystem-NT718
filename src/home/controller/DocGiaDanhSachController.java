@@ -28,8 +28,8 @@ public class DocGiaDanhSachController implements Initializable {
 
     DocGiaDao memberDao = new DocGiaDao();
     Main window = new Main();
-
     ObservableList<DocGia> dataTable = FXCollections.observableArrayList(memberDao.getAllMember());
+
 
 
     /*

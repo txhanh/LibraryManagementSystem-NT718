@@ -1,6 +1,7 @@
 package home.controller;
 
 import home.Main;
+import home.dao.JDBCConnection;
 import home.dao.PhieuPhatDao;
 import home.model.PhieuMuonSach;
 import home.model.PhieuPhat;
@@ -15,10 +16,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class PhieuPhatDanhSachController implements Initializable {
@@ -211,5 +218,39 @@ public class PhieuPhatDanhSachController implements Initializable {
         tenTuaSachColumn.setCellValueFactory(new PropertyValueFactory<>("tenTuaSach"));
         tienPhatColumn.setCellValueFactory(new PropertyValueFactory<>("tienPhat"));
         maCuonSachColumn.setCellValueFactory(new PropertyValueFactory<>("maCuonSach"));
+    }
+
+    @FXML
+    void openInPhieuPhat(ActionEvent event) throws JRException {
+        selectedPhieuPhat = tablePhieuPhat.getSelectionModel().getSelectedItem();
+        if(selectedPhieuPhat == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả");
+            alert.showAndWait();
+            return;
+        }
+
+        int maPP = selectedPhieuPhat.getMaPhieuPhat();
+
+        HashMap hashmap = new HashMap();
+        hashmap.put("MAPHIEUPHAT", maPP);
+
+        /*
+        Tạo kết nối với CSDL
+        Chọn đường dẫn file report đã tạo, và file output dạng pdf
+         */
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String dir = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\ReportCoThamSo\\ReportCoThamSo.jrxml";
+        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\ReportCoThamSo\\ReportCoThamSo.pdf";
+
+        /*
+        Gọi các thư viện của Jasper report
+         */
+        JasperDesign jd = JRXmlLoader.load(dir);
+        JasperReport jr = JasperCompileManager.compileReport(dir);
+        JasperPrint jp = JasperFillManager.fillReport(jr, hashmap, connection);
+        JasperViewer jv = new JasperViewer(jp, false); // tắt report mà không tắt chương trình
+        jv.setVisible(true);
     }
 }

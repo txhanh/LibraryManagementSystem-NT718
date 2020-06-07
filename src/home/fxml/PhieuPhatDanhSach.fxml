@@ -47,6 +47,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#xoaPhieuPhatAction" text="Xóa" />
                         <MenuItem mnemonicParsing="false" onAction="#openCapNhatPhieuPhatAction" text="Chỉnh sửa" />
+                        <MenuItem mnemonicParsing="false" onAction="#openInPhieuPhat" text="In phiếu phạt" />
                     </items>
                   </ContextMenu>
                </contextMenu>
