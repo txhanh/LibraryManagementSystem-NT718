@@ -2,15 +2,11 @@ package home.controller;
 
 import home.Main;
 import home.dao.JDBCConnection;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -72,11 +68,8 @@ public class ThangNamThongKeTop3Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         comboboxThang.getItems().addAll(khoiTaoThang());
         comboboxNam.getItems().addAll(khoiTaoNam());
-
-
     }
 
     private Integer[] khoiTaoThang() {
