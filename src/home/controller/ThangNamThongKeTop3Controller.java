@@ -39,21 +39,6 @@ public class ThangNamThongKeTop3Controller implements Initializable {
         int thang = Integer.valueOf(tfThang.getText());
         int nam = Integer.valueOf(tfNam.getText());
 
-//        if( (thang < 1 && thang > 12)){
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Tháng nhập vào không hợp lệ");
-//            alert.showAndWait();
-//            return;
-//        }
-
-//        if( (nam < 2000 && nam > 2022)){
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Năm nhập vào không hợp lệ, chỉ cho phép nhập từ 2000 - 2022");
-//            alert.showAndWait();
-//            return;
-//        }
         /*
         Tạo hashmap và truyền tham số từ giao diện vào
          */
@@ -66,8 +51,8 @@ public class ThangNamThongKeTop3Controller implements Initializable {
         Chọn đường dẫn file report đã tạo, và file output dạng pdf
          */
         Connection connection = JDBCConnection.getJDBCConnection();
-        String dir = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\Top3SachMuon\\Top3SachMuon.jrxml";
-        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\Top3SachMuon\\Top3SachMuon.pdf";
+        String dir = ".\\src\\home\\report\\TK3_Top3SachMuon.jrxml";
+//        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\Top3SachMuon\\Top3SachMuon.pdf";
 
         /*
         Gọi các thư viện của Jasper report

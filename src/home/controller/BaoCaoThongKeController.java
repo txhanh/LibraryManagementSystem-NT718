@@ -42,8 +42,8 @@ public class BaoCaoThongKeController {
     @FXML
     void danhSachCuonSachAction(ActionEvent event) throws JRException {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String dir = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\SoLuongCuonSach\\SoLuongCuonSach.jrxml";
-        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\SoLuongCuonSach\\SoLuongCuonSach.pdf";
+        String dir = ".\\src\\home\\report\\TK1_SoLuongCuonSach.jrxml";
+//        String pdf = ".\\src\\home\\report\\input\\SoLuongCuonSach.pdf";
         JasperDesign jd = JRXmlLoader.load(dir);
         JasperReport jr = JasperCompileManager.compileReport(dir);
         JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap(), connection);
@@ -55,8 +55,8 @@ public class BaoCaoThongKeController {
     @FXML
     void muonSachTheoTheLoaiAction(ActionEvent event) throws JRException {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String dir = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\MuonSachTheoTheLoai2\\MuonSachTheoTheLoai2.jrxml";
-        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\MuonSachTheoTheLoai2\\MuonSachTheoTheLoai2.pdf";
+        String dir = ".\\src\\home\\report\\TK2_MuonSachTheoTheLoai.jrxml";
+//        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\MuonSachTheoTheLoai2\\MuonSachTheoTheLoai2.pdf";
         JasperDesign jd = JRXmlLoader.load(dir);
         JasperReport jr = JasperCompileManager.compileReport(dir);
         JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap(), connection);

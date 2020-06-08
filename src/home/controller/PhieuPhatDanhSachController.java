@@ -241,8 +241,8 @@ public class PhieuPhatDanhSachController implements Initializable {
         Chọn đường dẫn file report đã tạo, và file output dạng pdf
          */
         Connection connection = JDBCConnection.getJDBCConnection();
-        String dir = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\ReportCoThamSo\\ReportCoThamSo.jrxml";
-        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\ReportCoThamSo\\ReportCoThamSo.pdf";
+        String dir = ".\\src\\home\\report\\InPhieuPhat.jrxml";
+//        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\ReportCoThamSo\\ReportCoThamSo.pdf";
 
         /*
         Gọi các thư viện của Jasper report
