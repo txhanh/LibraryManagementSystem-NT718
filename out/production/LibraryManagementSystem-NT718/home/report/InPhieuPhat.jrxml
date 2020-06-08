@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InPhieuPhat" language="groovy" pageWidth="600" pageHeight="842" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="97e7388a-9cfa-495c-9efa-3299cf341528">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MAPHIEUPHAT" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT MAPHIEUPHAT, HODOCGIA, TENDOCGIA, TENTUASACH, NGAYMUONSACH, NGAYDUKIENTRA, NGAYTRASACH, SONGAYTRATRE, PP.TIENPHAT
+FROM DOCGIA DG, TUASACH TS, CUONSACH CS, PHIEUMUONSACH PMS, PHIEUTRASACH PTS, PHIEUPHAT PP
+WHERE DG.MADOCGIA = PP.MADOCGIA AND TS.MATUASACH = CS.MATUASACH AND CS.MACUONSACH = PMS.MACUONSACH
+AND PMS.MAPHIEUMUON = PTS.MAPHIEUMUON AND PP.MAPHIEUTRA = PTS.MAPHIEUTRA
+AND MAPHIEUPHAT = $P{MAPHIEUPHAT}]]>
+	</queryString>
+	<field name="MAPHIEUPHAT" class="java.math.BigDecimal"/>
+	<field name="HODOCGIA" class="java.lang.String"/>
+	<field name="TENDOCGIA" class="java.lang.String"/>
+	<field name="TENTUASACH" class="java.lang.String"/>
+	<field name="NGAYMUONSACH" class="java.sql.Timestamp"/>
+	<field name="NGAYDUKIENTRA" class="java.sql.Timestamp"/>
+	<field name="NGAYTRASACH" class="java.sql.Timestamp"/>
+	<field name="SONGAYTRATRE" class="java.math.BigDecimal"/>
+	<field name="TIENPHAT" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="40" uuid="01a6a420-b7f7-4834-9fcc-3f62013a168e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[PHIẾU PHẠT ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="251">
+			<staticText>
+				<reportElement x="34" y="0" width="67" height="20" uuid="84b3c3d1-5f2a-40e5-a215-063315f5d2f6"/>
+				<text><![CDATA[Mã phiếu phạt:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="0" width="103" height="20" uuid="803a22ea-518d-4336-bb5d-f8ac02062220"/>
+				<textFieldExpression><![CDATA[$F{MAPHIEUPHAT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="31" width="67" height="20" uuid="4aa4ba4b-d5cb-466f-9674-d9f04f2b49f9"/>
+				<text><![CDATA[Tên độc giả: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="31" width="173" height="20" uuid="4152ed86-17f6-4448-8ab7-aaa14ca91f86"/>
+				<textFieldExpression><![CDATA[$F{HODOCGIA} + " " + $F{TENDOCGIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="63" width="67" height="20" uuid="72954be1-425b-4289-b4c9-0c3c3ec86c8c"/>
+				<text><![CDATA[Tên tựa sách: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="63" width="455" height="20" uuid="0aa5c0a3-7ae7-4a93-bbc0-60a214021726"/>
+				<textFieldExpression><![CDATA[$F{TENTUASACH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="94" width="80" height="20" uuid="52bc3a86-de45-43b5-a795-2f5dc69e1dae"/>
+				<text><![CDATA[Ngày mượn sách:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="125" y="94" width="173" height="20" uuid="4bab3560-05cf-44e7-808d-550c6cde0450"/>
+				<textFieldExpression><![CDATA[$F{NGAYMUONSACH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="124" width="80" height="20" uuid="69fcace7-a5d5-43f1-8e60-8b7b6af3b72a"/>
+				<text><![CDATA[Ngày dự kiến trả:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="125" y="124" width="173" height="20" uuid="034c43b1-5355-4de9-81b6-f758ba8eb068"/>
+				<textFieldExpression><![CDATA[$F{NGAYDUKIENTRA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="156" width="67" height="20" uuid="2ac78a1c-ad60-48e1-9985-2406b18e2fff"/>
+				<text><![CDATA[Ngày trả sách: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="125" y="156" width="184" height="20" uuid="ac1f98f6-9164-44a9-8cfb-0fab2e0dc84c"/>
+				<textFieldExpression><![CDATA[$F{NGAYTRASACH}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="187" width="80" height="20" uuid="8e359e3a-8537-4f72-ab29-d0ac671b4c16"/>
+				<text><![CDATA[Số ngày trả trễ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="187" width="184" height="20" uuid="98af3732-dbd6-4660-8875-372f8bd9334e"/>
+				<textFieldExpression><![CDATA[$F{SONGAYTRATRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="218" width="49" height="20" uuid="bb8f6dd4-b064-4b02-a52b-438c5bae68d7"/>
+				<text><![CDATA[Tiền phạt:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="218" width="184" height="20" uuid="2b33f87e-981b-4b32-96e0-400cd4424a70"/>
+				<textFieldExpression><![CDATA[$F{TIENPHAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="43">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="152" y="11" width="160" height="20" uuid="1afa907d-7e47-485c-9e1e-4545fac729ba"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="516" y="11" width="28" height="20" uuid="ede05499-39c7-4f93-abc8-f841b74f4ad5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="62" y="11" width="87" height="20" uuid="dd9bd0dd-4e36-4a9c-bc51-3fb353ff8339"/>
+				<text><![CDATA[Ngày in phiếu phạt:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="333" y="14" width="156" height="23" forecolor="#FF0033" uuid="6fe81b8d-e12f-4958-8d06-9c70cb13640b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số tiền cần thanh toán:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="238" y="7" width="306" height="1" uuid="8be0042b-ef23-450a-b41a-c0a09945b3ca"/>
+			</line>
+			<textField>
+				<reportElement x="489" y="14" width="55" height="23" forecolor="#FF0033" uuid="eabe361f-8f90-4420-a628-403a1d2c87bf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIENPHAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

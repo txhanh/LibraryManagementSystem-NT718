@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TK3_Top3SachMuon" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7352a1c5-312b-4169-a813-d06db6f7e3e6">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="thang" class="java.lang.String"/>
+	<parameter name="nam" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select TENTUASACH, count(TENTUASACH)
+from PHIEUMUONSACH pms, CUONSACH cs, TUASACH ts
+where pms.MACUONSACH = cs.MACUONSACH and ts.MATUASACH = cs.MATUASACH
+and extract(month from NGAYMUONSACH) = $P{thang} and extract(year from NGAYMUONSACH) = $P{nam}
+group by TENTUASACH
+order by count(TENTUASACH) desc
+FETCH FIRST 3 ROWS WITH TIES]]>
+	</queryString>
+	<field name="TENTUASACH" class="java.lang.String"/>
+	<field name="COUNT(TENTUASACH)" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="10" width="551" height="58" uuid="94b057bb-8581-4068-a814-3abb115a35cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="20" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[	TOP 3 SÁCH ĐƯỢC MƯỢN NHIỀU THEO THÁNG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="342" y="12" width="83" height="20" forecolor="#FF0000" uuid="2a233838-112d-46ac-ba6e-20797de7f8e8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Thống kê theo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="425" y="12" width="121" height="20" forecolor="#FF0000" uuid="f9c514a6-b56b-4457-a767-35549c0f2d7f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["tháng " + $P{thang} + " năm " + $P{nam}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="553" height="30" backcolor="#999999" uuid="bd4d89f1-26db-4eb3-a4ad-881edcf3a442"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="0" width="211" height="30" uuid="5ffbb0ef-d1f5-4ba6-bce4-0ac730015781"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Tên tựa sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="178" height="30" uuid="bd9c00bf-27dd-459a-a34e-fcff59ffb618"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Số lượt mượn trong tháng]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="553" height="24" forecolor="#33FFCC" backcolor="#E5ECF9" uuid="08d12d95-6226-402b-ac67-6645a666e21d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="14" y="0" width="361" height="24" uuid="dba22a3e-4932-4b56-8651-1fd053ff845d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TENTUASACH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="178" height="24" uuid="238d6b02-4ad0-4ce5-8f10-c29dd26b88e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COUNT(TENTUASACH)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TK2_MuonSachTheoTheLoai" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05210099-0891-4a84-9860-8e8f32dbfd08">
+	<property name="ireport.zoom" value="1.9487171000000045"/>
+	<property name="ireport.x" value="57"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT TENTHELOAI, TENTUASACH, TENDOCGIA, MAPHIEUMUON
+FROM CUONSACH CS,
+     TUASACH TS,
+     DOCGIA DG,
+     PHIEUMUONSACH PMS
+WHERE PMS.MACUONSACH = CS.MACUONSACH
+  AND CS.MATUASACH = TS.MATUASACH
+  AND PMS.MADOCGIA = DG.MADOCGIA
+ORDER BY  TENTHELOAI, TENTUASACH, TENDOCGIA]]>
+	</queryString>
+	<field name="TENTHELOAI" class="java.lang.String"/>
+	<field name="TENTUASACH" class="java.lang.String"/>
+	<field name="TENDOCGIA" class="java.lang.String"/>
+	<field name="MAPHIEUMUON" class="java.math.BigDecimal"/>
+	<variable name="TENTHELOAI_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{TENTHELOAI}]]></variableExpression>
+	</variable>
+	<variable name="TongSachMuon" class="java.lang.Integer"/>
+	<variable name="MAPHIEUMUON_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{MAPHIEUMUON}]]></variableExpression>
+	</variable>
+	<variable name="MAPHIEUMUON_2" class="java.lang.Integer" resetType="Group" resetGroup="THELOAISACH" calculation="Count">
+		<variableExpression><![CDATA[$F{MAPHIEUMUON}]]></variableExpression>
+	</variable>
+	<group name="THELOAISACH">
+		<groupExpression><![CDATA[$F{TENTHELOAI}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<staticText>
+					<reportElement mode="Opaque" x="6" y="2" width="546" height="20" backcolor="#C0C0C0" uuid="770006eb-14c0-4a31-94bc-8d3ec77f1582"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Thể loại: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="48" y="2" width="100" height="20" uuid="c79b2e65-bb26-4cd4-b00d-fd36351d6175"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{TENTHELOAI}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="22">
+				<textField>
+					<reportElement x="485" y="5" width="26" height="16" forecolor="#33CC00" uuid="d1f254f3-e024-46bc-8319-72030bc361f7"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{MAPHIEUMUON_2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="319" y="5" width="163" height="16" forecolor="#33CC00" uuid="c21b5e51-72f9-49e9-9bd1-a739868f9bc0"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tổng số sách mượn theo thể loại:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<line>
+				<reportElement x="10" y="10" width="542" height="1" uuid="f8375c67-9caa-4dbb-b192-d2303a4e7475"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="19" width="546" height="52" uuid="871d4923-7ef3-4545-aefc-6f87c20b6944"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[THỐNG KÊ MƯỢN SÁCH THEO THỂ LOẠI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24">
+			<staticText>
+				<reportElement mode="Opaque" x="6" y="2" width="546" height="20" forecolor="#000000" backcolor="#70A9A9" uuid="49cf5bf0-75e4-49bc-8e9d-1d43cf8ba921"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="5" width="100" height="19" uuid="c6a2ad94-e884-4b0e-9cc4-5d475312585c"/>
+				<text><![CDATA[Tên tựa sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="4" width="103" height="19" uuid="c0ed2966-4eb1-4647-8e61-95cd50d521d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tên độc giả mượn sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="4" width="130" height="19" uuid="ef927505-9daa-46bc-8840-50f2956d4f38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Mã phiếu mượn]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="6" y="2" width="546" height="18" backcolor="#E5ECF9" uuid="c9df7e76-ba20-430f-b936-fe181a8f77e5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="19" y="2" width="300" height="18" uuid="9031b322-c764-42fc-a5b6-ba4facfd4037"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TENTUASACH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="2" width="103" height="18" uuid="297e367c-e663-4825-8995-af53ec449d77"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TENDOCGIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="422" y="2" width="130" height="18" uuid="59efe4cd-2533-4786-8ff9-f9f004e8ebfb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MAPHIEUMUON}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="27">
+			<textField>
+				<reportElement x="240" y="4" width="249" height="20" uuid="d90b060a-33f6-47db-b7d1-9d6797ca8708"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Trang "+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="489" y="4" width="40" height="20" uuid="160e204e-75f3-4d2d-a1d6-b1630198af62"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="45" y="4" width="100" height="20" uuid="ce499692-9456-4b02-ab15-d8d3e4a74836"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="33">
+			<staticText>
+				<reportElement x="350" y="11" width="117" height="20" forecolor="#FF0000" uuid="dd52ded7-abcb-4c2e-9a02-956169f6ea40"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng số sách đã mượn:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="485" y="11" width="22" height="20" forecolor="#FF0000" uuid="8ab48f9f-98aa-44a7-9db9-3c9952556fe0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{MAPHIEUMUON_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="240" y="7" width="299" height="1" uuid="b44e520d-0cba-49f9-be54-00ad7a5b9a09"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

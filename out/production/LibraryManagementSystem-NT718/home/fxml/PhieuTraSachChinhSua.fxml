@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="761.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.PhieuTraSachChinhSuaController">
+   <children>
+      <Button fx:id="btnCapNhatPhieuTra" layoutX="87.0" layoutY="688.0" mnemonicParsing="false" onAction="#capNhatPhieuTraSachAction" prefHeight="37.0" text="Cập nhật phiếu trả" />
+      <Button fx:id="btnCancel" layoutX="358.0" layoutY="688.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
+      <Label layoutX="26.0" layoutY="254.0" prefHeight="25.0" prefWidth="134.0" text="Thông tin độc giả">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxDocGia" layoutX="181.0" layoutY="249.0" prefHeight="35.0" prefWidth="354.0" />
+      <Label layoutX="25.0" layoutY="175.0" prefHeight="25.0" prefWidth="149.0" text="Thông tin cuốn sách">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxCuonSach" layoutX="181.0" layoutY="170.0" prefHeight="35.0" prefWidth="354.0" />
+      <DatePicker fx:id="datepickerNgayMuonSach" layoutX="193.0" layoutY="327.0" prefHeight="37.0" prefWidth="218.0" />
+      <Label layoutX="27.0" layoutY="333.0" text="Ngày mượn sách">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datepickerNgayTraSach" layoutX="193.0" layoutY="392.0" prefHeight="37.0" prefWidth="218.0" />
+      <Label layoutX="28.0" layoutY="398.0" text="Ngày trả sách">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="104.0" prefHeight="25.0" prefWidth="134.0" text="Mã phiếu mượn">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxMaPhieuMuon" layoutX="181.0" layoutY="99.0" prefHeight="35.0" prefWidth="354.0" />
+      <TextField fx:id="tfSoNgayMuon" layoutX="193.0" layoutY="466.0" prefHeight="37.0" prefWidth="187.0" />
+      <TextField fx:id="tfSoNgayTraTre" layoutX="193.0" layoutY="535.0" prefHeight="37.0" prefWidth="187.0" />
+      <TextField fx:id="tfTienPhat" layoutX="193.0" layoutY="605.0" prefHeight="37.0" prefWidth="187.0" />
+      <Label layoutX="46.0" layoutY="472.0" text="Số ngày mượn">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="611.0" text="Tiền phạt">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="541.0" text="Số ngày trả trễ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="32.0" prefHeight="25.0" prefWidth="111.0" text="Mã phiếu trả">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboboxMaPhieuTra" layoutX="181.0" layoutY="27.0" prefHeight="35.0" prefWidth="354.0" promptText="(Chọn để tìm kiếm mã phiếu trả)" />
+   </children>
+</AnchorPane>
