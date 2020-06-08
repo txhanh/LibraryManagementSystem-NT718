@@ -36,15 +36,7 @@
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="574.0" layoutY="302.0" prefHeight="53.0" prefWidth="317.0" text="Trần Xuân Hạnh (Hạnh J)">
-                     <effect>
-                        <Reflection />
-                     </effect>
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="580.0" layoutY="415.0" prefHeight="53.0" prefWidth="352.0" text="Trần Thị Mỹ Uyên (Uyên Miu)">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="609.0" layoutY="258.0" prefHeight="53.0" prefWidth="317.0" text="NT718 Team">
                      <effect>
                         <Reflection />
                      </effect>

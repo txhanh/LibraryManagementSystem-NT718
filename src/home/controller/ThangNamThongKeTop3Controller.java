@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
@@ -26,37 +27,33 @@ public class ThangNamThongKeTop3Controller implements Initializable {
     Main window = new Main();
 
     @FXML
-    private TextField tfThang;
+    private ComboBox<Integer> comboboxThang;
 
     @FXML
-    private TextField tfNam;
+    private ComboBox<Integer> comboboxNam;
 
     @FXML
     private Button btnThongKeTop3;
 
     @FXML
     void thongKeTop3Action(ActionEvent event) throws JRException {
-        int thang = Integer.valueOf(tfThang.getText());
-        int nam = Integer.valueOf(tfNam.getText());
+        int thang = comboboxThang.getValue();
+        int nam = comboboxNam.getValue();
 
-        /*
-        Tạo hashmap và truyền tham số từ giao diện vào
-         */
+//        Tạo hashmap và truyền tham số từ giao diện vào
         HashMap hashmap = new HashMap();
         hashmap.put("thang", thang);
         hashmap.put("nam", nam);
 
-        /*
-        Tạo kết nối với CSDL
-        Chọn đường dẫn file report đã tạo, và file output dạng pdf
-         */
+//        Tạo kết nối với CSDL
+//        Chọn đường dẫn file report đã tạo, và file output dạng pdf
+
         Connection connection = JDBCConnection.getJDBCConnection();
         String dir = ".\\src\\home\\report\\TK3_Top3SachMuon.jrxml";
 //        String pdf = "D:\\IntelliJ\\iReport\\Data\\DemoTK1\\Top3SachMuon\\Top3SachMuon.pdf";
 
-        /*
-        Gọi các thư viện của Jasper report
-         */
+
+//        Gọi các thư viện của Jasper report
         JasperDesign jd = JRXmlLoader.load(dir);
         JasperReport jr = JasperCompileManager.compileReport(dir);
         JasperPrint jp = JasperFillManager.fillReport(jr, hashmap, connection);
@@ -76,28 +73,28 @@ public class ThangNamThongKeTop3Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*
-        Các textField chỉ được phép nhập số, không cho nhập các ký tự khác
-         */
+        comboboxThang.getItems().addAll(khoiTaoThang());
+        comboboxNam.getItems().addAll(khoiTaoNam());
 
-        tfThang.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    tfThang.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
 
-        tfNam.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    tfNam.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
+    }
+
+    private Integer[] khoiTaoThang() {
+        Integer[] result = new Integer[12];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (int) (i + 1);
+        }
+        return result;
+    }
+
+    private Integer[] khoiTaoNam() {
+        Integer[] result = new Integer[5];
+        int start_year = 2018;
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (int) (start_year);
+            start_year++;
+        }
+        return result;
     }
 }
