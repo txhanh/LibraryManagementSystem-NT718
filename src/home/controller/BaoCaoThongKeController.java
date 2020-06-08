@@ -47,8 +47,6 @@ public class BaoCaoThongKeController {
         JasperDesign jd = JRXmlLoader.load(dir);
         JasperReport jr = JasperCompileManager.compileReport(dir);
         JasperPrint jp = JasperFillManager.fillReport(jr, new HashMap(), connection);
-//        JasperViewer.viewReport(jp);
-//        JasperExportManager.exportReportToPdfFile(jp,pdf);
         JasperViewer jv = new JasperViewer(jp, false);
         jv.setVisible(true);
     }

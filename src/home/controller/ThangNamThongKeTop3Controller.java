@@ -36,10 +36,8 @@ public class ThangNamThongKeTop3Controller implements Initializable {
 
     @FXML
     void thongKeTop3Action(ActionEvent event) throws JRException {
-
         int thang = Integer.valueOf(tfThang.getText());
         int nam = Integer.valueOf(tfNam.getText());
-
 
 //        if( (thang < 1 && thang > 12)){
 //            Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -56,7 +54,6 @@ public class ThangNamThongKeTop3Controller implements Initializable {
 //            alert.showAndWait();
 //            return;
 //        }
-
         /*
         Tạo hashmap và truyền tham số từ giao diện vào
          */
