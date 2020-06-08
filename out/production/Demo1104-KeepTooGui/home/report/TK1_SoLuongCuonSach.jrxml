@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TK1_SoLuongCuonSach" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d905eb9-1a53-4f26-823f-acfd4cfd745e">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT MATUASACH, TENTUASACH, SOLUONG
+FROM TUASACH
+order by matuasach]]>
+	</queryString>
+	<field name="MATUASACH" class="java.math.BigDecimal"/>
+	<field name="TENTUASACH" class="java.lang.String"/>
+	<field name="SOLUONG" class="java.math.BigDecimal"/>
+	<variable name="MATUASACH_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{MATUASACH}]]></variableExpression>
+	</variable>
+	<variable name="SOLUONG_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SOLUONG}]]></variableExpression>
+	</variable>
+	<variable name="SOLUONG_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SOLUONG}]]></variableExpression>
+	</variable>
+	<variable name="SOLUONG_3" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SOLUONG}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="555" height="47" forecolor="#0000CC" uuid="0404dc62-2ab8-4668-b836-fbc9b621b5e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DANH SÁCH TỰA SÁCH]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="444" y="0" width="111" height="20" forecolor="#00CC00" uuid="6554951f-03fb-418b-8a0d-b5ede2f6e2e9"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="402" y="0" width="42" height="20" forecolor="#00CC00" uuid="b06ac95d-e03b-4766-bda5-c7d3d913254a"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Ngày in: ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="23" backcolor="#999999" uuid="69e4fdd0-0c7d-4f75-8280-e03c0b683a4d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="79" height="23" uuid="b97fdd14-bbce-4ac0-b9a7-113a1f5fac5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã tựa sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="0" width="345" height="23" uuid="31943ff4-7f21-4cb5-b126-41f10816d106"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên tựa sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="23" uuid="75136fab-03ce-427d-8f3b-59b318097f75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số lượng]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="23" forecolor="#FFFFFF" backcolor="#E5ECF9" uuid="ca949aea-7089-4f0c-b484-cfb467a0f321"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="0e8ff974-8eeb-46ba-9544-7a683c237377"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MATUASACH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="0" width="345" height="20" uuid="803c90ad-3d91-425f-894a-f483d48a2232"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TENTUASACH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="3a778be9-8e0c-4e4e-b1a4-d9802eee6f28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SOLUONG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="284" y="11" width="271" height="1" uuid="62ed0b93-c022-4c7b-9aac-e3743491de9d"/>
+			</line>
+			<staticText>
+				<reportElement x="445" y="22" width="53" height="20" forecolor="#CC3300" uuid="f74a3fc4-8e41-48ac-80a1-7a9c36656108"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="498" y="22" width="57" height="20" forecolor="#CC3300" uuid="098ce767-c17b-47cf-a783-d6b13cca6b58"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SOLUONG_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
