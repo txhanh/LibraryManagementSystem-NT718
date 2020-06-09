@@ -100,6 +100,61 @@ create table PHIEUPHAT
 --------------------------------------------------------
 --  File created - Tuesday-June-09-2020
 --------------------------------------------------------
+REM INSERTING into QLTV0804.DOCGIA
+SET DEFINE OFF;
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (105,'Phan Tiến ','Tùng','03151465','tientung@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (207,'Phan Tiến','Tùng','032156465','tientungca@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (89,'Phạm Đình','San','032165467','sanpham@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (90,'Đàm Quang','Thành','03165498','thanhdam@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (104,'Vũ Quốc','Anh','0321549878','quocanh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (142,'Phạm Lê','Tuấn','0356987546','anhtuanbuonho@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (222,'Lê Đức Phương','Thảo','0314654879','danthoi@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (4,'Trần Trường','Sơn','032165456','son@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (27,'Nguyễn Quang','Hải Hải','0416584','quanghai97@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (73,'Nguyễn Ngọc','Tùng','0224679879','tungng@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (121,'Phan Minh','Quân Eayong','0965234873','quanphan@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (1,'Trần Xuân','Hạnh','0358844499','hanh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (221,'Mai Xuân','Hoan','03264879','xuanhoan.xz@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (23,'Cristiano','Ronaldoooo','0156454587','cr7@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (62,'Đỗ Thị ','Quang Anh','024187987','quanganhbede2k@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (321,'Trần Nguyên','Chiến','893741283971','chien@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (63,'Giàng','Mí Khề','03156456','hovoi@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (103,'Nguyễn Huy Ngọc','Anh','03467987987','ngocanh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (47,'Mai Đức','Thanh','031654','maiducthanh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (41,'Trần Thị','Mỹ Uyên','032115645','uyen@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (162,'Nguyễn Thị Thúy','Quỳnh','0165484798','quynh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (65,'Phan Đăng','Nhật Minh','054679878','nhatminh@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (3,'Trần Hải','Đăng','031156487','dang@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (161,'Phan Thị','Nguyệt','03165487','nguyet@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (26,'Bùi Tiến Tiến','Dũng','02315648','dungbui@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (262,'Hồ Xuân','Vương','032165465','vuong@gmail.com');
+Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (322,'Đinh Thị Khánh','Tường','487239809','tuong@gmail.com');
+
+
+
+REM INSERTING into QLTV0804.TUASACH
+SET DEFINE OFF;
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (1,'Nhập môn lập trình','Giáo trình','Nguyễn Tấn Trần Minh Khang','ĐHQG TPHCM',2);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (2,'Nhập môn công nghệ phần mềm','Giáo trình','Phạm Thi Vương','ĐGQG TPHCM',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (26,'Đô rê mon tập 11','Khác','Fujiko Ô Mô Tô Nô Nô','Kim Đồng',2);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (29,'Nghĩ đúng thì đừng làm sai','Khác','Tự bịa','Kim Đồng',3);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (82,'Deep learning và việc áp dụng thực tiễn','Luận văn','Hoàng Lâm','Giáo dục',2);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (7,'Những nguyên lí cơ bản của Chủ nghĩa Mác - Lênin','Giáo trình','Ban tuyên giáo','Chính trị Quốc gia',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (23,'Toán lớp 8 HK1','Tài liệu tham khảo','Tôn Thân','Giáo dục',0);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (81,'Ứng dụng công nghệ nhận diện khuôn mặt vào cuộc sống','Luận văn','Hồ Đắc Thanh Chương','Tổng hợp TPHCM',5);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (4,'Lập trình hướng đối tượng OOP','Giáo trình','Thái Hải Dương','Giáo dục',2);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (5,'Giới thiệu tổng quan về Hệ điều hành Linux','Tài liệu tham khảo','Trần Ngọc Sơn','Tổng hợp TPHCM',4);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (9,'Đắc nhân tâm - nghe nói hay lắm mà mình chưa đọc','Tạp chí Khoa Học','Ông nào nước Mĩ thì phải','Trẻ',0);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (24,'Những điều cần biết khi ở tuổi 20','Khác','Ngô Ngọc Nghĩa','Trẻ',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (3,'Nhập môn mạch số','Giáo trình','Lầu Phi Tường','ĐHQG TPHCM',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (6,'Tư tưởng Hồ Chí Minh','Giáo trình','Bộ Giáo dục và Đào tạo','Chính trị Quốc gia',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (21,'Dạy con làm giàu','Tài liệu tham khảo','James DDay','Giáo dục',2);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (28,'Đừng bao giờ đi ăn một mình ','Khác','Hà Duy Dũng','Trẻ',1);
+Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (83,'Thuật toán Vote rank và xác định tập ảnh hưởng','Tạp chí Khoa Học','Hoàng Anh Kiệt','ĐHQG TPHCM',3);
+
+
+
+----------------------------------------------------------------------------------------------------------------
 REM INSERTING into QLTV0804.CUONSACH
 SET DEFINE OFF;
 Insert into QLTV0804.CUONSACH (MACUONSACH,MATUASACH,TRANGTHAI) values (244,83,'Đã mượn');
@@ -133,35 +188,7 @@ Insert into QLTV0804.CUONSACH (MACUONSACH,MATUASACH,TRANGTHAI) values (241,5,'Đ
 Insert into QLTV0804.CUONSACH (MACUONSACH,MATUASACH,TRANGTHAI) values (250,81,'Đã mượn');
 Insert into QLTV0804.CUONSACH (MACUONSACH,MATUASACH,TRANGTHAI) values (251,81,'Chưa mượn');
 Insert into QLTV0804.CUONSACH (MACUONSACH,MATUASACH,TRANGTHAI) values (249,81,'Đã mượn');
-REM INSERTING into QLTV0804.DOCGIA
-SET DEFINE OFF;
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (105,'Phan Tiến ','Tùng','03151465','tientung@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (207,'Phan Tiến','Tùng','032156465','tientungca@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (89,'Phạm Đình','San','032165467','sanpham@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (90,'Đàm Quang','Thành','03165498','thanhdam@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (104,'Vũ Quốc','Anh','0321549878','quocanh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (142,'Phạm Lê','Tuấn','0356987546','anhtuanbuonho@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (222,'Lê Đức Phương','Thảo','0314654879','danthoi@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (4,'Trần Trường','Sơn','032165456','son@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (27,'Nguyễn Quang','Hải Hải','0416584','quanghai97@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (73,'Nguyễn Ngọc','Tùng','0224679879','tungng@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (121,'Phan Minh','Quân Eayong','0965234873','quanphan@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (1,'Trần Xuân','Hạnh','0358844499','hanh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (221,'Mai Xuân','Hoan','03264879','xuanhoan.xz@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (23,'Cristiano','Ronaldoooo','0156454587','cr7@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (62,'Đỗ Thị ','Quang Anh','024187987','quanganhbede2k@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (321,'Trần Nguyên','Chiến','893741283971','chien@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (63,'Giàng','Mí Khề','03156456','hovoi@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (103,'Nguyễn Huy Ngọc','Anh','03467987987','ngocanh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (47,'Mai Đức','Thanh','031654','maiducthanh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (41,'Trần Thị','Mỹ Uyên','032115645','uyen@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (162,'Nguyễn Thị Thúy','Quỳnh','0165484798','quynh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (65,'Phan Đăng','Nhật Minh','054679878','nhatminh@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (3,'Trần Hải','Đăng','031156487','dang@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (161,'Phan Thị','Nguyệt','03165487','nguyet@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (26,'Bùi Tiến Tiến','Dũng','02315648','dungbui@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (262,'Hồ Xuân','Vương','032165465','vuong@gmail.com');
-Insert into QLTV0804.DOCGIA (MADOCGIA,HODOCGIA,TENDOCGIA,SDT,EMAIL) values (322,'Đinh Thị Khánh','Tường','487239809','tuong@gmail.com');
+
 REM INSERTING into QLTV0804.PHIEUMUONSACH
 SET DEFINE OFF;
 Insert into QLTV0804.PHIEUMUONSACH (MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYMUONSACH,NGAYDUKIENTRA,TRANGTHAIPMS) values (119,89,107,to_date('14-MAY-20','DD-MON-RR'),to_date('19-MAY-20','DD-MON-RR'),'Chưa trả');
@@ -190,11 +217,7 @@ Insert into QLTV0804.PHIEUMUONSACH (MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYMUONSACH
 Insert into QLTV0804.PHIEUMUONSACH (MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYMUONSACH,NGAYDUKIENTRA,TRANGTHAIPMS) values (243,321,250,to_date('05-JUN-20','DD-MON-RR'),to_date('10-JUN-20','DD-MON-RR'),'Chưa trả');
 Insert into QLTV0804.PHIEUMUONSACH (MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYMUONSACH,NGAYDUKIENTRA,TRANGTHAIPMS) values (241,47,246,to_date('05-JUN-20','DD-MON-RR'),to_date('10-JUN-20','DD-MON-RR'),'Đã trả');
 Insert into QLTV0804.PHIEUMUONSACH (MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYMUONSACH,NGAYDUKIENTRA,TRANGTHAIPMS) values (251,1,244,to_date('06-JUN-20','DD-MON-RR'),to_date('11-JUN-20','DD-MON-RR'),'Chưa trả');
-REM INSERTING into QLTV0804.PHIEUPHAT
-SET DEFINE OFF;
-Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (41,4,104,8000);
-Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (42,221,105,15000);
-Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (43,142,141,4000);
+
 REM INSERTING into QLTV0804.PHIEUTRASACH
 SET DEFINE OFF;
 Insert into QLTV0804.PHIEUTRASACH (MAPHIEUTRA,MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE,TIENPHAT) values (104,122,4,142,to_date('28-MAY-20','DD-MON-RR'),13,8,8000);
@@ -204,24 +227,12 @@ Insert into QLTV0804.PHIEUTRASACH (MAPHIEUTRA,MAPHIEUMUON,MADOCGIA,MACUONSACH,NG
 Insert into QLTV0804.PHIEUTRASACH (MAPHIEUTRA,MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE,TIENPHAT) values (162,248,89,249,to_date('08-JUN-20','DD-MON-RR'),2,0,0);
 Insert into QLTV0804.PHIEUTRASACH (MAPHIEUTRA,MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE,TIENPHAT) values (103,141,222,162,to_date('19-MAY-20','DD-MON-RR'),3,0,0);
 Insert into QLTV0804.PHIEUTRASACH (MAPHIEUTRA,MAPHIEUMUON,MADOCGIA,MACUONSACH,NGAYTRASACH,SONGAYMUON,SONGAYTRATRE,TIENPHAT) values (105,121,221,161,to_date('06-JUN-20','DD-MON-RR'),20,15,15000);
-REM INSERTING into QLTV0804.TUASACH
+
+
+REM INSERTING into QLTV0804.PHIEUPHAT
 SET DEFINE OFF;
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (1,'Nhập môn lập trình','Giáo trình','Nguyễn Tấn Trần Minh Khang','ĐHQG TPHCM',2);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (2,'Nhập môn công nghệ phần mềm','Giáo trình','Phạm Thi Vương','ĐGQG TPHCM',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (26,'Đô rê mon tập 11','Khác','Fujiko Ô Mô Tô Nô Nô','Kim Đồng',2);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (29,'Nghĩ đúng thì đừng làm sai','Khác','Tự bịa','Kim Đồng',3);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (82,'Deep learning và việc áp dụng thực tiễn','Luận văn','Hoàng Lâm','Giáo dục',2);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (7,'Những nguyên lí cơ bản của Chủ nghĩa Mác - Lênin','Giáo trình','Ban tuyên giáo','Chính trị Quốc gia',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (23,'Toán lớp 8 HK1','Tài liệu tham khảo','Tôn Thân','Giáo dục',0);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (81,'Ứng dụng công nghệ nhận diện khuôn mặt vào cuộc sống','Luận văn','Hồ Đắc Thanh Chương','Tổng hợp TPHCM',5);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (4,'Lập trình hướng đối tượng OOP','Giáo trình','Thái Hải Dương','Giáo dục',2);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (5,'Giới thiệu tổng quan về Hệ điều hành Linux','Tài liệu tham khảo','Trần Ngọc Sơn','Tổng hợp TPHCM',4);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (9,'Đắc nhân tâm - nghe nói hay lắm mà mình chưa đọc','Tạp chí Khoa Học','Ông nào nước Mĩ thì phải','Trẻ',0);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (24,'Những điều cần biết khi ở tuổi 20','Khác','Ngô Ngọc Nghĩa','Trẻ',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (3,'Nhập môn mạch số','Giáo trình','Lầu Phi Tường','ĐHQG TPHCM',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (6,'Tư tưởng Hồ Chí Minh','Giáo trình','Bộ Giáo dục và Đào tạo','Chính trị Quốc gia',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (21,'Dạy con làm giàu','Tài liệu tham khảo','James DDay','Giáo dục',2);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (28,'Đừng bao giờ đi ăn một mình ','Khác','Hà Duy Dũng','Trẻ',1);
-Insert into QLTV0804.TUASACH (MATUASACH,TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) values (83,'Thuật toán Vote rank và xác định tập ảnh hưởng','Tạp chí Khoa Học','Hoàng Anh Kiệt','ĐHQG TPHCM',3);
+Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (41,4,104,8000);
+Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (42,221,105,15000);
+Insert into QLTV0804.PHIEUPHAT (MAPHIEUPHAT,MADOCGIA,MAPHIEUTRA,TIENPHAT) values (43,142,141,4000);
 
 
