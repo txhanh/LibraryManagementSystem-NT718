@@ -59,6 +59,10 @@ public class PhieuTraSachDao {
                 "    UPDATE PHIEUMUONSACH\n" +
                 "    SET TRANGTHAIPMS = 'Đã trả'\n" +
                 "    WHERE MAPHIEUMUON = ?;\n" +
+                "    \n" +
+                "UPDATE CUONSACH\n" +
+                "SET TRANGTHAI = 'Chưa mượn'\n" +
+                "WHERE MACUONSACH = ?;" +
                 "    COMMIT;\n" +
                 "EXCEPTION\n" +
                 "    WHEN OTHERS THEN\n" +
@@ -77,6 +81,7 @@ public class PhieuTraSachDao {
             preparedStatement.setInt(6, phieuTraSach.getSoNgayTraTre());
             preparedStatement.setLong(7, phieuTraSach.getTienPhat());
             preparedStatement.setInt(8, phieuTraSach.getMaPhieuMuon());
+            preparedStatement.setInt(9, phieuTraSach.getMaCuonSach());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;
@@ -89,10 +94,26 @@ public class PhieuTraSachDao {
 
     public boolean xoaPhieuTraSach(PhieuTraSach phieuTraSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "DELETE FROM PHIEUTRASACH WHERE MAPHIEUTRA = ?";
+        String sql = "BEGIN\n" +
+                "    DELETE FROM PHIEUTRASACH WHERE MAPHIEUTRA = ?;\n" +
+                "\n" +
+                "    UPDATE PHIEUMUONSACH\n" +
+                "    SET TRANGTHAIPMS = 'Chưa trả'\n" +
+                "    WHERE MAPHIEUMUON = ?;\n" +
+                "\n" +
+                "    COMMIT;\n" +
+                "EXCEPTION\n" +
+                "    WHEN OTHERS THEN\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+                "        ROLLBACK;\n" +
+                "        RAISE;\n" +
+                "\n" +
+                "end;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuTraSach.getMaPhieuTra());
+            preparedStatement.setInt(2,phieuTraSach.getMaPhieuMuon());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;

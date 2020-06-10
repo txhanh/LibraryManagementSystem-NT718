@@ -13,6 +13,12 @@ public class PhieuPhat {
     private SimpleLongProperty tienPhat;
     private SimpleIntegerProperty maCuonSach;
 
+    public PhieuPhat(int maDocGia, int maPhieuTra, long tienPhat) {
+        this.maDocGia = new SimpleIntegerProperty(maDocGia);
+        this.maPhieuTra = new SimpleIntegerProperty(maPhieuTra);
+        this.tienPhat = new SimpleLongProperty(tienPhat);
+    }
+
     public PhieuPhat(int maPhieuPhat, int maDocGia, int maPhieuTra, long tienPhat, int maCuonSach) {
         this.maPhieuPhat = new SimpleIntegerProperty(maPhieuPhat);
         this.maDocGia = new SimpleIntegerProperty(maDocGia);

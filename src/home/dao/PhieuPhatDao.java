@@ -2,10 +2,7 @@ package home.dao;
 
 import home.model.PhieuPhat;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,5 +101,25 @@ public class PhieuPhatDao {
         }
 
         return false;
+    }
+
+    public int layMaPhieuTraMoiInsert(){
+        int maPhieuTraMoiNhat = -1;
+        Connection connection = JDBCConnection.getJDBCConnection();
+        String sql = "SELECT MAPHIEUTRA\n" +
+                "FROM PHIEUTRASACH\n" +
+                "ORDER BY MAPHIEUTRA  DESC\n" +
+                "FETCH FIRST 1 ROWS ONLY";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()){
+                maPhieuTraMoiNhat = rs.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+     return maPhieuTraMoiNhat;
     }
 }

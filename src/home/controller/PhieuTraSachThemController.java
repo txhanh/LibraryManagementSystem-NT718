@@ -1,10 +1,7 @@
 package home.controller;
 
 import home.Main;
-import home.dao.CuonSachDao;
-import home.dao.DocGiaDao;
-import home.dao.PhieuMuonSachDao;
-import home.dao.PhieuTraSachDao;
+import home.dao.*;
 import home.model.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -24,6 +21,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static home.controller.CuonSachThemController.trangThai1;
@@ -31,7 +29,6 @@ import static home.controller.PhieuMuonSachDanhSachController.patternDay;
 import static home.controller.PhieuMuonSachThemController.trangThaiPMS1;
 
 public class PhieuTraSachThemController implements Initializable {
-
 
 
     DocGiaDao docGiaDao = new DocGiaDao();
@@ -97,12 +94,64 @@ public class PhieuTraSachThemController implements Initializable {
         int soNgayTraTre = Integer.parseInt(tfSoNgayTraTre.getText());
         long tienPhat = Long.parseLong(tfTienPhat.getText());
 
+        if (soNgayTraTre > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn đã trả sách trễ " + soNgayTraTre + " ngày. Bạn bị phạt " + tienPhat +
+                    " đồng, cần thanh toán mới có thể trả sách. Nếu chưa thể thanh toán thì vui lòng quay lại trả " +
+                    "sách sau");
+            Optional<ButtonType> response = alert.showAndWait();
+            if (response.get() == ButtonType.OK) {
+                Alert alert_confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                alert_confirm.setHeaderText(null);
+                alert_confirm.setContentText("Bạn xác nhận thanh toán " + tienPhat + " đồng để trả sách chứ ?");
+                Optional<ButtonType> response_confirm = alert_confirm.showAndWait();
+                if (response_confirm.get() == ButtonType.CANCEL) {
+                    Alert alert_info = new Alert(Alert.AlertType.INFORMATION);
+                    alert_info.setHeaderText(null);
+                    alert_info.setContentText("Bạn vui lòng thanh toán và trả sách lần sau. Tiền phạt sẽ vẫn tăng nếu" +
+                            " bạn trả sách trễ hơn một ngày");
+                    alert_info.showAndWait();
+                    cancelAction(event);
+                    return;
+                }
+            }
+        }
+
         PhieuTraSach phieuTraSach = new PhieuTraSach(maPhieuMuon, maDocGia, maCuonSach, ngayTraSach, soNgayMuon,
                 soNgayTraTre, tienPhat);
 
         boolean flag = phieuTraSachDao.themPhieuTraSach(phieuTraSach);
 
         if (flag) {
+            //  thêm phiếu phạt
+            if (soNgayTraTre > 0) {
+                PhieuPhatDao phieuPhatDao = new PhieuPhatDao();
+                int maPhieuTraMoiInsert = phieuPhatDao.layMaPhieuTraMoiInsert();
+                PhieuPhat phieuPhat = new PhieuPhat(maDocGia, maPhieuTraMoiInsert, tienPhat);
+                phieuPhatDao.themPhieuPhat(phieuPhat);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Thêm phiếu trả sách và phiếu phạt thành công");
+                Optional<ButtonType> response = alert.showAndWait();
+                if (response.get() == ButtonType.OK) {
+                    Alert alert_confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert_confirm.setHeaderText(null);
+                    alert_confirm.setContentText("Bạn muốn chuyển hướng sang danh sách phiếu phạt chứ ?");
+                    Optional<ButtonType> response_confirm = alert_confirm.showAndWait();
+                    if (response_confirm.get() == ButtonType.OK) {
+                        Stage stage = (Stage) btnCancel.getScene().getWindow();
+                        stage.close();
+                        window.loadAnotherWindow("/home/fxml/PhieuPhatDanhSach.fxml");
+                        return;
+                    } else {
+                        cancelAction(event);
+                        return;
+                    }
+                }
+            }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Thêm phiếu trả sách thành công");
@@ -277,7 +326,7 @@ public class PhieuTraSachThemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /*
-        Code để loại bỏ những mã phiếu mượn đã được trả khỏi combobox mã phiếu mượn trong phần THÊM PHIẾU TRẢ SÁCH
+        Code để loại bỏ những mã phiếu mượn đã được trả khỏi "combobox mã phiếu mượn" trong phần THÊM PHIẾU TRẢ SÁCH
         */
 
 //      Khởi tạo biến đếm trong cuonSachList (tính tổng số phần tử trong mảng)

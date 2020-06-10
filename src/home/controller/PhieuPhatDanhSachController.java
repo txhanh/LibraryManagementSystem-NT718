@@ -26,6 +26,7 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PhieuPhatDanhSachController implements Initializable {
@@ -126,6 +127,16 @@ public class PhieuPhatDanhSachController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để xóa cả");
             alert.showAndWait();
+            return;
+        }
+
+        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+        alert1.setHeaderText(null);
+        alert1.setContentText("Bạn thực sự muốn xóa phiếu phạt số \""
+                + selectedForDelete.getMaPhieuPhat() + "\" chứ?");
+
+        Optional<ButtonType> response = alert1.showAndWait();
+        if (response.get() == ButtonType.CANCEL) {
             return;
         }
 
