@@ -1,10 +1,7 @@
 package home.controller;
 
 import home.Main;
-import home.dao.CuonSachDao;
-import home.dao.DocGiaDao;
-import home.dao.PhieuMuonSachDao;
-import home.dao.PhieuTraSachDao;
+import home.dao.*;
 import home.model.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,6 +21,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -105,6 +103,28 @@ public class PhieuTraSachChinhSuaController implements Initializable {
         soNgayTraTre = Integer.parseInt(tfSoNgayTraTre.getText());
         soTienPhat = Long.parseLong(tfTienPhat.getText());
 
+        if (soNgayTraTre > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn đã trả sách trễ " + soNgayTraTre + " ngày. Bạn bị phạt " + soTienPhat +
+                    " đồng, cần xác nhận thanh toán mới có thể cập nhật trả sách. Nếu chưa thể thanh toán thì vui lòng hủy cập nhật ");
+            Optional<ButtonType> response = alert.showAndWait();
+            if (response.get() == ButtonType.OK) {
+                Alert alert_confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                alert_confirm.setHeaderText(null);
+                alert_confirm.setContentText("Bạn xác nhận thanh toán " + soTienPhat + " đồng để cập nhật trả sách chứ ?");
+                Optional<ButtonType> response_confirm = alert_confirm.showAndWait();
+                if (response_confirm.get() == ButtonType.CANCEL) {
+                    Alert alert_info = new Alert(Alert.AlertType.INFORMATION);
+                    alert_info.setHeaderText(null);
+                    alert_info.setContentText("Bạn đã hủy việc cập nhật trả sách");
+                    alert_info.showAndWait();
+                    cancelAction(event);
+                    return;
+                }
+            }
+        }
+
         PhieuTraSach phieuTraSach = new PhieuTraSach(maPhieuTra, maPhieuMuon, maDocGia, maCuonSach, ngayTraSach,
                 soNgayMuon,
                 soNgayTraTre, soTienPhat);
@@ -112,6 +132,34 @@ public class PhieuTraSachChinhSuaController implements Initializable {
         boolean flag = phieuTraSachDao.capNhatPhieuTraSach(phieuTraSach);
 
         if (flag) {
+
+            //  thêm phiếu phạt nếu cập nhật thành phiếu trả trễ
+            if (soNgayTraTre > 0) {
+                PhieuPhatDao phieuPhatDao = new PhieuPhatDao();
+                PhieuPhat phieuPhat = new PhieuPhat(maDocGia, maPhieuTra, soTienPhat);
+                phieuPhatDao.themPhieuPhat(phieuPhat);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Cập nhật phiếu trả sách và thêm phiếu phạt thành công");
+                Optional<ButtonType> response = alert.showAndWait();
+                if (response.get() == ButtonType.OK) {
+                    Alert alert_confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert_confirm.setHeaderText(null);
+                    alert_confirm.setContentText("Bạn muốn chuyển hướng sang danh sách phiếu phạt chứ ?");
+                    Optional<ButtonType> response_confirm = alert_confirm.showAndWait();
+                    if (response_confirm.get() == ButtonType.OK) {
+                        Stage stage = (Stage) btnCancel.getScene().getWindow();
+                        stage.close();
+                        window.loadAnotherWindow("/home/fxml/PhieuPhatDanhSach.fxml");
+                        return;
+                    } else {
+                        cancelAction(event);
+                        return;
+                    }
+                }
+            }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Cập nhật phiếu trả sách thành công");
