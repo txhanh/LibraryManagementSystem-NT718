@@ -103,5 +103,6 @@ public class TuaSachChinhSuaController implements Initializable {
         tfTacGia.setText(TuaSachDanhSachController.v_tacgia);
         comboboxNXB.setValue(TuaSachDanhSachController.v_nxb);
         soLuongSpinner.getValueFactory().setValue(TuaSachDanhSachController.v_soluong);
+        soLuongSpinner.setDisable(true);
     }
 }

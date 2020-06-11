@@ -19,6 +19,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Optional;
@@ -225,31 +226,23 @@ public class PhieuTraSachChinhSuaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
                                 LocalDate newValue) {
-                if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
+
+                // Báo lỗi nếu chọn ngày trả trước ngày mượn sách
+                if (datepickerNgayTraSach.getValue().isBefore(datepickerNgayMuonSach.getValue())) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setHeaderText(null);
-                    alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
+                    alert.setContentText("Ngày trả sách không được TRƯỚC ngày mượn sách");
                     alert.showAndWait();
                     return;
                 }
 
-
-                // Báo lỗi nếu chọn ngày trả trước ngày hôm nay
-
-                if (datepickerNgayTraSach.getValue().isBefore(LocalDate.now())) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Ngày trả sách không được TRƯỚC ngày hôm nay");
-                    alert.showAndWait();
-                    return;
-                }
 
                 // tính số ngày mượn sách, và set giá trị cho text field
                 LocalDate localDateNgayMuonSach = datepickerNgayMuonSach.getValue();
                 LocalDate localDateNgayTraSach = datepickerNgayTraSach.getValue();
 
-                Period period = Period.between(localDateNgayMuonSach, localDateNgayTraSach);
-                soNgayMuon = period.getDays();
+                //ChronoUnit dùng để tính số ngày chênh lệch giữa Ngày Mượn Sách và Ngày Trả Sách
+                soNgayMuon = (int) ChronoUnit.DAYS.between(localDateNgayMuonSach, localDateNgayTraSach);
                 tfSoNgayMuon.setText(String.valueOf(soNgayMuon));
 
                 // tính số ngày trả trễ;

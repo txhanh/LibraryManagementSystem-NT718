@@ -267,14 +267,6 @@ public class PhieuMuonSachChinhSuaController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
                                 LocalDate newValue) {
-                if (datepickerNgayMuonSach.getValue().isBefore(LocalDate.now())) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Ngày mượn sách không được TRƯỚC ngày hôm nay");
-                    alert.showAndWait();
-                    return;
-                }
-
                 datepickerNgayDuKienTra.setValue(newValue.plusDays(quyDinh.getSoNgayMuonToiDa()));
             }
         });
