@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/MainGUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/DangNhap.fxml"));
 
 //         grab your root here
         root.setOnMousePressed(new EventHandler<MouseEvent>() {

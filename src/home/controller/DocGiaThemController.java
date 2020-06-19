@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 public class DocGiaThemController {
 
@@ -46,7 +47,7 @@ public class DocGiaThemController {
     public BorderPane borderPane;
 
     @FXML
-    void addMemberAction(ActionEvent event) {
+    void addMemberAction(ActionEvent event) throws SQLException {
         String ho = tfHoDocGia.getText();
         String ten = tfTenDocGia.getText();
         String sdt = tfSDT.getText();

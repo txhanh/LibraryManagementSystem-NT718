@@ -34,9 +34,12 @@ public class DocGiaDao {
         return memberList;
     }
 
-    public boolean addMember(DocGia member) {
+    public boolean addMember(DocGia member) throws SQLException {
+
         Connection connection = JDBCConnection.getJDBCConnection();
+
         String sql = "INSERT INTO DOCGIA(hodocgia,tendocgia,sdt,email) VALUES (?,?,?,?)";
+        connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, member.getHoDocGia());
@@ -46,11 +49,23 @@ public class DocGiaDao {
             int rs = preparedStatement.executeUpdate();
 //            System.out.println(rs);
             if (rs > 0) {
+                String sql2 = "SELECT MADOCGIA, HODOCGIA, TENDOCGIA FROM DOCGIA ORDER BY MADOCGIA";
+                PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+                ResultSet resultSet =  preparedStatement2.executeQuery();
+                while (resultSet.next()){
+                    int madocgia = resultSet.getInt(1);
+                    String hodocgia = resultSet.getString(2);
+                    String tendocgia = resultSet.getString(3);
+                    System.out.println("Mã độc giả " + madocgia + " Họ: " + hodocgia + " Tên: " + tendocgia);
+                }
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+        connection.close();
         return false;
     }
 

@@ -66,10 +66,16 @@ public class MainGUIController implements Initializable {
     @FXML
     private Button btnBaoCaoTK;
 
+    @FXML
+    private Label lblNguoiDung;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadUI(("/home/fxml/PhieuPhatDanhSach.fxml"));
+        String nguoiDung = DangNhapController.getNguoiDung();
+        System.out.println("Been MainController: " + nguoiDung);
+        lblNguoiDung.setText(nguoiDung);
+        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
     }
 
 
