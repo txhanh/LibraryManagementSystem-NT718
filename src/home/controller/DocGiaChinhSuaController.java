@@ -76,7 +76,7 @@ public class DocGiaChinhSuaController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Cập nhật dữ liệu thất bại!!!");
+            alert.setContentText("Có ai đó đang thực hiện cập nhật dòng dữ liệu này cùng bạn!! Vui lòng kiểm tra lại để tránh LOST UPDATE");
             alert.showAndWait();
             cancelAction(event);
 

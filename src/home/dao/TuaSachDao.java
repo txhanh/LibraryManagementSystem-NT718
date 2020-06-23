@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TuaSachDao {
+    Connection connection = JDBCConnection.getJDBCConnection();
 
     public List<TuaSach> lietKeTuaSach() {
         List<TuaSach> tuaSachList = new ArrayList<>();
-        Connection connection = JDBCConnection.getJDBCConnection();
+
         String sql = "SELECT * FROM TUASACH ORDER BY MATUASACH";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -41,7 +42,7 @@ public class TuaSachDao {
 
     public List<String> lietKeTenTuaSach() {
         List<String> tenTuaSachList = new ArrayList<>();
-        Connection connection = JDBCConnection.getJDBCConnection();
+
         String sql = "SELECT TENTUASACH FROM TUASACH";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -59,7 +60,7 @@ public class TuaSachDao {
     }
 
     public boolean themTuaSach(TuaSach tuaSach) {
-        Connection connection = JDBCConnection.getJDBCConnection();
+
         String sql = "INSERT INTO TUASACH(TENTUASACH,TENTHELOAI,TACGIA,NXB,SOLUONG) VALUES" +
                 "(?,?,?,?,?)";
         try {
@@ -72,7 +73,9 @@ public class TuaSachDao {
             preparedStatement.setInt(5, tuaSach.getSoLuong());
 
             int rs = preparedStatement.executeUpdate();
+
             if (rs > 0) {
+                connection.close();
                 return true;
             }
         } catch (SQLException e) {
@@ -82,7 +85,6 @@ public class TuaSachDao {
     }
 
     public boolean xoaTuaSach(TuaSach tuaSach) {
-        Connection connection = JDBCConnection.getJDBCConnection();
         String sql = "DELETE FROM TUASACH WHERE MATUASACH = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -99,7 +101,12 @@ public class TuaSachDao {
     }
 
     public boolean capNhatTuaSach(TuaSach tuaSach) {
-        Connection connection = JDBCConnection.getJDBCConnection();
+        try {
+            connection.setAutoCommit(false);
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         String sql = "UPDATE TUASACH SET TENTUASACH = ?, TENTHELOAI = ?, TACGIA = ? ," +
                 "NXB = ?, SOLUONG = ?" +
                 "WHERE MATUASACH = ?";
@@ -115,12 +122,12 @@ public class TuaSachDao {
 
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
+                connection.close();
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         return false;
     }

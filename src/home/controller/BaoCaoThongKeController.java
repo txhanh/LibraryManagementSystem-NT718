@@ -15,6 +15,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -38,10 +39,19 @@ public class BaoCaoThongKeController {
     @FXML
     private Button btnInPhieuPhat;
 
+    Connection connection = JDBCConnection.getJDBCConnection();
+    // tạo connection ở ngoài để mỗi lần click vào button xem report thì hệ thống
+    // không tạo commit connection cũ và tạo connection mới nữa
+
 
     @FXML
     void danhSachCuonSachAction(ActionEvent event) throws JRException {
-        Connection connection = JDBCConnection.getJDBCConnection();
+        try {
+            connection.setAutoCommit(false); // tắt chế độ tự commit
+            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE); // set mức cô lập Serializable
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         String dir = ".\\src\\home\\report\\TK1_SoLuongCuonSach.jrxml";
 //        String pdf = ".\\src\\home\\report\\input\\SoLuongCuonSach.pdf";
         JasperDesign jd = JRXmlLoader.load(dir);
