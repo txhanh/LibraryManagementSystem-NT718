@@ -33,15 +33,6 @@ public class DangNhapController {
     @FXML
     private Button btnDangNhap;
 
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-    @FXML
-    void closeWindowAction(MouseEvent event) {
-        if (event.getSource() == btnClose) {
-            System.exit(0);
-        }
-    }
 
     private static String nguoiDung = null;
 
@@ -88,9 +79,9 @@ public class DangNhapController {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
-
-            Stage stage = (Stage) btnClose.getScene().getWindow();
+            Stage stage = (Stage) btnDangNhap.getScene().getWindow();
             stage.close();
+
         } else if (tfUser.getText().equals("thuthu") && pwPassword.getText().equals("1")) {
             Stage primaryStage = new Stage();
             nguoiDung = "Thủ thư";
@@ -120,9 +111,10 @@ public class DangNhapController {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
-
-            Stage stage = (Stage) btnClose.getScene().getWindow();
+            Stage stage = (Stage) btnDangNhap.getScene().getWindow();
             stage.close();
+
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

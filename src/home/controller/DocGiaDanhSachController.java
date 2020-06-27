@@ -110,7 +110,7 @@ public class DocGiaDanhSachController implements Initializable {
 
 
     @FXML
-    void openAddMemberWindow(ActionEvent event) {
+        void openAddMemberWindow(ActionEvent event) {
         window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml", "Thêm độc giả");
         cancelAction(event);
     }

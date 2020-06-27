@@ -10,9 +10,9 @@
 
 <AnchorPane prefHeight="455.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.TuaSachThemController">
    <children>
-      <TextField fx:id="tfTenTuaSach" layoutX="75.0" layoutY="40.0" prefHeight="40.0" prefWidth="543.0" promptText="Tên tựa sách" />
+      <TextField fx:id="tfTenTuaSach" layoutX="219.0" layoutY="40.0" prefHeight="40.0" prefWidth="399.0" promptText="Tên tựa sách" />
       <ComboBox fx:id="comboboxTheLoai" layoutX="222.0" layoutY="109.0" prefHeight="35.0" prefWidth="203.0" />
-      <TextField fx:id="tfTacGia" layoutX="75.0" layoutY="172.0" prefHeight="40.0" prefWidth="543.0" promptText="Tác giả" />
+      <TextField fx:id="tfTacGia" layoutX="219.0" layoutY="172.0" prefHeight="40.0" prefWidth="399.0" promptText="Tác giả" />
       <ComboBox fx:id="comboboxNXB" layoutX="222.0" layoutY="244.0" prefHeight="35.0" prefWidth="203.0" />
       <Button fx:id="btnThemTuaSach" layoutX="145.0" layoutY="383.0" mnemonicParsing="false" onAction="#themTuaSachAction" prefHeight="37.0" text="Thêm tựa sách" />
       <Button fx:id="btnCancel" layoutX="456.0" layoutY="383.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="92.0" text="Hủy bỏ" />
@@ -32,5 +32,7 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="75.0" layoutY="50.0" text="Tên tựa sách" />
+      <Label layoutX="77.0" layoutY="182.0" text="Tác giả" />
    </children>
 </AnchorPane>

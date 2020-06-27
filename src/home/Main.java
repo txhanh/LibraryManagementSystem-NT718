@@ -41,7 +41,7 @@ public class Main extends Application {
         });
 
         primaryStage.setTitle("Phần mềm quản lí thư viện");
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.DECORATED);
 
 
 

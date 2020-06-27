@@ -74,7 +74,7 @@ public class MainGUIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         String nguoiDung = DangNhapController.getNguoiDung();
         lblNguoiDung.setText(nguoiDung);
-        loadUI(("/home/fxml/TuaSachDanhSach.fxml"));
+        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
     }
 
 

@@ -84,22 +84,6 @@ public class PhieuPhatDanhSachController implements Initializable {
     @FXML
     private Button btnHome;
 
-    @FXML
-    void openCapNhatPhieuPhatAction(ActionEvent event) {
-        selectedPhieuPhat = tablePhieuPhat.getSelectionModel().getSelectedItem();
-        if(selectedPhieuPhat == null){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setHeaderText(null);
-            alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả");
-            alert.showAndWait();
-            return;
-        }
-
-        window.loadAnotherWindow("/home/fxml/PhieuPhatChinhSua.fxml", "Cập nhật phiếu phạt");
-        cancelAction(event);
-
-
-    }
 
     @FXML
     void openHomeWindow(ActionEvent event) {

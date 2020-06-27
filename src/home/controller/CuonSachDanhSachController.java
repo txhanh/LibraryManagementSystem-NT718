@@ -82,7 +82,7 @@ public class CuonSachDanhSachController implements Initializable {
         v_tentuasach = selectedForUpdate.getTenTuaSach();
         v_trangthai = selectedForUpdate.getTrangThai();
 
-        window.loadAnotherWindow("/home/fxml/CuonSachChinhSua.fxml");
+        window.loadAnotherWindow("/home/fxml/CuonSachChinhSua.fxml", "Cập nhật cuốn sách");
         cancelAction(event);
     }
 

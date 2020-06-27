@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="409.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.DocGiaThemController">
+<AnchorPane prefHeight="409.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.controller.DocGiaThemController">
    <children>
-      <TextField fx:id="tfHoDocGia" layoutX="72.0" layoutY="43.0" prefHeight="44.0" prefWidth="456.0" promptText="Họ độc giả" />
-      <TextField fx:id="tfTenDocGia" layoutX="72.0" layoutY="116.0" prefHeight="44.0" prefWidth="456.0" promptText="Tên độc giả" />
-      <TextField fx:id="tfSDT" layoutX="72.0" layoutY="190.0" prefHeight="44.0" prefWidth="456.0" promptText="Số điện thoại" />
-      <TextField fx:id="tfEmail" layoutX="72.0" layoutY="263.0" prefHeight="44.0" prefWidth="456.0" promptText="Email" />
+      <TextField fx:id="tfHoDocGia" layoutX="167.0" layoutY="37.0" prefHeight="44.0" prefWidth="456.0" promptText="Họ độc giả" />
+      <TextField fx:id="tfTenDocGia" layoutX="167.0" layoutY="114.0" prefHeight="44.0" prefWidth="456.0" promptText="Tên độc giả" />
+      <TextField fx:id="tfSDT" layoutX="167.0" layoutY="193.0" prefHeight="44.0" prefWidth="456.0" promptText="Số điện thoại" />
+      <TextField fx:id="tfEmail" layoutX="167.0" layoutY="268.0" prefHeight="44.0" prefWidth="456.0" promptText="Email" />
       <Button fx:id="btnAddMember" layoutX="132.0" layoutY="340.0" mnemonicParsing="false" onAction="#addMemberAction" prefHeight="37.0" prefWidth="116.0" text="Thêm độc giả" />
-      <Button fx:id="btnCancel" layoutX="385.0" layoutY="340.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="85.0" text="Hủy bỏ" />
+      <Button fx:id="btnCancel" layoutX="452.0" layoutY="340.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="37.0" prefWidth="85.0" text="Hủy bỏ" />
+      <Label layoutX="53.0" layoutY="48.0" text="Họ độc giả" />
+      <Label layoutX="53.0" layoutY="128.0" text="Tên độc giả" />
+      <Label layoutX="48.0" layoutY="205.0" text="Số điện thoại" />
+      <Label layoutX="64.0" layoutY="280.0" text="Email" />
    </children>
 </AnchorPane>

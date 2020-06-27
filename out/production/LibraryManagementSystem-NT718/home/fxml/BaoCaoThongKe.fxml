@@ -38,7 +38,7 @@
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnDanhSachCuonSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="301.0" layoutY="206.0" mnemonicParsing="false" onAction="#danhSachCuonSachAction" prefHeight="62.0" prefWidth="452.0" stylesheets="@../css/fullpackstyling.css" text="Danh sách cuốn sách trong thư viện" textFill="WHITE">
+                  <Button fx:id="btnDanhSachCuonSach" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="301.0" layoutY="206.0" mnemonicParsing="false" onAction="#danhSachCuonSachAction" prefHeight="62.0" prefWidth="452.0" stylesheets="@../css/fullpackstyling.css" text="Danh sách tựa sách trong thư viện" textFill="WHITE">
                      <padding>
                         <Insets left="50.0" />
                      </padding>
