@@ -101,6 +101,9 @@ public class PhieuTraSachDao {
                 "    SET TRANGTHAIPMS = 'Chưa trả'\n" +
                 "    WHERE MAPHIEUMUON = ?;\n" +
                 "\n" +
+                "UPDATE CUONSACH\n" +
+                "SET TRANGTHAI = 'Đã mượn'\n" +
+                "WHERE MACUONSACH = ?;" +
                 "    COMMIT;\n" +
                 "EXCEPTION\n" +
                 "    WHEN OTHERS THEN\n" +
@@ -114,6 +117,7 @@ public class PhieuTraSachDao {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, phieuTraSach.getMaPhieuTra());
             preparedStatement.setInt(2,phieuTraSach.getMaPhieuMuon());
+            preparedStatement.setInt(3,phieuTraSach.getMaCuonSach());
             int rs = preparedStatement.executeUpdate();
             if (rs > 0) {
                 return true;

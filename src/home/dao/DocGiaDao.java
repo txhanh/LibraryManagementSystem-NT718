@@ -77,7 +77,7 @@ public class DocGiaDao {
         long rowChecksum = 0;
         try {
             rowChecksum = _displayEmpDetails(conn, madocgia);
-            InputUtil.waitTillUserHitsEnter("Row has been selected but is not locked.");
+            InputUtil.waitTillUserHitsEnter("Bạn đã click nút cập nhật, những dữ liệu chưa bị khóa.");
             boolean flag = _updateEmpInfo(conn, madocgia, member.getHoDocGia(), member.getTenDocGia(), member.getSdt(),member.getEmail(), rowChecksum);
             if(flag){
                 return true;
@@ -106,7 +106,7 @@ public class DocGiaDao {
         String email = null;
 
         cstmt = conn.prepareCall(
-                "{call opt_lock_chksum_demo.get_emp_details(?, ?, ?, ?, ?, ?)}");
+                "{call opt_lock_chksum_demo.get_docgia_details(?, ?, ?, ?, ?, ?)}");
         cstmt.setInt(1, madocgia);
         cstmt.registerOutParameter(2, OracleTypes.VARCHAR);
         cstmt.registerOutParameter(3, OracleTypes.VARCHAR);
@@ -121,7 +121,7 @@ public class DocGiaDao {
         sdt = cstmt.getString(4);
         email = cstmt.getString(5);
         rowChecksum = cstmt.getLong(6);
-
+        System.out.println("Dữ liệu độc giả trước khi cập nhật:");
         System.out.println("Mã độc giả: " + madocgia + ", Họ: " + ho + ", Tên: "
                 + ten + ", SĐT: " + sdt + ", Email: " + email + ", Checksum: " + rowChecksum);
 
@@ -135,7 +135,7 @@ public class DocGiaDao {
         CallableStatement cstmt = null;
 
         cstmt = conn.prepareCall(
-                "{call opt_lock_chksum_demo.update_emp_info(?, ?, ?, ?, ?, ?, ?)}");
+                "{call opt_lock_chksum_demo.update_docgia_info(?, ?, ?, ?, ?, ?, ?)}");
         cstmt.setInt(1, madocgia);
         cstmt.setString(2, new_ho);
         cstmt.setString(3, new_ten);
