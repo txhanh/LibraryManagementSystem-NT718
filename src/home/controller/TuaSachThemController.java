@@ -20,10 +20,10 @@ public class TuaSachThemController implements Initializable {
     Main window = new Main();
 
     ObservableList<String> TheLoaiList = FXCollections.observableArrayList("Giáo trình",
-            "Tài liệu tham khảo", "Luận văn", "Tạp chí Khoa Học", "Khác");
+            "Tài liệu tham khảo", "Luận văn", "Văn học nghệ thuật", "Khác", "Khoa học công nghệ – Kinh tế", "Văn hóa xã hội – Lịch sử");
     ObservableList<String> NXBList = FXCollections.observableArrayList("ĐHQG TPHCM", "Trẻ",
             "Giáo dục", "ĐHQG Hà Nội", "Tổng hợp TPHCM", "Kim Đồng",
-            "Nước Ngoài", "Chính trị Quốc gia");
+            "Nước Ngoài", "Chính trị Quốc gia", "Văn hóa - thông tin");
 
     @FXML
     private TextField tfTenTuaSach;

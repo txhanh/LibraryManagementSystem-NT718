@@ -134,7 +134,7 @@ public class PhieuPhatDanhSachController implements Initializable {
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được phiếu phạt !");
+            alert.setContentText("Không xóa được phiếu phạt, vui lòng kiểm tra lại !");
             alert.showAndWait();
         }
     }

@@ -135,7 +135,7 @@ public class PhieuTraSachDanhSachController implements Initializable {
 
     @FXML
     void openThemPhieuTraSach(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/PhieuTraSachThem.fxml", "Thêm phiếu trả sách");
+        window.loadAnotherWindow("/home/fxml/PhieuTraSachThem.fxml", "Thêm phiếu trả sách bị phạt tiền");
         cancelAction(event);
     }
 
@@ -173,7 +173,7 @@ public class PhieuTraSachDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được phiếu trả sách. Kiểm tra lại ràng buộc toàn vẹn !");
+            alert.setContentText("Không xóa được phiếu trả sách. Vui lòng kiểm tra lại !");
             alert.showAndWait();
         }
     }

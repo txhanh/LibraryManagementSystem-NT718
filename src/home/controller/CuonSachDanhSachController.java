@@ -134,7 +134,7 @@ public class CuonSachDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được cuốn sách. Kiểm tra lại ràng buộc toàn vẹn !");
+            alert.setContentText("Cuốn sách này đang được mượn, không thể xóa được !");
             alert.showAndWait();
         }
     }

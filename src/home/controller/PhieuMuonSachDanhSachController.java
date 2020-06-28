@@ -138,7 +138,7 @@ public class PhieuMuonSachDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được phiếu mượn sách. Kiểm tra lại ràng buộc toàn vẹn !");
+            alert.setContentText("Phiếu mượn sách này đã được trả. Không thể xóa !");
             alert.showAndWait();
         }
     }

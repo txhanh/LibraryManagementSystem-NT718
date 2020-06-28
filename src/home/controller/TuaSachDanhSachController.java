@@ -110,7 +110,7 @@ public class TuaSachDanhSachController implements Initializable {
         } else {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Không xóa được tựa sách. Kiểm tra lại ràng buộc toàn vẹn !");
+            alert.setContentText("Không thể xóa tựa sách, vui lòng xóa hết cuốn sách của tựa sách này trước !");
             alert.showAndWait();
         }
     }
