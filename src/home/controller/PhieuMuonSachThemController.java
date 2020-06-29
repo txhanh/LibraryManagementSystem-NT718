@@ -113,9 +113,9 @@ public class PhieuMuonSachThemController implements Initializable {
             cancelAction(event);
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
-            alert.setContentText("Không thêm được phiếu mượn sách");
+            alert.setContentText("Mỗi độc giả chỉ được mượn tối đa 3 cuốn sách, bạn vui lòng trả cuốn sách cũ để được mượn cuốn sách mới này");
             alert.showAndWait();
             cancelAction(event);
         }

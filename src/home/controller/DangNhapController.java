@@ -82,7 +82,7 @@ public class DangNhapController {
             Stage stage = (Stage) btnDangNhap.getScene().getWindow();
             stage.close();
 
-        } else if (tfUser.getText().equals("thuthu") && pwPassword.getText().equals("1")) {
+        } else if (tfUser.getText().equals("thuthu") && pwPassword.getText().equals("thuthu")) {
             Stage primaryStage = new Stage();
             nguoiDung = "Thủ thư";
             Parent root = FXMLLoader.load(getClass().getResource("/home/fxml/MainGUI.fxml"));

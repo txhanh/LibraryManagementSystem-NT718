@@ -112,29 +112,41 @@
                   <FontAwesomeIconView fill="WHITE" size="18" />
                </graphic>
             </Button>
-            <HBox prefHeight="72.0" prefWidth="283.0">
-               <children>
-                  <Label text="Người dùng: " textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="lblNguoiDung" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-               </children>
+            <VBox prefHeight="120.0" prefWidth="283.0">
                <VBox.margin>
-                  <Insets top="120.0" />
+                  <Insets top="70.0" />
                </VBox.margin>
-            </HBox>
+               <children>
+                  <HBox prefHeight="55.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" graphicTextGap="20.0" prefHeight="55.0" prefWidth="166.0" text="Người dùng: " textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblNguoiDung" contentDisplay="CENTER" graphicTextGap="20.0" layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="142.0" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btnLogout" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="50.0" prefWidth="285.0" stylesheets="@../css/fullpackstyling.css" text="Đăng xuất" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" size="18" />
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </children>
          <BorderPane.margin>
             <Insets />

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainGUIController implements Initializable {
@@ -69,6 +70,9 @@ public class MainGUIController implements Initializable {
     @FXML
     private Label lblNguoiDung;
 
+    @FXML
+    private Button btnLogout;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -102,6 +106,17 @@ public class MainGUIController implements Initializable {
             loadUI("/home/fxml/PhieuPhatDanhSach.fxml");
         } else if (event.getSource() == btnBaoCaoTK) {
             loadUI("/home/fxml/BaoCaoThongKe.fxml");
+        } else if (event.getSource() == btnLogout) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Bạn muốn đăng xuất chứ?");
+            Optional<ButtonType> response = alert.showAndWait();
+            if(response.get() == ButtonType.CANCEL){
+                return;
+            }
+            window.loadAnotherWindow("/home/fxml/DangNhap.fxml", "Phần mềm quản lí thư viện - Đăng nhập");
+            Stage stage = (Stage) btnLogout.getScene().getWindow();
+            stage.close();
         } else if (event.getSource() == btnHome || event.getSource() == null) {
             loadUI(("/home/fxml/Intro.fxml"));
         }

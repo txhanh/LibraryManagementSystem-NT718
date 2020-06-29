@@ -40,7 +40,7 @@ public class Main extends Application {
             }
         });
 
-        primaryStage.setTitle("Phần mềm quản lí thư viện");
+        primaryStage.setTitle("Phần mềm quản lí thư viện - Đăng nhập");
         primaryStage.initStyle(StageStyle.DECORATED);
 
 
