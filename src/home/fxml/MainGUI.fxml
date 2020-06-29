@@ -119,7 +119,7 @@
                <children>
                   <HBox prefHeight="55.0" prefWidth="200.0">
                      <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" graphicTextGap="20.0" prefHeight="55.0" prefWidth="166.0" text="Người dùng: " textFill="WHITE">
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" graphicTextGap="20.0" prefHeight="60.0" prefWidth="166.0" text="Người dùng: " textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -131,10 +131,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btnLogout" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="50.0" prefWidth="285.0" stylesheets="@../css/fullpackstyling.css" text="Đăng xuất" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" size="18" />
-                     </graphic>
+                  <Button fx:id="btnLogout" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#handleClickAction" prefHeight="60.0" prefWidth="285.0" stylesheets="@../css/fullpackstyling.css" text="Đăng xuất" textFill="WHITE">
                      <padding>
                         <Insets left="50.0" />
                      </padding>
@@ -142,8 +139,11 @@
                         <Font size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" size="25" />
+                     </graphic>
                   </Button>
                </children>
             </VBox>
