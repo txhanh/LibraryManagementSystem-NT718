@@ -7,10 +7,7 @@ import home.model.TuaSach;
 import oracle.jdbc.proxy.annotation.Pre;
 import sun.dc.pr.PRError;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,43 +44,43 @@ public class CuonSachDao {
 
     public boolean themCuonSach(CuonSach cuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sqlSelect = "DECLARE\n" +
-                "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
-                "    v_count number;\n" +
-                "BEGIN\n" +
-                "    SELECT MATUASACH into v_matuasach\n" +
-                "    FROM TUASACH\n" +
-                "    WHERE TENTUASACH = ?;\n" +
-                "\n" +
-                "    INSERT INTO CUONSACH(MATUASACH, TRANGTHAI)\n" +
-                "    VALUES (v_matuasach, ?);\n" +
-                "    \n" +
-                "    SELECT SOLUONG INTO v_count\n" +
-                "    FROM TUASACH\n" +
-                "    WHERE MATUASACH = v_matuasach;\n" +
-                "    \n" +
-                "    UPDATE TUASACH\n" +
-                "    SET SOLUONG = v_count + 1\n" +
-                "    WHERE MATUASACH = v_matuasach;\n" +
-                "\n" +
-                "    COMMIT;\n" +
-                "\n" +
-                "EXCEPTION\n" +
-                "    WHEN OTHERS THEN\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-                "        ROLLBACK;\n" +
-                "        RAISE;\n" +
-                "\n" +
-                "END;";
+//        String sqlSelect = "DECLARE\n" +
+//                "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
+//                "    v_count number;\n" +
+//                "BEGIN\n" +
+//                "    SELECT MATUASACH into v_matuasach\n" +
+//                "    FROM TUASACH\n" +
+//                "    WHERE TENTUASACH = ?;\n" +
+//                "\n" +
+//                "    INSERT INTO CUONSACH(MATUASACH, TRANGTHAI)\n" +
+//                "    VALUES (v_matuasach, ?);\n" +
+//                "    \n" +
+//                "    SELECT SOLUONG INTO v_count\n" +
+//                "    FROM TUASACH\n" +
+//                "    WHERE MATUASACH = v_matuasach;\n" +
+//                "    \n" +
+//                "    UPDATE TUASACH\n" +
+//                "    SET SOLUONG = v_count + 1\n" +
+//                "    WHERE MATUASACH = v_matuasach;\n" +
+//                "\n" +
+//                "    COMMIT;\n" +
+//                "\n" +
+//                "EXCEPTION\n" +
+//                "    WHEN OTHERS THEN\n" +
+//                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
+//                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
+//                "        ROLLBACK;\n" +
+//                "        RAISE;\n" +
+//                "\n" +
+//                "END;";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlSelect);
+            CallableStatement cstmt = connection.prepareCall("{call PROC_THEMCUONSACH(?,?)}");
 
 
-            preparedStatement.setString(1, cuonSach.getTenTuaSach());
-            preparedStatement.setString(2, cuonSach.getTrangThai());
+            cstmt.setString(1, cuonSach.getTenTuaSach());
+            cstmt.setString(2, cuonSach.getTrangThai());
 
-            int rs = preparedStatement.executeUpdate();
+            int rs = cstmt.executeUpdate();
 
             if (rs > 0) {
                 return true;
