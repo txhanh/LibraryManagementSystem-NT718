@@ -3,10 +3,7 @@ package home.dao;
 import home.model.PhieuTraSach;
 import jdk.nashorn.internal.scripts.JD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,38 +48,16 @@ public class PhieuTraSachDao {
 
     public boolean themPhieuTraSach(PhieuTraSach phieuTraSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "BEGIN\n" +
-                "    INSERT INTO PHIEUTRASACH(MAPHIEUMUON, MADOCGIA, MACUONSACH, NGAYTRASACH, SONGAYMUON, " +
-                "SONGAYTRATRE, TIENPHAT)\n" +
-                "    VALUES (?, ?, ?, ?, ?, ?, ?);\n" +
-                "    \n" +
-                "    UPDATE PHIEUMUONSACH\n" +
-                "    SET TRANGTHAIPMS = 'Đã trả'\n" +
-                "    WHERE MAPHIEUMUON = ?;\n" +
-                "    \n" +
-                "UPDATE CUONSACH\n" +
-                "SET TRANGTHAI = 'Chưa mượn'\n" +
-                "WHERE MACUONSACH = ?;" +
-                "    COMMIT;\n" +
-                "EXCEPTION\n" +
-                "    WHEN OTHERS THEN\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-                "        ROLLBACK;\n" +
-                "        RAISE;\n" +
-                "end;";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, phieuTraSach.getMaPhieuMuon());
-            preparedStatement.setInt(2, phieuTraSach.getMaDocGia());
-            preparedStatement.setInt(3, phieuTraSach.getMaCuonSach());
-            preparedStatement.setDate(4, (java.sql.Date) phieuTraSach.getNgayTraSach());
-            preparedStatement.setInt(5, phieuTraSach.getSoNgayMuon());
-            preparedStatement.setInt(6, phieuTraSach.getSoNgayTraTre());
-            preparedStatement.setLong(7, phieuTraSach.getTienPhat());
-            preparedStatement.setInt(8, phieuTraSach.getMaPhieuMuon());
-            preparedStatement.setInt(9, phieuTraSach.getMaCuonSach());
-            int rs = preparedStatement.executeUpdate();
+            CallableStatement cstmt = connection.prepareCall("{call PROC_THEMPHIEUTRASACH(?,?,?,?,?,?,?)}");
+            cstmt.setInt(1, phieuTraSach.getMaPhieuMuon());
+            cstmt.setInt(2, phieuTraSach.getMaDocGia());
+            cstmt.setInt(3, phieuTraSach.getMaCuonSach());
+            cstmt.setDate(4, (java.sql.Date) phieuTraSach.getNgayTraSach());
+            cstmt.setInt(5, phieuTraSach.getSoNgayMuon());
+            cstmt.setInt(6, phieuTraSach.getSoNgayTraTre());
+            cstmt.setLong(7, phieuTraSach.getTienPhat());
+            int rs = cstmt.executeUpdate();
             if (rs > 0) {
                 return true;
             }
