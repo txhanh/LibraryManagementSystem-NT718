@@ -44,35 +44,7 @@ public class CuonSachDao {
 
     public boolean themCuonSach(CuonSach cuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-//        String sqlSelect = "DECLARE\n" +
-//                "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
-//                "    v_count number;\n" +
-//                "BEGIN\n" +
-//                "    SELECT MATUASACH into v_matuasach\n" +
-//                "    FROM TUASACH\n" +
-//                "    WHERE TENTUASACH = ?;\n" +
-//                "\n" +
-//                "    INSERT INTO CUONSACH(MATUASACH, TRANGTHAI)\n" +
-//                "    VALUES (v_matuasach, ?);\n" +
-//                "    \n" +
-//                "    SELECT SOLUONG INTO v_count\n" +
-//                "    FROM TUASACH\n" +
-//                "    WHERE MATUASACH = v_matuasach;\n" +
-//                "    \n" +
-//                "    UPDATE TUASACH\n" +
-//                "    SET SOLUONG = v_count + 1\n" +
-//                "    WHERE MATUASACH = v_matuasach;\n" +
-//                "\n" +
-//                "    COMMIT;\n" +
-//                "\n" +
-//                "EXCEPTION\n" +
-//                "    WHEN OTHERS THEN\n" +
-//                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-//                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-//                "        ROLLBACK;\n" +
-//                "        RAISE;\n" +
-//                "\n" +
-//                "END;";
+
         try {
             CallableStatement cstmt = connection.prepareCall("{call PROC_THEMCUONSACH(?,?)}");
 
@@ -97,43 +69,12 @@ public class CuonSachDao {
     public boolean XoaCuonSach(CuonSach cuonSach) {
 
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "DECLARE\n" +
-                "    v_matuasach TUASACH.MATUASACH%TYPE;\n" +
-                "    v_count number;\n" +
-                "BEGIN\n" +
-                "\n" +
-                "    SELECT MATUASACH INTO v_matuasach\n" +
-                "    FROM CUONSACH\n" +
-                "    WHERE MACUONSACH = ?;\n" +
-                "\n" +
-                "    DELETE FROM CUONSACH WHERE MACUONSACH = ?;\n" +
-                "\n" +
-                "\n" +
-                "    SELECT SOLUONG INTO v_count\n" +
-                "    FROM TUASACH\n" +
-                "    WHERE MATUASACH = v_matuasach;\n" +
-                "\n" +
-                "    UPDATE TUASACH\n" +
-                "    SET SOLUONG = v_count - 1\n" +
-                "    WHERE MATUASACH = v_matuasach;\n" +
-                "\n" +
-                "    COMMIT;\n" +
-                "\n" +
-                "EXCEPTION\n" +
-                "    WHEN OTHERS THEN\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-                "        ROLLBACK;\n" +
-                "        RAISE;\n" +
-                "\n" +
-                "END;";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            CallableStatement cstmt = connection.prepareCall("{call PROC_XOACUONSACH(?)}");
 
-            preparedStatement.setInt(1, cuonSach.getMaCuonSach());
-            preparedStatement.setInt(2, cuonSach.getMaCuonSach());
+            cstmt.setInt(1, cuonSach.getMaCuonSach());
 
-            int rs = preparedStatement.executeUpdate();
+            int rs = cstmt.executeUpdate();
 
             if (rs > 0) {
                 return true;

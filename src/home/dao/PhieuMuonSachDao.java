@@ -4,10 +4,7 @@ import home.controller.PhieuMuonSachDanhSachController;
 import home.model.PhieuMuonSach;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,32 +58,16 @@ public class PhieuMuonSachDao {
 
     public boolean themPhieuMuonSach(PhieuMuonSach phieuMuonSach) {
         Connection connection = JDBCConnection.getJDBCConnection();
-        String sql = "BEGIN\n" +
-                "    INSERT INTO PHIEUMUONSACH(MADOCGIA, MACUONSACH, NGAYMUONSACH, NGAYDUKIENTRA, TRANGTHAIPMS) VALUES (?, ?, ?, ?, ?)" +
-                ";\n" +
-                "\n" +
-                "    UPDATE CUONSACH\n" +
-                "    SET TRANGTHAI = 'Đã mượn'\n" +
-                "    WHERE MACUONSACH = ?;\n" +
-                "\n" +
-                "    COMMIT ;\n" +
-                "EXCEPTION\n" +
-                "    WHEN OTHERS THEN\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_STACK());\n" +
-                "        DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE());\n" +
-                "        ROLLBACK;\n" +
-                "        RAISE;\n" +
-                "end;\n";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, phieuMuonSach.getMaDocGia());
-            preparedStatement.setInt(2, phieuMuonSach.getMaCuonSach());
-            preparedStatement.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
-            preparedStatement.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
-            preparedStatement.setString(5, phieuMuonSach.getTrangThaiPMS());
-            preparedStatement.setInt(6, phieuMuonSach.getMaCuonSach());
-            int rs = preparedStatement.executeUpdate();
+            CallableStatement cstmt = connection.prepareCall("{call PROC_THEMPHIEUMUONSACH(?,?,?,?,?)}");
+            cstmt.setInt(1, phieuMuonSach.getMaDocGia());
+            cstmt.setInt(2, phieuMuonSach.getMaCuonSach());
+            cstmt.setDate(3, (java.sql.Date) phieuMuonSach.getNgayMuon());
+            cstmt.setDate(4, (java.sql.Date) phieuMuonSach.getNgayDuKienTra());
+            cstmt.setString(5, phieuMuonSach.getTrangThaiPMS());
+
+            int rs = cstmt.executeUpdate();
             if (rs > 0) {
                 return true;
             }
