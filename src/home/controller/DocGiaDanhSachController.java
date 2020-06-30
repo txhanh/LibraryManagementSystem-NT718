@@ -31,7 +31,6 @@ public class DocGiaDanhSachController implements Initializable {
     ObservableList<DocGia> dataTable = FXCollections.observableArrayList(memberDao.getAllMember());
 
 
-
     /*
     Tạo 1 object DocGia và sử dụng get/set để truyền dữ liệu
     khi được chọn từ bảng TableView để thực hiện việc
@@ -81,9 +80,13 @@ public class DocGiaDanhSachController implements Initializable {
 
     @FXML
     void openHomeWindow(ActionEvent event) {
+        String role = MainGUIController.getUser_label();
 
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
-
+        if (role == "Quản lí") {
+            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        } else {
+            window.loadAnotherWindow("/home/fxml/MainGUI-thuthu.fxml");
+        }
 
         cancelAction(event);
     }
@@ -99,7 +102,7 @@ public class DocGiaDanhSachController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả!!!");
             alert.showAndWait();
-            return ;
+            return;
         }
 
 
@@ -110,7 +113,7 @@ public class DocGiaDanhSachController implements Initializable {
 
 
     @FXML
-        void openAddMemberWindow(ActionEvent event) {
+    void openAddMemberWindow(ActionEvent event) {
         window.loadAnotherWindow("/home/fxml/DocGiaThem.fxml", "Thêm độc giả");
         cancelAction(event);
     }

@@ -47,7 +47,6 @@ public class PhieuPhatDanhSachController implements Initializable {
     }
 
 
-
     @FXML
     private GridPane panePhieuPhat;
 
@@ -87,7 +86,14 @@ public class PhieuPhatDanhSachController implements Initializable {
 
     @FXML
     void openHomeWindow(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        String role = MainGUIController.getUser_label();
+
+        if (role == "Quản lí") {
+            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        } else {
+            window.loadAnotherWindow("/home/fxml/MainGUI-thuthu.fxml");
+        }
+
         cancelAction(event);
     }
 
@@ -106,7 +112,7 @@ public class PhieuPhatDanhSachController implements Initializable {
     @FXML
     void xoaPhieuPhatAction(ActionEvent event) {
         PhieuPhat selectedForDelete = tablePhieuPhat.getSelectionModel().getSelectedItem();
-        if(selectedForDelete == null){
+        if (selectedForDelete == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để xóa cả");
@@ -125,13 +131,13 @@ public class PhieuPhatDanhSachController implements Initializable {
         }
 
         boolean flag = phieuPhatDao.xoaPhieuPhat(selectedForDelete);
-        if(flag){
+        if (flag) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("Xóa phiếu phạt thành công !");
             alert.showAndWait();
             danhSachPhieuPhat.remove(selectedForDelete);
-        } else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Không xóa được phiếu phạt, vui lòng kiểm tra lại !");
@@ -218,7 +224,7 @@ public class PhieuPhatDanhSachController implements Initializable {
     @FXML
     void openInPhieuPhat(ActionEvent event) throws JRException {
         selectedPhieuPhat = tablePhieuPhat.getSelectionModel().getSelectedItem();
-        if(selectedPhieuPhat == null){
+        if (selectedPhieuPhat == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả");

@@ -145,7 +145,14 @@ public class PhieuMuonSachDanhSachController implements Initializable {
 
     @FXML
     void openHomeWindow(ActionEvent event) {
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        String role = MainGUIController.getUser_label();
+
+        if (role == "Quản lí") {
+            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        } else {
+            window.loadAnotherWindow("/home/fxml/MainGUI-thuthu.fxml");
+        }
+
         cancelAction(event);
     }
 

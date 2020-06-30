@@ -47,6 +47,7 @@ public class DangNhapController {
     private double xOffset = 0;
     private double yOffset = 0;
 
+
     @FXML
     void dangNhapMethod(ActionEvent event) throws IOException {
 
@@ -85,7 +86,7 @@ public class DangNhapController {
         } else if (tfUser.getText().equals("thuthu") && pwPassword.getText().equals("thuthu")) {
             Stage primaryStage = new Stage();
             nguoiDung = "Thủ thư";
-            Parent root = FXMLLoader.load(getClass().getResource("/home/fxml/MainGUI.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/home/fxml/MainGUI-thuthu.fxml"));
 //         grab your root here
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
@@ -120,9 +121,8 @@ public class DangNhapController {
             alert.setHeaderText(null);
             alert.setContentText("Sai tên đăng nhập hoặc mật khẩu, vui lòng thử lại");
             alert.showAndWait();
-            tfUser.setText("");
+//            tfUser.setText("");
             pwPassword.setText("");
-            return;
         }
     }
 

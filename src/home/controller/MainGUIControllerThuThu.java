@@ -2,23 +2,17 @@ package home.controller;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import home.Main;
-import home.dao.DocGiaDao;
-import home.model.DocGia;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,9 +20,15 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class MainGUIController implements Initializable {
+public class MainGUIControllerThuThu implements Initializable {
 
     Main window = new Main();
+
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private Button btnHome;
 
     @FXML
     private Button btnDocGia;
@@ -45,64 +45,17 @@ public class MainGUIController implements Initializable {
     @FXML
     private Button btnPhieuTra;
 
-
-    @FXML
-    private FontAwesomeIconView btnClose;
-
-
-    @FXML
-    private Button btnAddMember;
-
-    @FXML
-    private Button btnHome;
-
-
-    @FXML
-    public BorderPane borderPane;
-
-
     @FXML
     private Button btnPhieuPhat;
 
     @FXML
-    private Button btnBaoCaoTK;
-
-    @FXML
-    private  Label lblNguoiDung;
+    private Label lblNguoiDung;
 
     @FXML
     private Button btnLogout;
 
-    public Label getLblNguoiDung() {
-        return lblNguoiDung;
-    }
-
-    public void setLblNguoiDung(Label lblNguoiDung) {
-        this.lblNguoiDung = lblNguoiDung;
-    }
-
-    private static String user_label;
-
-
-    public static String getUser_label() {
-        return user_label;
-    }
-
-    public static void setUser_label(String user_label) {
-        MainGUIController.user_label = user_label;
-    }
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String nguoiDung = DangNhapController.getNguoiDung();
-        lblNguoiDung.setText(nguoiDung);
-        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
-//        System.out.println(this.getLblNguoiDung().getText());
-        setUser_label(this.getLblNguoiDung().getText());
-    }
-
+    @FXML
+    private FontAwesomeIconView btnClose;
 
     @FXML
     void closeWindowAction(MouseEvent event) {
@@ -110,7 +63,6 @@ public class MainGUIController implements Initializable {
             System.exit(0);
         }
     }
-
 
     @FXML
     void handleClickAction(ActionEvent event) {
@@ -126,14 +78,12 @@ public class MainGUIController implements Initializable {
             loadUI("/home/fxml/PhieuTraSachDanhSach.fxml");
         } else if (event.getSource() == btnPhieuPhat) {
             loadUI("/home/fxml/PhieuPhatDanhSach.fxml");
-        } else if (event.getSource() == btnBaoCaoTK) {
-            loadUI("/home/fxml/BaoCaoThongKe.fxml");
         } else if (event.getSource() == btnLogout) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
             alert.setContentText("Bạn muốn đăng xuất chứ?");
             Optional<ButtonType> response = alert.showAndWait();
-            if(response.get() == ButtonType.CANCEL){
+            if (response.get() == ButtonType.CANCEL) {
                 return;
             }
             window.loadAnotherWindow("/home/fxml/DangNhap.fxml", "Phần mềm quản lí thư viện - Đăng nhập");
@@ -142,9 +92,15 @@ public class MainGUIController implements Initializable {
         } else if (event.getSource() == btnHome || event.getSource() == null) {
             loadUI(("/home/fxml/Intro.fxml"));
         }
-
-
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        String nguoiDung = DangNhapController.getNguoiDung();
+        lblNguoiDung.setText(nguoiDung);
+        loadUI(("/home/fxml/DocGiaDanhSach.fxml"));
+    }
+
 
     public void loadUI(String nameUI) {
 
@@ -157,6 +113,4 @@ public class MainGUIController implements Initializable {
         }
 
     }
-
-
 }

@@ -72,7 +72,14 @@ public class TuaSachDanhSachController implements Initializable {
     @FXML
     void openHomeWindow(ActionEvent event) {
 
-        window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        String role = MainGUIController.getUser_label();
+
+        if (role == "Quản lí") {
+            window.loadAnotherWindow("/home/fxml/MainGUI.fxml");
+        } else {
+            window.loadAnotherWindow("/home/fxml/MainGUI-thuthu.fxml");
+        }
+
         cancelAction(event);
     }
 
@@ -90,10 +97,10 @@ public class TuaSachDanhSachController implements Initializable {
 
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
-        alert.setContentText("Bạn thực sự muốn xóa tựa sách \"" + selectedForDelete.getTenSach() + "\" chứ?" );
+        alert.setContentText("Bạn thực sự muốn xóa tựa sách \"" + selectedForDelete.getTenSach() + "\" chứ?");
 
         Optional<ButtonType> response = alert.showAndWait();
-        if(response.get() == ButtonType.CANCEL){
+        if (response.get() == ButtonType.CANCEL) {
             return;
         }
 
@@ -119,7 +126,7 @@ public class TuaSachDanhSachController implements Initializable {
     void openCapNhatTuaSachAction(ActionEvent event) {
 
         TuaSach selectedForUpdate = tableTuaSach.getSelectionModel().getSelectedItem();
-        if(selectedForUpdate == null){
+        if (selectedForUpdate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText(null);
             alert.setContentText("Bạn chưa chọn dòng nào để cập nhật cả");
