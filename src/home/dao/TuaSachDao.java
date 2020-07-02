@@ -75,7 +75,7 @@ public class TuaSachDao {
             int rs = preparedStatement.executeUpdate();
 
             if (rs > 0) {
-                connection.close();
+//                connection.close();
                 return true;
             }
         } catch (SQLException e) {
